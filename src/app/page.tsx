@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { CITIES } from "@/lib/cities";
-import { buildGaodeSearchUrl } from "@/lib/gaode";
+import { buildGaodeSearchUrl, openInGaodeApp } from "@/lib/gaode";
 
 type TranslateSource = "local" | "passthrough" | "gemini";
 
@@ -109,12 +109,16 @@ export default function HomePage() {
     await translate(item.q);
   }
 
+  function openGaode() {
+    if (!keyword.trim()) return;
+    openInGaodeApp(keyword.trim(), city || undefined);
+  }
+
   async function translateAndOpen() {
     inputRef.current?.blur();
     const result = await translate();
     if (!result) return;
-    const url = buildGaodeSearchUrl(result, city || undefined);
-    window.location.href = url;
+    openInGaodeApp(result, city || undefined);
   }
 
   async function copyLink() {
@@ -248,16 +252,13 @@ export default function HomePage() {
                 enterKeyHint="done"
               />
               <p className="hint">
-                틀리면 위에서 고친 뒤 고덕지도를 여세요.
+                앱이 설치돼 있으면 高德地图 앱으로 바로 엽니다. 없으면 웹으로
+                이동합니다.
               </p>
               <div className="actions">
-                <a
-                  className="primary"
-                  href={gaodeUrl}
-                  rel="noopener noreferrer"
-                >
-                  고덕지도에서 보기
-                </a>
+                <button type="button" className="primary" onClick={openGaode}>
+                  고덕지도 앱으로 열기
+                </button>
                 <button type="button" className="secondary" onClick={copyLink}>
                   {copied ? "복사됨" : "링크 복사"}
                 </button>
@@ -269,9 +270,9 @@ export default function HomePage() {
 
       {keyword ? (
         <div className="sticky-cta">
-          <a className="primary" href={gaodeUrl} rel="noopener noreferrer">
-            고덕지도 열기
-          </a>
+          <button type="button" className="primary" onClick={openGaode}>
+            고덕지도 앱으로 열기
+          </button>
           <button type="button" className="secondary" onClick={copyLink}>
             {copied ? "복사됨" : "링크 복사"}
           </button>
