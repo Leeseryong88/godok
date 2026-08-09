@@ -10,7 +10,13 @@ import {
 } from "react";
 import { resolveCityForGaode } from "@/lib/cityAliases";
 import { CITIES } from "@/lib/cities";
-import { openInGaodeApp } from "@/lib/gaode";
+import {
+  detectPlatform,
+  DevicePlatform,
+  GAODE_INSTALL,
+  openGaodeInstallPage,
+  openInGaodeApp,
+} from "@/lib/gaode";
 import { loadSavedCity, saveCity } from "@/lib/history";
 import { PLACE_TYPES } from "@/lib/placeTypes";
 
@@ -32,18 +38,23 @@ export default function HomePage() {
   const [query, setQuery] = useState("");
   const [pendingQuery, setPendingQuery] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const [installOpen, setInstallOpen] = useState(false);
   const [customType, setCustomType] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [formError, setFormError] = useState("");
   const [ready, setReady] = useState(false);
+  const [platform, setPlatform] = useState<DevicePlatform>("desktop");
 
   const inputRef = useRef<HTMLInputElement>(null);
   const customRef = useRef<HTMLInputElement>(null);
   const titleId = useId();
+  const installTitleId = useId();
+  const isDesktop = platform === "desktop";
 
   useEffect(() => {
     setCity(normalizeSavedCity(loadSavedCity("")));
+    setPlatform(detectPlatform(navigator.userAgent || ""));
     setReady(true);
   }, []);
 
@@ -53,22 +64,27 @@ export default function HomePage() {
   }, [city, ready]);
 
   useEffect(() => {
-    if (!modalOpen) return;
+    if (!modalOpen && !installOpen) return;
 
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
     const onKey = (e: globalThis.KeyboardEvent) => {
-      if (e.key === "Escape" && !loading) closeModal();
+      if (e.key !== "Escape" || loading) return;
+      if (installOpen) setInstallOpen(false);
+      else if (modalOpen) closeModal();
     };
     window.addEventListener("keydown", onKey);
-    window.setTimeout(() => customRef.current?.focus(), 50);
+
+    if (modalOpen && !installOpen) {
+      window.setTimeout(() => customRef.current?.focus(), 50);
+    }
 
     return () => {
       document.body.style.overflow = prev;
       window.removeEventListener("keydown", onKey);
     };
-  }, [modalOpen, loading]);
+  }, [modalOpen, installOpen, loading]);
 
   function openModal(trimmed: string) {
     setPendingQuery(trimmed);
@@ -87,6 +103,12 @@ export default function HomePage() {
 
   function tryOpenSearch() {
     if (loading) return;
+
+    if (isDesktop) {
+      setFormError("모바일에서만 고덕지도 앱으로 검색할 수 있어요.");
+      return;
+    }
+
     const trimmed = query.trim();
     if (!trimmed) {
       setFormError("검색어를 입력해 주세요.");
@@ -105,8 +127,9 @@ export default function HomePage() {
   function onCityChange(value: string) {
     setCity(value);
     setFormError("");
-    // 도시 고른 뒤 바로 검색어 입력 가능하도록
-    window.setTimeout(() => inputRef.current?.focus(), 0);
+    if (!isDesktop) {
+      window.setTimeout(() => inputRef.current?.focus(), 0);
+    }
   }
 
   function onQueryKeyDown(e: KeyboardEvent<HTMLInputElement>) {
@@ -121,6 +144,11 @@ export default function HomePage() {
   }) {
     const trimmed = pendingQuery.trim();
     if (!trimmed || loading) return;
+
+    if (isDesktop) {
+      setError("모바일에서만 고덕지도 앱으로 검색할 수 있어요.");
+      return;
+    }
 
     setError("");
     setLoading(true);
@@ -143,8 +171,11 @@ export default function HomePage() {
       setModalOpen(false);
       setPendingQuery("");
       setCustomType("");
-      // select value는 이미 중국어 도시명(上海 등)
-      openInGaodeApp(data.keyword, city || undefined);
+
+      const result = await openInGaodeApp(data.keyword, city || undefined);
+      if (result === "not_installed" || result === "desktop") {
+        setInstallOpen(true);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "검색에 실패했습니다.");
     } finally {
@@ -163,10 +194,17 @@ export default function HomePage() {
     void runSearch({ placeTypeCustom: custom });
   }
 
+  function onInstallClick() {
+    openGaodeInstallPage(platform === "desktop" ? "android" : platform);
+  }
+
   const cityLabel =
     CITIES.find((c) => c.value === city)?.short ||
     CITIES.find((c) => c.value === city)?.label ||
     "";
+
+  const installHref =
+    platform === "ios" ? GAODE_INSTALL.ios : GAODE_INSTALL.androidWeb;
 
   return (
     <main className="page">
@@ -192,20 +230,27 @@ export default function HomePage() {
           </h1>
         </header>
 
+        {isDesktop && ready ? (
+          <p className="device-banner" role="status">
+            이 서비스는 모바일에서만 사용할 수 있어요. 휴대폰 브라우저로
+            열어 高德地图 앱으로 검색하세요.
+          </p>
+        ) : null}
+
         <form
           className="search"
           onSubmit={onSearchSubmit}
           aria-label="장소 검색"
           noValidate
         >
-          <div className="search-box">
+          <div className={`search-box${isDesktop ? " is-disabled" : ""}`}>
             <label className="city-wrap">
               <span className="sr-only">도시</span>
               <select
                 className="city-select"
                 value={city}
                 onChange={(e) => onCityChange(e.target.value)}
-                disabled={loading}
+                disabled={loading || isDesktop}
                 aria-label="도시 선택"
               >
                 {CITIES.map((c) => (
@@ -227,7 +272,7 @@ export default function HomePage() {
               onKeyDown={onQueryKeyDown}
               placeholder="장소 검색"
               maxLength={80}
-              disabled={loading}
+              disabled={loading || isDesktop}
               autoComplete="off"
               autoCorrect="off"
               autoCapitalize="none"
@@ -241,6 +286,8 @@ export default function HomePage() {
             <p className="error form-error" role="alert">
               {formError}
             </p>
+          ) : !isDesktop ? (
+            <p className="search-hint">高德地图 앱이 설치되어 있어야 해요</p>
           ) : null}
         </form>
       </div>
@@ -334,7 +381,7 @@ export default function HomePage() {
 
             {loading ? (
               <p className="modal-status" aria-live="polite">
-                고덕 검색어 준비 중…
+                고덕 앱으로 여는 중…
               </p>
             ) : null}
 
@@ -343,6 +390,70 @@ export default function HomePage() {
                 {error}
               </p>
             ) : null}
+          </div>
+        </div>
+      ) : null}
+
+      {installOpen ? (
+        <div
+          className="modal-root"
+          role="presentation"
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) setInstallOpen(false);
+          }}
+        >
+          <div
+            className="modal install-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={installTitleId}
+          >
+            <div className="modal-head">
+              <div>
+                <p className="modal-kicker">高德地图</p>
+                <h2 id={installTitleId} className="modal-title install-title">
+                  고덕지도를 설치해 주세요
+                </h2>
+              </div>
+              <button
+                type="button"
+                className="modal-close"
+                onClick={() => setInstallOpen(false)}
+                aria-label="닫기"
+              >
+                ✕
+              </button>
+            </div>
+
+            <p className="modal-desc install-desc">
+              앱이 없거나 열리지 않았어요. 설치한 뒤 다시 검색하면 바로
+              고덕지도에서 결과를 볼 수 있어요.
+            </p>
+
+            <div className="install-actions">
+              <button
+                type="button"
+                className="install-primary"
+                onClick={onInstallClick}
+              >
+                고덕지도 설치하기
+              </button>
+              <a
+                className="install-secondary"
+                href={installHref}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                다운로드 페이지 열기
+              </a>
+              <button
+                type="button"
+                className="install-dismiss"
+                onClick={() => setInstallOpen(false)}
+              >
+                닫기
+              </button>
+            </div>
           </div>
         </div>
       ) : null}
