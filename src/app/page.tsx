@@ -11,7 +11,7 @@ import {
 } from "react";
 import { track } from "@vercel/analytics";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { COUPANG_CHINA_ESIM_URL } from "@/lib/affiliate";
+import { COUPANG_BANNER, COUPANG_CHINA_ESIM_URL } from "@/lib/affiliate";
 import { resolveCityForGaode } from "@/lib/cityAliases";
 import { CITIES } from "@/lib/cities";
 import {
@@ -362,6 +362,25 @@ export default function HomePage() {
           >
             {t.affiliateLink}
           </a>
+
+          <a
+            className="affiliate-banner"
+            href={COUPANG_BANNER.href}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            referrerPolicy="unsafe-url"
+            onClick={() => track("coupang_banner_click")}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={COUPANG_BANNER.src}
+              alt="Coupang Partners"
+              width={COUPANG_BANNER.width}
+              height={COUPANG_BANNER.height}
+              loading="lazy"
+            />
+          </a>
+
           <p className="affiliate-disclosure">{t.affiliateDisclosure}</p>
         </aside>
       </div>

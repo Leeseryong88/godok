@@ -266,8 +266,27 @@ input {
   text-decoration-color: rgba(198, 238, 226, 0.7);
 }
 
+.affiliate-banner {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 16px auto 0;
+  border-radius: 12px;
+  overflow: hidden;
+  line-height: 0;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+.affiliate-banner img {
+  display: block;
+  width: min(300px, 100%);
+  height: auto;
+  aspect-ratio: 300 / 250;
+  background: #fff;
+}
+
 .affiliate-disclosure {
-  margin: 6px 8px 0;
+  margin: 8px 8px 0;
   color: rgba(231, 243, 239, 0.42);
   font-size: 10px;
   line-height: 1.4;
