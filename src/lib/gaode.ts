@@ -1,6 +1,6 @@
 const APP_NAME = "godok";
 
-/** 웹 검색 URI (callnative=1 포함, 공유/폴백용) */
+/** 웹 검색 URI (공유/폴백용, callnative는 보조) */
 export function buildGaodeSearchUrl(keyword: string, city?: string): string {
   const params = new URLSearchParams({
     keyword,
@@ -28,6 +28,16 @@ function keywordWithCity(keyword: string, city?: string): string {
   return `${c} ${k}`;
 }
 
+function openByAnchor(url: string): void {
+  const a = document.createElement("a");
+  a.href = url;
+  a.rel = "noreferrer";
+  a.style.display = "none";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
 /** iOS: 공식 poi 검색 스킴 */
 export function buildIosGaodeAppUrl(keyword: string, city?: string): string {
   const params = new URLSearchParams({
@@ -39,8 +49,8 @@ export function buildIosGaodeAppUrl(keyword: string, city?: string): string {
 }
 
 /**
- * Android Chrome 등에서 앱 패키지를 지정해 고덕 앱을 직접 실행.
- * 미설치 시 browser_fallback_url(웹)로 이동.
+ * Android: Intent로 고덕 앱 패키지를 직접 실행.
+ * 미설치 시에만 browser_fallback_url(웹)로 이동.
  */
 export function buildAndroidGaodeIntentUrl(
   keyword: string,
@@ -60,9 +70,19 @@ export function buildAndroidGaodeIntentUrl(
   );
 }
 
+/** Android 구형 브라우저용 직접 스킴 */
+export function buildAndroidGaodeAppUrl(keyword: string, city?: string): string {
+  const params = new URLSearchParams({
+    sourceApplication: APP_NAME,
+    keywords: keywordWithCity(keyword, city),
+    dev: "0",
+  });
+  return `androidamap://poi?${params.toString()}`;
+}
+
 /**
- * 모바일: 설치된 고덕 앱을 우선 실행.
- * city가 있으면 웹 URI의 city 파라미터 + 앱 키워드에 도시 반영.
+ * 모바일: 설치된 고덕 앱을 항상 우선 실행.
+ * 도시가 있어도 웹이 아닌 앱 스킴을 먼저 사용하고, 실패 시에만 웹으로 폴백.
  */
 export function openInGaodeApp(keyword: string, city?: string): void {
   const trimmed = keyword.trim();
@@ -74,24 +94,19 @@ export function openInGaodeApp(keyword: string, city?: string): void {
 
   const { ios, android } = isMobileUA(navigator.userAgent || "");
 
-  // PC
+  // PC는 웹
   if (!ios && !android) {
     window.open(webUrl, "_blank", "noopener,noreferrer");
     return;
   }
 
-  // 도시가 있으면 공식 웹 URI(city + callnative)로 앱 호출이 범위 지정에 더 안정적
-  if (cityZh) {
-    window.location.href = webUrl;
-    return;
-  }
-
   if (android) {
+    // Chrome/삼성인터넷: Intent로 앱 패키지를 직접 실행 (미설치 시 웹 폴백)
     window.location.href = buildAndroidGaodeIntentUrl(trimmed, webUrl, cityZh);
     return;
   }
 
-  // iOS: 커스텀 스킴 → 실패 시 city 포함 웹 폴백
+  // iOS: iosamap 스킴 우선 → 안 열리면 웹 폴백
   const appUrl = buildIosGaodeAppUrl(trimmed, cityZh);
   const started = Date.now();
   let cancelled = false;
@@ -115,7 +130,11 @@ export function openInGaodeApp(keyword: string, city?: string): void {
   window.addEventListener("pagehide", onHide);
   window.addEventListener("blur", onHide);
 
-  window.location.href = appUrl;
+  openByAnchor(appUrl);
+  // 일부 Safari에서 location도 함께
+  window.setTimeout(() => {
+    if (!cancelled) window.location.href = appUrl;
+  }, 50);
 
   window.setTimeout(() => {
     cleanup();
