@@ -8,7 +8,13 @@
   --danger: #b42318;
   --danger-bg: #fff1f0;
   --font-display: "Newsreader", "Songti SC", Georgia, serif;
-  --font-body: "Sora", "Noto Sans KR", "PingFang SC", sans-serif;
+  --font-body:
+    "Sora",
+    "Noto Sans KR",
+    "Noto Sans Arabic",
+    "Noto Sans Devanagari",
+    "PingFang SC",
+    sans-serif;
   --touch: 56px;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -53,6 +59,92 @@ input {
     calc(20px + var(--safe-right))
     calc(24px + var(--safe-bottom))
     calc(20px + var(--safe-left));
+}
+
+.lang-switch {
+  position: absolute;
+  top: calc(12px + var(--safe-top));
+  right: calc(12px + var(--safe-right));
+  z-index: 5;
+}
+
+[dir="rtl"] .lang-switch {
+  right: auto;
+  left: calc(12px + var(--safe-left));
+}
+
+.lang-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 10px 0 12px;
+  border: 1px solid rgba(247, 251, 250, 0.22);
+  border-radius: 999px;
+  background: rgba(11, 28, 36, 0.55);
+  color: #eef6f4;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+}
+
+.lang-caret {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid rgba(238, 246, 244, 0.75);
+}
+
+.lang-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  min-width: 168px;
+  border-radius: 14px;
+  background: #f4f7f6;
+  color: var(--ink);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+}
+
+[dir="rtl"] .lang-menu {
+  right: auto;
+  left: 0;
+}
+
+.lang-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 40px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: start;
+}
+
+.lang-option:hover,
+.lang-option.is-selected {
+  background: rgba(214, 69, 46, 0.1);
+}
+
+.lang-option-code {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--muted);
 }
 
 .backdrop {

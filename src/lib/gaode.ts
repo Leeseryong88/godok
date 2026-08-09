@@ -2,9 +2,10 @@ import { getCityMeta } from "./cities";
 
 const APP_NAME = "godok";
 
-/** 고덕지도 설치 링크 (웹 지도 검색 아님) */
+/** Amap(AutoNavi) 앱 설치 링크 — 웹 지도 검색 아님 */
 export const GAODE_INSTALL = {
-  ios: "https://apps.apple.com/app/id461703208",
+  /** App Store: Amap Global */
+  ios: "https://apps.apple.com/app/amap-global/id461703208",
   /** Play/스토어 앱이 있으면 열림 */
   androidMarket: "market://details?id=com.autonavi.minimap",
   /** 스토어 스킴이 막힌 환경용 공식 다운로드 */

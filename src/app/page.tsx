@@ -5,9 +5,11 @@ import {
   KeyboardEvent,
   useEffect,
   useId,
+  useMemo,
   useRef,
   useState,
 } from "react";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { resolveCityForGaode } from "@/lib/cityAliases";
 import { CITIES } from "@/lib/cities";
 import {
@@ -18,6 +20,14 @@ import {
   openInGaodeApp,
 } from "@/lib/gaode";
 import { loadSavedCity, saveCity } from "@/lib/history";
+import {
+  applyDocumentLocale,
+  DEFAULT_LOCALE,
+  loadLocale,
+  saveLocale,
+  type Locale,
+} from "@/lib/i18n/locales";
+import { getMessages } from "@/lib/i18n/messages";
 import { PLACE_TYPES } from "@/lib/placeTypes";
 
 type TranslateResponse = {
@@ -45,14 +55,19 @@ export default function HomePage() {
   const [formError, setFormError] = useState("");
   const [ready, setReady] = useState(false);
   const [platform, setPlatform] = useState<DevicePlatform>("desktop");
+  const [locale, setLocale] = useState<Locale>(DEFAULT_LOCALE);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const customRef = useRef<HTMLInputElement>(null);
   const titleId = useId();
   const installTitleId = useId();
   const isDesktop = platform === "desktop";
+  const t = useMemo(() => getMessages(locale), [locale]);
 
   useEffect(() => {
+    const next = loadLocale(DEFAULT_LOCALE);
+    setLocale(next);
+    applyDocumentLocale(next);
     setCity(normalizeSavedCity(loadSavedCity("")));
     setPlatform(detectPlatform(navigator.userAgent || ""));
     setReady(true);
@@ -62,6 +77,12 @@ export default function HomePage() {
     if (!ready) return;
     saveCity(city);
   }, [city, ready]);
+
+  useEffect(() => {
+    if (!ready) return;
+    saveLocale(locale);
+    applyDocumentLocale(locale);
+  }, [locale, ready]);
 
   useEffect(() => {
     if (!modalOpen && !installOpen) return;
@@ -86,6 +107,12 @@ export default function HomePage() {
     };
   }, [modalOpen, installOpen, loading]);
 
+  function onLocaleChange(next: Locale) {
+    setLocale(next);
+    setFormError("");
+    setError("");
+  }
+
   function openModal(trimmed: string) {
     setPendingQuery(trimmed);
     setCustomType("");
@@ -105,13 +132,13 @@ export default function HomePage() {
     if (loading) return;
 
     if (isDesktop) {
-      setFormError("모바일에서만 고덕지도 앱으로 검색할 수 있어요.");
+      setFormError(t.desktopOnly);
       return;
     }
 
     const trimmed = query.trim();
     if (!trimmed) {
-      setFormError("검색어를 입력해 주세요.");
+      setFormError(t.emptyQuery);
       inputRef.current?.focus();
       return;
     }
@@ -146,7 +173,7 @@ export default function HomePage() {
     if (!trimmed || loading) return;
 
     if (isDesktop) {
-      setError("모바일에서만 고덕지도 앱으로 검색할 수 있어요.");
+      setError(t.desktopOnly);
       return;
     }
 
@@ -166,7 +193,7 @@ export default function HomePage() {
         }),
       });
       const data = (await res.json()) as TranslateResponse & { error?: string };
-      if (!res.ok) throw new Error(data.error || "검색에 실패했습니다.");
+      if (!res.ok) throw new Error(data.error || t.searchFailed);
 
       setModalOpen(false);
       setPendingQuery("");
@@ -177,7 +204,7 @@ export default function HomePage() {
         setInstallOpen(true);
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "검색에 실패했습니다.");
+      setError(err instanceof Error ? err.message : t.searchFailed);
     } finally {
       setLoading(false);
     }
@@ -198,16 +225,19 @@ export default function HomePage() {
     openGaodeInstallPage(platform === "desktop" ? "android" : platform);
   }
 
-  const cityLabel =
-    CITIES.find((c) => c.value === city)?.short ||
-    CITIES.find((c) => c.value === city)?.label ||
-    "";
+  const cityLabel = t.cities[city] || "";
 
   const installHref =
     platform === "ios" ? GAODE_INSTALL.ios : GAODE_INSTALL.androidWeb;
 
   return (
     <main className="page">
+      <LanguageSwitcher
+        locale={locale}
+        label={t.language}
+        onChange={onLocaleChange}
+      />
+
       <div className="backdrop" aria-hidden="true">
         <svg
           className="backdrop-map"
@@ -225,37 +255,36 @@ export default function HomePage() {
       <div className="shell">
         <header className="hero">
           <h1 className="brand">
-            고덕검색
-            <em>高德搜索</em>
+            {t.brand}
+            <em>{t.brandSub}</em>
           </h1>
         </header>
 
         {isDesktop && ready ? (
           <p className="device-banner" role="status">
-            이 서비스는 모바일에서만 사용할 수 있어요. 휴대폰 브라우저로
-            열어 高德地图 앱으로 검색하세요.
+            {t.desktopBanner}
           </p>
         ) : null}
 
         <form
           className="search"
           onSubmit={onSearchSubmit}
-          aria-label="장소 검색"
+          aria-label={t.searchAria}
           noValidate
         >
           <div className={`search-box${isDesktop ? " is-disabled" : ""}`}>
             <label className="city-wrap">
-              <span className="sr-only">도시</span>
+              <span className="sr-only">{t.cityAria}</span>
               <select
                 className="city-select"
                 value={city}
                 onChange={(e) => onCityChange(e.target.value)}
                 disabled={loading || isDesktop}
-                aria-label="도시 선택"
+                aria-label={t.cityAria}
               >
                 {CITIES.map((c) => (
                   <option key={c.value || "all"} value={c.value}>
-                    {c.short}
+                    {t.cities[c.value] || c.short}
                   </option>
                 ))}
               </select>
@@ -270,7 +299,7 @@ export default function HomePage() {
                 if (formError) setFormError("");
               }}
               onKeyDown={onQueryKeyDown}
-              placeholder="장소 검색"
+              placeholder={t.placeholder}
               maxLength={80}
               disabled={loading || isDesktop}
               autoComplete="off"
@@ -279,7 +308,7 @@ export default function HomePage() {
               spellCheck={false}
               enterKeyHint="search"
               inputMode="search"
-              aria-label="장소 검색어"
+              aria-label={t.queryAria}
             />
           </div>
           {formError ? (
@@ -307,7 +336,7 @@ export default function HomePage() {
             <div className="modal-head">
               <div>
                 <p className="modal-kicker">
-                  검색어
+                  {t.queryKicker}
                   {cityLabel ? ` · ${cityLabel}` : ""}
                 </p>
                 <p className="modal-query">{pendingQuery}</p>
@@ -317,39 +346,39 @@ export default function HomePage() {
                 className="modal-close"
                 onClick={closeModal}
                 disabled={loading}
-                aria-label="닫기"
+                aria-label={t.close}
               >
                 ✕
               </button>
             </div>
 
             <h2 id={titleId} className="modal-title">
-              어떤 장소인가요?
+              {t.placeTypeTitle}
             </h2>
             <p className="modal-desc">
               {city
-                ? `${cityLabel}에서 유형에 맞춰 검색해요`
-                : "유형을 고르면 더 정확하게 찾아요"}
+                ? t.placeTypeDescCity.replace("{city}", cityLabel)
+                : t.placeTypeDesc}
             </p>
 
             <div className="type-grid" role="list">
-              {PLACE_TYPES.map((t) => (
+              {PLACE_TYPES.map((pt) => (
                 <button
-                  key={t.id}
+                  key={pt.id}
                   type="button"
                   className="type-btn"
                   role="listitem"
                   disabled={loading}
-                  onClick={() => onPickType(t.id)}
+                  onClick={() => onPickType(pt.id)}
                 >
-                  {t.label}
+                  {t.placeTypes[pt.id] || pt.label}
                 </button>
               ))}
             </div>
 
             <form className="custom-type" onSubmit={onCustomSubmit}>
               <label className="custom-label" htmlFor="custom-type">
-                직접 입력
+                {t.customLabel}
               </label>
               <div className="custom-row">
                 <input
@@ -358,7 +387,7 @@ export default function HomePage() {
                   className="custom-field"
                   value={customType}
                   onChange={(e) => setCustomType(e.target.value)}
-                  placeholder="예: 병원, 공원, 박물관"
+                  placeholder={t.customPlaceholder}
                   maxLength={40}
                   disabled={loading}
                   autoComplete="off"
@@ -371,7 +400,7 @@ export default function HomePage() {
                   {loading ? (
                     <span className="spinner light" aria-hidden="true" />
                   ) : (
-                    "찾기"
+                    t.find
                   )}
                 </button>
               </div>
@@ -379,7 +408,7 @@ export default function HomePage() {
 
             {loading ? (
               <p className="modal-status" aria-live="polite">
-                고덕 앱으로 여는 중…
+                {t.openingApp}
               </p>
             ) : null}
 
@@ -408,25 +437,22 @@ export default function HomePage() {
           >
             <div className="modal-head">
               <div>
-                <p className="modal-kicker">高德地图</p>
+                <p className="modal-kicker">{t.installKicker}</p>
                 <h2 id={installTitleId} className="modal-title install-title">
-                  고덕지도를 설치해 주세요
+                  {t.installTitle}
                 </h2>
               </div>
               <button
                 type="button"
                 className="modal-close"
                 onClick={() => setInstallOpen(false)}
-                aria-label="닫기"
+                aria-label={t.close}
               >
                 ✕
               </button>
             </div>
 
-            <p className="modal-desc install-desc">
-              앱이 없거나 열리지 않았어요. 설치한 뒤 다시 검색하면 바로
-              고덕지도에서 결과를 볼 수 있어요.
-            </p>
+            <p className="modal-desc install-desc">{t.installDesc}</p>
 
             <div className="install-actions">
               <button
@@ -434,7 +460,7 @@ export default function HomePage() {
                 className="install-primary"
                 onClick={onInstallClick}
               >
-                고덕지도 설치하기
+                {t.installPrimary}
               </button>
               <a
                 className="install-secondary"
@@ -442,14 +468,14 @@ export default function HomePage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                다운로드 페이지 열기
+                {t.installSecondary}
               </a>
               <button
                 type="button"
                 className="install-dismiss"
                 onClick={() => setInstallOpen(false)}
               >
-                닫기
+                {t.dismiss}
               </button>
             </div>
           </div>

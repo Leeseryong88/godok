@@ -2,12 +2,12 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "고덕검색",
-  description: "장소를 검색하면 高德地图에서 바로 엽니다.",
-  applicationName: "고덕검색",
+  title: "Amap Search",
+  description: "Search places and open them in the Amap app by AutoNavi.",
+  applicationName: "Amap Search",
   appleWebApp: {
     capable: true,
-    title: "고덕검색",
+    title: "Amap Search",
     statusBarStyle: "black-translucent",
   },
   formatDetection: {
@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -38,7 +38,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,650;6..72,700&family=Sora:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,650;6..72,700&family=Sora:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
