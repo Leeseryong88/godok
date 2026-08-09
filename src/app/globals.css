@@ -404,6 +404,13 @@ button {
   touch-action: manipulation;
 }
 
+.page.is-overlay-open .shell,
+.page.is-overlay-open .coupang-banner,
+.page.is-overlay-open .lang-switch {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .modal-root {
   position: fixed;
   inset: 0;
@@ -418,6 +425,8 @@ button {
   background: rgba(6, 14, 18, 0.62);
   backdrop-filter: blur(4px);
   animation: fadeIn 0.2s ease both;
+  /* iOS 키보드/고정 입력창이 모달 위로 올라오는 것 완화 */
+  isolation: isolate;
 }
 
 .modal {
@@ -430,6 +439,8 @@ button {
   padding: 18px 16px 16px;
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
   animation: sheetUp 0.28s ease both;
+  outline: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .modal-head {

@@ -62,10 +62,19 @@ export default function HomePage() {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const customRef = useRef<HTMLInputElement>(null);
+  const modalDialogRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
   const installTitleId = useId();
   const isDesktop = platform === "desktop";
+  const overlayOpen = modalOpen || installOpen;
   const t = useMemo(() => getMessages(locale), [locale]);
+
+  function dismissKeyboard() {
+    inputRef.current?.blur();
+    customRef.current?.blur();
+    const active = document.activeElement;
+    if (active instanceof HTMLElement) active.blur();
+  }
 
   useEffect(() => {
     const next = loadLocale(DEFAULT_LOCALE);
@@ -88,10 +97,21 @@ export default function HomePage() {
   }, [locale, ready]);
 
   useEffect(() => {
-    if (!modalOpen && !installOpen) return;
+    if (!overlayOpen) return;
 
-    const prev = document.body.style.overflow;
+    const prevOverflow = document.body.style.overflow;
+    const prevPosition = document.body.style.position;
+    const prevTop = document.body.style.top;
+    const prevWidth = document.body.style.width;
+    const scrollY = window.scrollY;
+
+    // iOS: 배경 스크롤·입력창이 모달 위로 뜨는 것 방지
     document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+
+    dismissKeyboard();
 
     const onKey = (e: globalThis.KeyboardEvent) => {
       if (e.key !== "Escape" || loading) return;
@@ -100,15 +120,22 @@ export default function HomePage() {
     };
     window.addEventListener("keydown", onKey);
 
-    if (modalOpen && !installOpen) {
-      window.setTimeout(() => customRef.current?.focus(), 50);
-    }
+    // 입력칸이 아닌 다이얼로그에 포커스 → 키보드가 다시 안 올라옴
+    const focusTimer = window.setTimeout(() => {
+      dismissKeyboard();
+      modalDialogRef.current?.focus({ preventScroll: true });
+    }, 80);
 
     return () => {
-      document.body.style.overflow = prev;
+      window.clearTimeout(focusTimer);
+      document.body.style.overflow = prevOverflow;
+      document.body.style.position = prevPosition;
+      document.body.style.top = prevTop;
+      document.body.style.width = prevWidth;
+      window.scrollTo(0, scrollY);
       window.removeEventListener("keydown", onKey);
     };
-  }, [modalOpen, installOpen, loading]);
+  }, [overlayOpen, modalOpen, installOpen, loading]);
 
   function onLocaleChange(next: Locale) {
     setLocale(next);
@@ -145,8 +172,9 @@ export default function HomePage() {
       inputRef.current?.focus();
       return;
     }
-    inputRef.current?.blur();
-    openModal(trimmed);
+    dismissKeyboard();
+    // 키보드가 내려간 뒤 모달을 열어 입력창이 모달을 가리지 않게 함
+    window.setTimeout(() => openModal(trimmed), 60);
   }
 
   function onSearchSubmit(e: FormEvent) {
@@ -234,7 +262,7 @@ export default function HomePage() {
     platform === "ios" ? GAODE_INSTALL.ios : GAODE_INSTALL.androidWeb;
 
   return (
-    <main className="page">
+    <main className={`page${overlayOpen ? " is-overlay-open" : ""}`}>
       <LanguageSwitcher
         locale={locale}
         label={t.language}
@@ -255,7 +283,11 @@ export default function HomePage() {
         </svg>
       </div>
 
-      <div className="shell">
+      <div
+        className="shell"
+        aria-hidden={overlayOpen || undefined}
+        inert={overlayOpen || undefined}
+      >
         <header className="hero">
           <h1 className="brand">
             {t.brand}
@@ -346,10 +378,12 @@ export default function HomePage() {
           }}
         >
           <div
+            ref={modalDialogRef}
             className="modal"
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
+            tabIndex={-1}
           >
             <div className="modal-head">
               <div>
