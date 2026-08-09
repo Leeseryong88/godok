@@ -2,7 +2,7 @@ export const LOCALES = ["en", "es", "hi", "ar", "ko"] as const;
 
 export type Locale = (typeof LOCALES)[number];
 
-export const DEFAULT_LOCALE: Locale = "en";
+export const DEFAULT_LOCALE: Locale = "ko";
 
 export const LOCALE_META: Record<
   Locale,
