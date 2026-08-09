@@ -6,9 +6,7 @@ const APP_NAME = "godok";
 export const GAODE_INSTALL = {
   /** App Store: Amap Global */
   ios: "https://apps.apple.com/app/amap-global/id461703208",
-  /** Play/스토어 앱이 있으면 열림 */
   androidMarket: "market://details?id=com.autonavi.minimap",
-  /** 스토어 스킴이 막힌 환경용 공식 다운로드 */
   androidWeb: "https://mobile.amap.com/",
 } as const;
 
@@ -16,22 +14,11 @@ export type DevicePlatform = "ios" | "android" | "desktop";
 
 export type GaodeOpenResult = "opened" | "not_installed" | "desktop";
 
-function resolveCityParams(city?: string): {
-  name?: string;
-  adcode?: string;
-  cityParam?: string;
-} {
+function resolveCityName(city?: string): string | undefined {
   const raw = city?.trim();
-  if (!raw) return {};
+  if (!raw) return undefined;
   const meta = getCityMeta(raw);
-  if (meta) {
-    return {
-      name: meta.name,
-      adcode: meta.adcode,
-      cityParam: meta.adcode || meta.name,
-    };
-  }
-  return { name: raw, cityParam: raw };
+  return meta?.name || raw;
 }
 
 export function detectPlatform(ua = ""): DevicePlatform {
@@ -41,25 +28,22 @@ export function detectPlatform(ua = ""): DevicePlatform {
 }
 
 /**
- * 최신 고덕 앱 검색 스킴 (city = adcode 우선)
- * amapuri://search?keywords=...&city=310000
+ * URLSearchParams는 공백을 + 로 넣어 일부 앱 스킴에서 깨짐.
+ * 공식 문서 형식에 맞게 %20 인코딩 사용.
  */
-export function buildAmapUriSearchUrl(keyword: string, city?: string): string {
-  const { cityParam } = resolveCityParams(city);
-  const params = new URLSearchParams({
-    sourceApplication: APP_NAME,
-    keywords: keyword.trim(),
-  });
-  if (cityParam) params.set("city", cityParam);
-  return `amapuri://search?${params.toString()}`;
+function buildQuery(params: Record<string, string>): string {
+  return Object.entries(params)
+    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+    .join("&");
 }
 
-/** 구형 poi 스킴용: 도시명을 키워드 앞에 명시 */
+/** poi 스킴용: 도시명을 키워드에 포함해 검색 범위 유도 */
 function keywordWithCity(keyword: string, cityName?: string): string {
-  const k = keyword.trim();
+  const k = keyword.trim().replace(/\s+/g, " ");
   const c = cityName?.trim();
   if (!c) return k;
   if (k.includes(c)) return k;
+  // 공백 없이 붙이면 중국어 검색에 더 잘 맞는 경우가 많음
   return `${c}${k}`;
 }
 
@@ -73,40 +57,44 @@ function openByAnchor(url: string): void {
   a.remove();
 }
 
-function buildAndroidAmapUriIntent(keyword: string, city?: string): string {
-  const { cityParam } = resolveCityParams(city);
-  const params = new URLSearchParams({
-    sourceApplication: APP_NAME,
-    keywords: keyword.trim(),
-  });
-  if (cityParam) params.set("city", cityParam);
-
-  // 미설치 시 웹 지도가 아니라 설치 페이지로
-  const fallback = GAODE_INSTALL.androidWeb;
-
-  return (
-    `intent://search?${params.toString()}` +
-    `#Intent;scheme=amapuri;package=com.autonavi.minimap;` +
-    `S.browser_fallback_url=${encodeURIComponent(fallback)};end`
-  );
-}
-
-function buildAndroidPoiUrl(keyword: string, cityName?: string): string {
-  const params = new URLSearchParams({
+/**
+ * 공식 Android POI 검색
+ * androidamap://poi?sourceApplication=...&keywords=...&dev=0
+ * @see https://developer.amap.com/api/amap-mobile/guide/android/search
+ */
+export function buildAndroidPoiUrl(keyword: string, cityName?: string): string {
+  return `androidamap://poi?${buildQuery({
     sourceApplication: APP_NAME,
     keywords: keywordWithCity(keyword, cityName),
     dev: "0",
-  });
-  return `androidamap://poi?${params.toString()}`;
+  })}`;
 }
 
-function buildIosPoiUrl(keyword: string, cityName?: string): string {
-  const params = new URLSearchParams({
+/**
+ * 공식 iOS POI 검색
+ * iosamap://poi?sourceApplication=...&name=...&dev=0
+ * @see https://developer.amap.com/api/amap-mobile/guide/ios/search
+ */
+export function buildIosPoiUrl(keyword: string, cityName?: string): string {
+  return `iosamap://poi?${buildQuery({
     sourceApplication: APP_NAME,
     name: keywordWithCity(keyword, cityName),
     dev: "0",
-  });
-  return `iosamap://poi?${params.toString()}`;
+  })}`;
+}
+
+function buildAndroidPoiIntent(keyword: string, cityName?: string): string {
+  const path = `poi?${buildQuery({
+    sourceApplication: APP_NAME,
+    keywords: keywordWithCity(keyword, cityName),
+    dev: "0",
+  })}`;
+  const fallback = GAODE_INSTALL.androidWeb;
+  return (
+    `intent://${path}` +
+    `#Intent;scheme=androidamap;package=com.autonavi.minimap;` +
+    `S.browser_fallback_url=${encodeURIComponent(fallback)};end`
+  );
 }
 
 export function openGaodeInstallPage(platform: DevicePlatform): void {
@@ -115,7 +103,6 @@ export function openGaodeInstallPage(platform: DevicePlatform): void {
     return;
   }
   if (platform === "android") {
-    // market:// 우선, 실패 시 공식 다운로드는 안내 모달에서 HTTPS로
     window.location.href = GAODE_INSTALL.androidMarket;
     window.setTimeout(() => {
       if (document.visibilityState === "visible") {
@@ -126,15 +113,23 @@ export function openGaodeInstallPage(platform: DevicePlatform): void {
 }
 
 /**
- * 모바일에서만 고덕 앱 스킴으로 검색.
- * 웹 지도(uri.amap.com)로는 연결하지 않음.
- * 페이지가 계속 보이면 미설치로 판단.
+ * 모바일에서만 공식 Amap POI 스킴으로 검색.
+ * (amapuri://search 는 미지원/불안정 → 앱이 열리기만 하고 검색이 멈추는 원인)
  */
+function sanitizeKeyword(keyword: string): string {
+  return keyword
+    .replace(/[\r\n\t]+/g, " ")
+    .replace(/[“”"']/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 80);
+}
+
 export function openInGaodeApp(
   keyword: string,
   city?: string
 ): Promise<GaodeOpenResult> {
-  const trimmed = keyword.trim();
+  const trimmed = sanitizeKeyword(keyword);
   if (!trimmed) return Promise.resolve("not_installed");
 
   if (typeof window === "undefined") {
@@ -146,8 +141,9 @@ export function openInGaodeApp(
     return Promise.resolve("desktop");
   }
 
-  const { name: cityName } = resolveCityParams(city);
-  const amapUri = buildAmapUriSearchUrl(trimmed, city);
+  const cityName = resolveCityName(city);
+  const androidUrl = buildAndroidPoiUrl(trimmed, cityName);
+  const iosUrl = buildIosPoiUrl(trimmed, cityName);
 
   return new Promise((resolve) => {
     let settled = false;
@@ -177,26 +173,22 @@ export function openInGaodeApp(
     window.addEventListener("blur", onHide);
 
     if (platform === "android") {
-      window.location.href = buildAndroidAmapUriIntent(trimmed, city);
+      // Intent → 구형 스킴 한 번만 보조 (여러 스킴 연타는 로딩 고착 유발)
+      window.location.href = buildAndroidPoiIntent(trimmed, cityName);
       window.setTimeout(() => {
         if (!settled && document.visibilityState === "visible") {
-          openByAnchor(buildAndroidPoiUrl(trimmed, cityName));
+          openByAnchor(androidUrl);
         }
-      }, 450);
+      }, 600);
     } else {
-      const legacyIos = buildIosPoiUrl(trimmed, cityName);
-      openByAnchor(amapUri);
-      window.setTimeout(() => {
-        if (!settled) window.location.href = amapUri;
-      }, 40);
+      openByAnchor(iosUrl);
       window.setTimeout(() => {
         if (!settled && document.visibilityState === "visible") {
-          openByAnchor(legacyIos);
+          window.location.href = iosUrl;
         }
-      }, 650);
+      }, 80);
     }
 
-    // 앱이 안 열리면 설치 안내
     window.setTimeout(() => {
       if (
         !settled &&
