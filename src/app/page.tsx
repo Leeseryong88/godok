@@ -35,6 +35,7 @@ export default function HomePage() {
   const [copied, setCopied] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
+  const cityRowRef = useRef<HTMLDivElement>(null);
 
   const gaodeUrl = useMemo(() => {
     if (!keyword.trim()) return "";
@@ -42,14 +43,28 @@ export default function HomePage() {
   }, [keyword, city]);
 
   useEffect(() => {
-    inputRef.current?.focus();
+    // 모바일에서는 자동 포커스로 키보드가 바로 떠 화면이 밀리므로 넓은 화면만 포커스
+    const wide = window.matchMedia("(min-width: 641px)").matches;
+    if (wide) inputRef.current?.focus();
   }, []);
 
   useEffect(() => {
-    if (keyword && resultRef.current) {
-      resultRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
+    if (!keyword || !resultRef.current) return;
+    resultRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, [keyword]);
+
+  useEffect(() => {
+    const row = cityRowRef.current;
+    if (!row) return;
+    const active = row.querySelector<HTMLButtonElement>(
+      '[data-active="true"]'
+    );
+    active?.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  }, [city]);
 
   async function translate(nextQuery = query): Promise<string | null> {
     const trimmed = nextQuery.trim();
@@ -59,6 +74,7 @@ export default function HomePage() {
     setLoading(true);
     setKeyword("");
     setSource(null);
+    setCopied(false);
 
     try {
       const res = await fetch("/api/translate", {
@@ -82,25 +98,23 @@ export default function HomePage() {
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
+    inputRef.current?.blur();
     await translate();
   }
 
   async function onSuggest(item: (typeof SUGGESTIONS)[number]) {
     setQuery(item.q);
     if (item.city) setCity(item.city);
+    inputRef.current?.blur();
     await translate(item.q);
   }
 
-  function openGaode() {
-    if (!gaodeUrl) return;
-    window.open(gaodeUrl, "_blank", "noopener,noreferrer");
-  }
-
   async function translateAndOpen() {
+    inputRef.current?.blur();
     const result = await translate();
     if (!result) return;
     const url = buildGaodeSearchUrl(result, city || undefined);
-    window.open(url, "_blank", "noopener,noreferrer");
+    window.location.href = url;
   }
 
   async function copyLink() {
@@ -115,7 +129,7 @@ export default function HomePage() {
   }
 
   return (
-    <main className="page">
+    <main className={`page${keyword ? " has-result" : ""}`}>
       <div className="stage">
         <h1 className="brand">
           고덕검색
@@ -128,20 +142,28 @@ export default function HomePage() {
 
         <section className="panel" aria-label="검색">
           <p className="label">도시</p>
-          <div className="city-row" role="listbox" aria-label="도시 선택">
-            {CITIES.map((c) => (
-              <button
-                key={c.value || "all"}
-                type="button"
-                className="city-chip"
-                role="option"
-                aria-selected={city === c.value}
-                data-active={city === c.value}
-                onClick={() => setCity(c.value)}
-              >
-                {c.label}
-              </button>
-            ))}
+          <div className="city-wrap">
+            <div
+              className="city-row"
+              ref={cityRowRef}
+              role="listbox"
+              aria-label="도시 선택"
+            >
+              {CITIES.map((c) => (
+                <button
+                  key={c.value || "all"}
+                  type="button"
+                  className="city-chip"
+                  role="option"
+                  aria-selected={city === c.value}
+                  data-active={city === c.value}
+                  onClick={() => setCity(c.value)}
+                >
+                  <span className="short">{c.short}</span>
+                  <span className="full">{c.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
 
           <form className="search-block" onSubmit={onSubmit}>
@@ -155,11 +177,15 @@ export default function HomePage() {
                 className="field"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="예: 임시정부, Starbucks, 渋谷駅"
+                placeholder="예: 임시정부, Starbucks"
                 maxLength={80}
                 required
                 autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="none"
+                spellCheck={false}
                 enterKeyHint="search"
+                inputMode="search"
               />
               <button
                 type="submit"
@@ -177,13 +203,12 @@ export default function HomePage() {
               <button
                 type="button"
                 className="secondary"
-                style={{ padding: "8px 12px", fontSize: 13 }}
                 disabled={loading || !query.trim()}
                 onClick={translateAndOpen}
               >
                 변환 후 바로 열기
               </button>
-              <span>{query.trim().length}/80</span>
+              <span aria-live="polite">{query.trim().length}/80</span>
             </div>
           </form>
 
@@ -220,15 +245,19 @@ export default function HomePage() {
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
                 aria-label="중국어 검색어 수정"
+                enterKeyHint="done"
               />
               <p className="hint">
-                틀리면 위에서 고친 뒤 고덕지도를 여세요. 목록에서 장소를 고르면
-                됩니다.
+                틀리면 위에서 고친 뒤 고덕지도를 여세요.
               </p>
               <div className="actions">
-                <button type="button" className="primary" onClick={openGaode}>
+                <a
+                  className="primary"
+                  href={gaodeUrl}
+                  rel="noopener noreferrer"
+                >
                   고덕지도에서 보기
-                </button>
+                </a>
                 <button type="button" className="secondary" onClick={copyLink}>
                   {copied ? "복사됨" : "링크 복사"}
                 </button>
@@ -237,6 +266,17 @@ export default function HomePage() {
           ) : null}
         </section>
       </div>
+
+      {keyword ? (
+        <div className="sticky-cta">
+          <a className="primary" href={gaodeUrl} rel="noopener noreferrer">
+            고덕지도 열기
+          </a>
+          <button type="button" className="secondary" onClick={copyLink}>
+            {copied ? "복사됨" : "링크 복사"}
+          </button>
+        </div>
+      ) : null}
     </main>
   );
 }

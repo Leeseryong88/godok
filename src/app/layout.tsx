@@ -1,10 +1,26 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "고덕검색 | 다국어 → 高德地图",
   description:
     "한국어·영어·일본어로 검색하면 중국어 키워드로 바꿔 고덕지도로 열어줍니다.",
+  appleWebApp: {
+    capable: true,
+    title: "고덕검색",
+    statusBarStyle: "default",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: "cover",
+  themeColor: "#e8f2ed",
 };
 
 export default function RootLayout({
