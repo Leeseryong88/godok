@@ -1,10 +1,12 @@
 ﻿import { NextResponse } from "next/server";
-import { resolveSearchKeyword } from "@/lib/translate";
+import { resolveSearchKeyword, type PlaceIntent } from "@/lib/translate";
 
 export const runtime = "nodejs";
 
 type Body = {
   query?: string;
+  placeTypeId?: string;
+  placeTypeCustom?: string;
 };
 
 export async function POST(req: Request) {
@@ -26,8 +28,27 @@ export async function POST(req: Request) {
     );
   }
 
+  const placeTypeId =
+    typeof body.placeTypeId === "string" ? body.placeTypeId.trim() : "";
+  const placeTypeCustom =
+    typeof body.placeTypeCustom === "string"
+      ? body.placeTypeCustom.trim().slice(0, 40)
+      : "";
+
+  if (!placeTypeId && !placeTypeCustom) {
+    return NextResponse.json(
+      { error: "장소 유형을 선택하거나 입력해 주세요." },
+      { status: 400 }
+    );
+  }
+
+  const intent: PlaceIntent = {
+    typeId: placeTypeId || undefined,
+    custom: placeTypeCustom || undefined,
+  };
+
   try {
-    const result = await resolveSearchKeyword(query);
+    const result = await resolveSearchKeyword(query, intent);
     return NextResponse.json(result);
   } catch (err) {
     const message = err instanceof Error ? err.message : "TRANSLATE_FAILED";
