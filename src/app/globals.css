@@ -126,11 +126,11 @@ input {
 
 .search-box {
   display: grid;
-  grid-template-columns: auto 1px minmax(0, 1fr);
+  grid-template-columns: max-content 1px minmax(0, 1fr);
   align-items: center;
-  gap: 0;
+  column-gap: 12px;
   min-height: var(--touch);
-  padding: 6px 12px 6px 8px;
+  padding: 6px 14px 6px 10px;
   border-radius: 18px;
   background: var(--surface);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
@@ -138,9 +138,10 @@ input {
 
 .search-divider {
   width: 1px;
-  height: 28px;
-  background: rgba(18, 36, 43, 0.12);
-  margin: 0 8px;
+  height: 22px;
+  margin: 0;
+  background: rgba(18, 36, 43, 0.14);
+  justify-self: center;
 }
 
 .city-wrap {
@@ -155,13 +156,12 @@ input {
   background:
     transparent
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%230f5f50' d='M1 1.5 L6 6.5 L11 1.5'/%3E%3C/svg%3E")
-    no-repeat right 4px center;
+    no-repeat right 2px center;
   color: #0f5f50;
   font-size: 15px;
   font-weight: 700;
   min-height: 44px;
-  padding: 0 22px 0 8px;
-  max-width: 118px;
+  padding: 0 20px 0 6px;
   outline: none;
   cursor: pointer;
 }
@@ -173,13 +173,15 @@ input {
 
 .field {
   width: 100%;
+  min-width: 0;
   min-height: 44px;
   border: 0;
   background: transparent;
   color: var(--ink);
   outline: none;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 500;
+  padding: 0 2px;
 }
 
 .field::placeholder {

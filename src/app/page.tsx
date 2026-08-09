@@ -223,7 +223,7 @@ export default function HomePage() {
                 if (formError) setFormError("");
               }}
               onKeyDown={onQueryKeyDown}
-              placeholder="장소 검색 후 Enter"
+              placeholder="장소 검색"
               maxLength={80}
               disabled={loading}
               autoComplete="off"
