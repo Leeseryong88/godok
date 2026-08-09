@@ -2,9 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "고덕검색 — 내 언어로 高德地图 찾기",
-  description:
-    "한국어·영어·일본어로 장소를 검색하면 고덕지도(高德地图) 앱에서 바로 엽니다.",
+  title: "고덕검색",
+  description: "장소를 검색하면 高德地图에서 바로 엽니다.",
   applicationName: "고덕검색",
   appleWebApp: {
     capable: true,
