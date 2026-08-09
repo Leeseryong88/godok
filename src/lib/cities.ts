@@ -1,0 +1,21 @@
+/** 고덕 city 파라미터용 — LLM 없이 로컬로 처리해 토큰 절약 */
+export const CITIES = [
+  { value: "", label: "전체(중국)" },
+  { value: "北京", label: "베이징 · 北京" },
+  { value: "上海", label: "상하이 · 上海" },
+  { value: "广州", label: "광저우 · 广州" },
+  { value: "深圳", label: "선전 · 深圳" },
+  { value: "成都", label: "청두 · 成都" },
+  { value: "杭州", label: "항저우 · 杭州" },
+  { value: "重庆", label: "충칭 · 重庆" },
+  { value: "西安", label: "시안 · 西安" },
+  { value: "南京", label: "난징 · 南京" },
+  { value: "武汉", label: "우한 · 武汉" },
+  { value: "苏州", label: "쑤저우 · 苏州" },
+  { value: "天津", label: "톈진 · 天津" },
+  { value: "青岛", label: "칭다오 · 青岛" },
+  { value: "厦门", label: "샤먼 · 厦门" },
+  { value: "昆明", label: "쿤밍 · 昆明" },
+  { value: "大连", label: "다롄 · 大连" },
+  { value: "哈尔滨", label: "하얼빈 · 哈尔滨" },
+] as const;

@@ -1,0 +1,113 @@
+/**
+ * 자주 쓰는 장소/브랜드 로컬 사전.
+ * 히트 시 Gemini를 호출하지 않아 토큰 0.
+ */
+const DICT: Record<string, string> = {
+  // brands
+  starbucks: "星巴克",
+  "스타벅스": "星巴克",
+  mcdonalds: "麦当劳",
+  "mcdonald's": "麦当劳",
+  "맥도날드": "麦当劳",
+  kfc: "肯德基",
+  "케이에프씨": "肯德基",
+  "켄터키": "肯德基",
+  subway: "赛百味",
+  "서브웨이": "赛百味",
+  "pizza hut": "必胜客",
+  pizzahut: "必胜客",
+  "피자헛": "必胜客",
+  "7-eleven": "7-Eleven",
+  "7 eleven": "7-Eleven",
+  "세븐일레븐": "7-Eleven",
+  familyMart: "全家",
+  familymart: "全家",
+  "패밀리마트": "全家",
+  luckin: "瑞幸咖啡",
+  "luckin coffee": "瑞幸咖啡",
+  "루이싱": "瑞幸咖啡",
+  "루이싱 커피": "瑞幸咖啡",
+  costa: "咖世家",
+  "코스타": "咖世家",
+  ikea: "宜家",
+  "이케아": "宜家",
+  uniqlo: "优衣库",
+  "유니클로": "优衣库",
+  "muji": "无印良品",
+  "무인양품": "无印良品",
+  apple: "苹果店",
+  "애플스토어": "苹果店",
+  "apple store": "苹果店",
+
+  // landmarks
+  "forbidden city": "故宫",
+  "the forbidden city": "故宫",
+  "자금성": "故宫",
+  "천안문": "天安门",
+  "tiananmen": "天安门",
+  "tiananmen square": "天安门",
+  "만리장성": "长城",
+  "great wall": "长城",
+  "the great wall": "长城",
+  "외탄": "外滩",
+  bund: "外滩",
+  "the bund": "外滩",
+  "동방명주": "东方明珠",
+  "oriental pearl": "东方明珠",
+  "서호": "西湖",
+  "west lake": "西湖",
+  "이화원": "颐和园",
+  "summer palace": "颐和园",
+  "천단": "天坛",
+  "temple of heaven": "天坛",
+  "병마용": "兵马俑",
+  "terracotta warriors": "兵马俑",
+  "임시정부": "临时政府",
+  "대한민국 임시정부": "大韩民国临时政府旧址",
+  "임정": "临时政府",
+  "provisional government": "临时政府",
+  "상하이 디즈니": "上海迪士니",
+  "shanghai disney": "上海迪士尼",
+  "shanghai disneyland": "上海迪士尼",
+  "북경대학": "北京大学",
+  "北京大学": "北京大学",
+  "칭화대학": "清华大学",
+  "tsinghua": "清华大学",
+
+  // transport / categories
+  "공항": "机场",
+  airport: "机场",
+  "기차역": "火车站",
+  "train station": "火车站",
+  "지하철": "地铁",
+  metro: "地铁",
+  "화장실": "厕所",
+  toilet: "厕所",
+  restroom: "厕所",
+  "편의점": "便利店",
+  "convenience store": "便利店",
+  "약국": "药店",
+  pharmacy: "药店",
+  "병원": "医院",
+  hospital: "医院",
+  "은행": "银行",
+  bank: "银行",
+  "호텔": "酒店",
+  hotel: "酒店",
+  "카페": "咖啡",
+  cafe: "咖啡",
+  coffee: "咖啡",
+  "맛집": "美食",
+  restaurant: "餐厅",
+};
+
+function normalize(q: string): string {
+  return q.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+/** 로컬 사전에 있으면 중국어 키워드, 없으면 null */
+export function lookupLocal(query: string): string | null {
+  const key = normalize(query);
+  if (!key) return null;
+  return DICT[key] ?? null;
+}
