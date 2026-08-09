@@ -19,11 +19,20 @@ function isMobileUA(ua: string): { ios: boolean; android: boolean } {
   };
 }
 
+/** 앱 스킴에 city 파라미터가 없어 키워드 앞에 도시를 붙임 */
+function keywordWithCity(keyword: string, city?: string): string {
+  const k = keyword.trim();
+  const c = city?.trim();
+  if (!c) return k;
+  if (k.includes(c)) return k;
+  return `${c} ${k}`;
+}
+
 /** iOS: 공식 poi 검색 스킴 */
-export function buildIosGaodeAppUrl(keyword: string): string {
+export function buildIosGaodeAppUrl(keyword: string, city?: string): string {
   const params = new URLSearchParams({
     sourceApplication: APP_NAME,
-    name: keyword,
+    name: keywordWithCity(keyword, city),
     dev: "0",
   });
   return `iosamap://poi?${params.toString()}`;
@@ -35,11 +44,12 @@ export function buildIosGaodeAppUrl(keyword: string): string {
  */
 export function buildAndroidGaodeIntentUrl(
   keyword: string,
-  fallbackWebUrl: string
+  fallbackWebUrl: string,
+  city?: string
 ): string {
   const query = new URLSearchParams({
     sourceApplication: APP_NAME,
-    keywords: keyword,
+    keywords: keywordWithCity(keyword, city),
     dev: "0",
   }).toString();
 
@@ -50,43 +60,39 @@ export function buildAndroidGaodeIntentUrl(
   );
 }
 
-/** Android 구형/기타 브라우저용 스킴 */
-export function buildAndroidGaodeAppUrl(keyword: string): string {
-  const params = new URLSearchParams({
-    sourceApplication: APP_NAME,
-    keywords: keyword,
-    dev: "0",
-  });
-  return `androidamap://poi?${params.toString()}`;
-}
-
 /**
  * 모바일: 설치된 고덕 앱을 우선 실행.
- * 데스크톱/앱 미설치: 웹 URI로 폴백.
+ * city가 있으면 웹 URI의 city 파라미터 + 앱 키워드에 도시 반영.
  */
 export function openInGaodeApp(keyword: string, city?: string): void {
   const trimmed = keyword.trim();
   if (!trimmed) return;
 
-  const webUrl = buildGaodeSearchUrl(trimmed, city);
+  const cityZh = city?.trim() || undefined;
+  const webUrl = buildGaodeSearchUrl(trimmed, cityZh);
   if (typeof window === "undefined") return;
 
   const { ios, android } = isMobileUA(navigator.userAgent || "");
 
-  // PC는 웹으로
+  // PC
   if (!ios && !android) {
     window.open(webUrl, "_blank", "noopener,noreferrer");
     return;
   }
 
-  if (android) {
-    // Intent URL이 Chrome/삼성 인터넷에서 앱 실행에 가장 안정적
-    window.location.href = buildAndroidGaodeIntentUrl(trimmed, webUrl);
+  // 도시가 있으면 공식 웹 URI(city + callnative)로 앱 호출이 범위 지정에 더 안정적
+  if (cityZh) {
+    window.location.href = webUrl;
     return;
   }
 
-  // iOS: 커스텀 스킴 → 실패 시 웹 폴백
-  const appUrl = buildIosGaodeAppUrl(trimmed);
+  if (android) {
+    window.location.href = buildAndroidGaodeIntentUrl(trimmed, webUrl, cityZh);
+    return;
+  }
+
+  // iOS: 커스텀 스킴 → 실패 시 city 포함 웹 폴백
+  const appUrl = buildIosGaodeAppUrl(trimmed, cityZh);
   const started = Date.now();
   let cancelled = false;
 
@@ -113,8 +119,11 @@ export function openInGaodeApp(keyword: string, city?: string): void {
 
   window.setTimeout(() => {
     cleanup();
-    // 앱이 뜨면 보통 숨겨지므로, 그대로면 미설치/차단 → 웹
-    if (!cancelled && document.visibilityState === "visible" && Date.now() - started < 2800) {
+    if (
+      !cancelled &&
+      document.visibilityState === "visible" &&
+      Date.now() - started < 2800
+    ) {
       window.location.href = webUrl;
     }
   }, 1800);

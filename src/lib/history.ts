@@ -35,11 +35,17 @@ export function clearHistory(): void {
   localStorage.removeItem(KEY);
 }
 
-export function loadSavedCity(fallback = "上海"): string {
+export function loadSavedCity(fallback = ""): string {
   if (typeof window === "undefined") return fallback;
-  return localStorage.getItem(CITY_KEY) ?? fallback;
+  const saved = localStorage.getItem(CITY_KEY);
+  return saved ?? fallback;
 }
 
 export function saveCity(city: string): void {
-  localStorage.setItem(CITY_KEY, city);
+  const value = city.trim();
+  if (!value) {
+    localStorage.removeItem(CITY_KEY);
+    return;
+  }
+  localStorage.setItem(CITY_KEY, value);
 }

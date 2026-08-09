@@ -7,7 +7,9 @@ import {
   useRef,
   useState,
 } from "react";
+import { resolveCityForGaode } from "@/lib/cityAliases";
 import { openInGaodeApp } from "@/lib/gaode";
+import { loadSavedCity, saveCity } from "@/lib/history";
 import { PLACE_TYPES } from "@/lib/placeTypes";
 
 type TranslateResponse = {
@@ -15,21 +17,31 @@ type TranslateResponse = {
 };
 
 export default function HomePage() {
+  const [city, setCity] = useState("");
   const [query, setQuery] = useState("");
   const [pendingQuery, setPendingQuery] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [customType, setCustomType] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [ready, setReady] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const customRef = useRef<HTMLInputElement>(null);
   const titleId = useId();
 
   useEffect(() => {
+    setCity(loadSavedCity(""));
+    setReady(true);
+
     const wide = window.matchMedia("(min-width: 720px)").matches;
     if (wide) inputRef.current?.focus();
   }, []);
+
+  useEffect(() => {
+    if (!ready) return;
+    saveCity(city);
+  }, [city, ready]);
 
   useEffect(() => {
     if (!modalOpen) return;
@@ -81,6 +93,7 @@ export default function HomePage() {
 
     setError("");
     setLoading(true);
+    saveCity(city);
 
     try {
       const res = await fetch("/api/translate", {
@@ -95,10 +108,11 @@ export default function HomePage() {
       const data = (await res.json()) as TranslateResponse & { error?: string };
       if (!res.ok) throw new Error(data.error || "검색에 실패했습니다.");
 
+      const cityZh = resolveCityForGaode(city);
       setModalOpen(false);
       setPendingQuery("");
       setCustomType("");
-      openInGaodeApp(data.keyword);
+      openInGaodeApp(data.keyword, cityZh || undefined);
     } catch (err) {
       setError(err instanceof Error ? err.message : "검색에 실패했습니다.");
     } finally {
@@ -116,6 +130,8 @@ export default function HomePage() {
     if (!custom) return;
     void runSearch({ placeTypeCustom: custom });
   }
+
+  const cityZhPreview = resolveCityForGaode(city);
 
   return (
     <main className="page">
@@ -143,6 +159,34 @@ export default function HomePage() {
 
         <form className="search" onSubmit={onSearchSubmit} aria-label="장소 검색">
           <div className="search-box">
+            <input
+              className="field city-field"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              placeholder="도시"
+              maxLength={40}
+              disabled={loading}
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="none"
+              spellCheck={false}
+              enterKeyHint="next"
+              aria-label="도시"
+              list="city-suggestions"
+            />
+            <datalist id="city-suggestions">
+              <option value="상하이" />
+              <option value="베이징" />
+              <option value="광저우" />
+              <option value="선전" />
+              <option value="청두" />
+              <option value="항저우" />
+              <option value="시안" />
+              <option value="난징" />
+              <option value="上海" />
+              <option value="北京" />
+            </datalist>
+            <span className="search-divider" aria-hidden="true" />
             <input
               ref={inputRef}
               className="field"
@@ -180,7 +224,10 @@ export default function HomePage() {
           >
             <div className="modal-head">
               <div>
-                <p className="modal-kicker">검색어</p>
+                <p className="modal-kicker">
+                  검색어
+                  {cityZhPreview ? ` · ${city.trim() || cityZhPreview}` : ""}
+                </p>
                 <p className="modal-query">{pendingQuery}</p>
               </div>
               <button
@@ -197,7 +244,11 @@ export default function HomePage() {
             <h2 id={titleId} className="modal-title">
               어떤 장소인가요?
             </h2>
-            <p className="modal-desc">유형을 고르면 더 정확하게 찾아요</p>
+            <p className="modal-desc">
+              {cityZhPreview
+                ? `${cityZhPreview}에서 유형에 맞춰 검색해요`
+                : "유형을 고르면 더 정확하게 찾아요"}
+            </p>
 
             <div className="type-grid" role="list">
               {PLACE_TYPES.map((t) => (
