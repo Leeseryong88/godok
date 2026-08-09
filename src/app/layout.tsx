@@ -2,13 +2,14 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "고덕검색 | 다국어 → 高德地图",
+  title: "고덕검색 — 내 언어로 高德地图 찾기",
   description:
-    "한국어·영어·일본어로 검색하면 중국어 키워드로 바꿔 고덕지도로 열어줍니다.",
+    "한국어·영어·일본어로 장소를 검색하면 고덕지도(高德地图) 앱에서 바로 엽니다.",
+  applicationName: "고덕검색",
   appleWebApp: {
     capable: true,
     title: "고덕검색",
-    statusBarStyle: "default",
+    statusBarStyle: "black-translucent",
   },
   formatDetection: {
     telephone: false,
@@ -20,7 +21,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   viewportFit: "cover",
-  themeColor: "#e8f2ed",
+  themeColor: "#0b1c24",
 };
 
 export default function RootLayout({
@@ -38,7 +39,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,650;6..72,700&family=Sora:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
       </head>
