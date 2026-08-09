@@ -286,8 +286,6 @@ export default function HomePage() {
             <p className="error form-error" role="alert">
               {formError}
             </p>
-          ) : !isDesktop ? (
-            <p className="search-hint">高德地图 앱이 설치되어 있어야 해요</p>
           ) : null}
         </form>
       </div>
