@@ -1,15 +1,51 @@
+import { getCityMeta } from "./cities";
+
 const APP_NAME = "godok";
 
-/** 웹 검색 URI (공유/폴백용, callnative는 보조) */
+function resolveCityParams(city?: string): {
+  name?: string;
+  adcode?: string;
+  /** URI city 파라미터: adcode 우선 */
+  cityParam?: string;
+} {
+  const raw = city?.trim();
+  if (!raw) return {};
+  const meta = getCityMeta(raw);
+  if (meta) {
+    return {
+      name: meta.name,
+      adcode: meta.adcode,
+      cityParam: meta.adcode || meta.name,
+    };
+  }
+  return { name: raw, cityParam: raw };
+}
+
+/** 웹 검색 URI — city는 adcode가 가장 확실 */
 export function buildGaodeSearchUrl(keyword: string, city?: string): string {
+  const { cityParam } = resolveCityParams(city);
   const params = new URLSearchParams({
-    keyword,
+    keyword: keyword.trim(),
     view: "list",
     callnative: "1",
     src: APP_NAME,
   });
-  if (city) params.set("city", city);
+  if (cityParam) params.set("city", cityParam);
   return `https://uri.amap.com/search?${params.toString()}`;
+}
+
+/**
+ * 최신 고덕 앱 검색 스킴 (city 파라미터 지원)
+ * amapuri://search?keywords=...&city=310000
+ */
+export function buildAmapUriSearchUrl(keyword: string, city?: string): string {
+  const { cityParam } = resolveCityParams(city);
+  const params = new URLSearchParams({
+    sourceApplication: APP_NAME,
+    keywords: keyword.trim(),
+  });
+  if (cityParam) params.set("city", cityParam);
+  return `amapuri://search?${params.toString()}`;
 }
 
 function isMobileUA(ua: string): { ios: boolean; android: boolean } {
@@ -19,13 +55,13 @@ function isMobileUA(ua: string): { ios: boolean; android: boolean } {
   };
 }
 
-/** 앱 스킴에 city 파라미터가 없어 키워드 앞에 도시를 붙임 */
-function keywordWithCity(keyword: string, city?: string): string {
+/** 구형 poi 스킴용: 도시명을 키워드 앞에 명시 */
+function keywordWithCity(keyword: string, cityName?: string): string {
   const k = keyword.trim();
-  const c = city?.trim();
+  const c = cityName?.trim();
   if (!c) return k;
   if (k.includes(c)) return k;
-  return `${c} ${k}`;
+  return `${c}${k}`;
 }
 
 function openByAnchor(url: string): void {
@@ -38,76 +74,83 @@ function openByAnchor(url: string): void {
   a.remove();
 }
 
-/** iOS: 공식 poi 검색 스킴 */
-export function buildIosGaodeAppUrl(keyword: string, city?: string): string {
+function buildAndroidAmapUriIntent(
+  keyword: string,
+  fallbackWebUrl: string,
+  city?: string
+): string {
+  const { cityParam } = resolveCityParams(city);
   const params = new URLSearchParams({
     sourceApplication: APP_NAME,
-    name: keywordWithCity(keyword, city),
+    keywords: keyword.trim(),
+  });
+  if (cityParam) params.set("city", cityParam);
+
+  return (
+    `intent://search?${params.toString()}` +
+    `#Intent;scheme=amapuri;package=com.autonavi.minimap;` +
+    `S.browser_fallback_url=${encodeURIComponent(fallbackWebUrl)};end`
+  );
+}
+
+/** 구형 Android poi 스킴 (city 미지원 → 키워드에 도시 포함) */
+function buildAndroidPoiUrl(keyword: string, cityName?: string): string {
+  const params = new URLSearchParams({
+    sourceApplication: APP_NAME,
+    keywords: keywordWithCity(keyword, cityName),
+    dev: "0",
+  });
+  return `androidamap://poi?${params.toString()}`;
+}
+
+/** 구형 iOS poi 스킴 */
+function buildIosPoiUrl(keyword: string, cityName?: string): string {
+  const params = new URLSearchParams({
+    sourceApplication: APP_NAME,
+    name: keywordWithCity(keyword, cityName),
     dev: "0",
   });
   return `iosamap://poi?${params.toString()}`;
 }
 
 /**
- * Android: Intent로 고덕 앱 패키지를 직접 실행.
- * 미설치 시에만 browser_fallback_url(웹)로 이동.
- */
-export function buildAndroidGaodeIntentUrl(
-  keyword: string,
-  fallbackWebUrl: string,
-  city?: string
-): string {
-  const query = new URLSearchParams({
-    sourceApplication: APP_NAME,
-    keywords: keywordWithCity(keyword, city),
-    dev: "0",
-  }).toString();
-
-  return (
-    `intent://poi?${query}` +
-    `#Intent;scheme=androidamap;package=com.autonavi.minimap;` +
-    `S.browser_fallback_url=${encodeURIComponent(fallbackWebUrl)};end`
-  );
-}
-
-/** Android 구형 브라우저용 직접 스킴 */
-export function buildAndroidGaodeAppUrl(keyword: string, city?: string): string {
-  const params = new URLSearchParams({
-    sourceApplication: APP_NAME,
-    keywords: keywordWithCity(keyword, city),
-    dev: "0",
-  });
-  return `androidamap://poi?${params.toString()}`;
-}
-
-/**
- * 모바일: 설치된 고덕 앱을 항상 우선 실행.
- * 도시가 있어도 웹이 아닌 앱 스킴을 먼저 사용하고, 실패 시에만 웹으로 폴백.
+ * 모바일: 앱 우선 실행 + 도시 범위 반영.
+ * 1) amapuri://search?city=adcode (도시 지정 가능)
+ * 2) 구형 poi 스킴 (키워드에 도시명 포함)
+ * 3) 웹 URI (city=adcode)
  */
 export function openInGaodeApp(keyword: string, city?: string): void {
   const trimmed = keyword.trim();
   if (!trimmed) return;
 
-  const cityZh = city?.trim() || undefined;
-  const webUrl = buildGaodeSearchUrl(trimmed, cityZh);
+  const { name: cityName } = resolveCityParams(city);
+  const webUrl = buildGaodeSearchUrl(trimmed, city);
+  const amapUri = buildAmapUriSearchUrl(trimmed, city);
+
   if (typeof window === "undefined") return;
 
   const { ios, android } = isMobileUA(navigator.userAgent || "");
 
-  // PC는 웹
   if (!ios && !android) {
     window.open(webUrl, "_blank", "noopener,noreferrer");
     return;
   }
 
   if (android) {
-    // Chrome/삼성인터넷: Intent로 앱 패키지를 직접 실행 (미설치 시 웹 폴백)
-    window.location.href = buildAndroidGaodeIntentUrl(trimmed, webUrl, cityZh);
+    // Intent: amapuri search + city(adcode)
+    window.location.href = buildAndroidAmapUriIntent(trimmed, webUrl, city);
+
+    // Intent를 무시하는 환경 대비 구형 스킴 보조
+    window.setTimeout(() => {
+      if (document.visibilityState === "visible") {
+        openByAnchor(buildAndroidPoiUrl(trimmed, cityName));
+      }
+    }, 500);
     return;
   }
 
-  // iOS: iosamap 스킴 우선 → 안 열리면 웹 폴백
-  const appUrl = buildIosGaodeAppUrl(trimmed, cityZh);
+  // iOS: amapuri(도시 지원) → iosamap → 웹
+  const legacyIos = buildIosPoiUrl(trimmed, cityName);
   const started = Date.now();
   let cancelled = false;
 
@@ -130,20 +173,26 @@ export function openInGaodeApp(keyword: string, city?: string): void {
   window.addEventListener("pagehide", onHide);
   window.addEventListener("blur", onHide);
 
-  openByAnchor(appUrl);
-  // 일부 Safari에서 location도 함께
+  openByAnchor(amapUri);
   window.setTimeout(() => {
-    if (!cancelled) window.location.href = appUrl;
-  }, 50);
+    if (!cancelled) window.location.href = amapUri;
+  }, 40);
+
+  window.setTimeout(() => {
+    if (!cancelled && document.visibilityState === "visible") {
+      openByAnchor(legacyIos);
+      window.location.href = legacyIos;
+    }
+  }, 700);
 
   window.setTimeout(() => {
     cleanup();
     if (
       !cancelled &&
       document.visibilityState === "visible" &&
-      Date.now() - started < 2800
+      Date.now() - started < 3200
     ) {
       window.location.href = webUrl;
     }
-  }, 1800);
+  }, 2200);
 }

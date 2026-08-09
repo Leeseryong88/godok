@@ -7,6 +7,7 @@ type Body = {
   query?: string;
   placeTypeId?: string;
   placeTypeCustom?: string;
+  city?: string;
 };
 
 export async function POST(req: Request) {
@@ -34,6 +35,7 @@ export async function POST(req: Request) {
     typeof body.placeTypeCustom === "string"
       ? body.placeTypeCustom.trim().slice(0, 40)
       : "";
+  const city = typeof body.city === "string" ? body.city.trim().slice(0, 40) : "";
 
   if (!placeTypeId && !placeTypeCustom) {
     return NextResponse.json(
@@ -45,6 +47,7 @@ export async function POST(req: Request) {
   const intent: PlaceIntent = {
     typeId: placeTypeId || undefined,
     custom: placeTypeCustom || undefined,
+    city: city || undefined,
   };
 
   try {

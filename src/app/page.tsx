@@ -134,6 +134,7 @@ export default function HomePage() {
           query: trimmed,
           placeTypeId: opts.placeTypeId,
           placeTypeCustom: opts.placeTypeCustom,
+          city: city || undefined,
         }),
       });
       const data = (await res.json()) as TranslateResponse & { error?: string };
@@ -142,6 +143,7 @@ export default function HomePage() {
       setModalOpen(false);
       setPendingQuery("");
       setCustomType("");
+      // select value는 이미 중국어 도시명(上海 등)
       openInGaodeApp(data.keyword, city || undefined);
     } catch (err) {
       setError(err instanceof Error ? err.message : "검색에 실패했습니다.");
