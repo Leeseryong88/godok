@@ -273,38 +273,6 @@ input {
   line-height: 1.4;
 }
 
-.coupang-banner {
-  position: relative;
-  z-index: 1;
-  width: min(680px, 100%);
-  margin-top: auto;
-  padding-top: 28px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.coupang-banner-slot {
-  width: 100%;
-  min-height: 140px;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.coupang-banner-slot iframe {
-  max-width: 100%;
-}
-
-.coupang-banner-disclosure {
-  margin: 8px 8px 0;
-  color: rgba(231, 243, 239, 0.42);
-  font-size: 10px;
-  line-height: 1.4;
-  text-align: center;
-}
-
 .search-divider {
   width: 1px;
   height: 22px;
@@ -405,7 +373,6 @@ button {
 }
 
 .page.is-overlay-open .shell,
-.page.is-overlay-open .coupang-banner,
 .page.is-overlay-open .lang-switch {
   visibility: hidden;
   pointer-events: none;

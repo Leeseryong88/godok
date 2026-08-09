@@ -10,7 +10,6 @@ import {
   useState,
 } from "react";
 import { track } from "@vercel/analytics";
-import { CoupangDynamicBanner } from "@/components/CoupangDynamicBanner";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { COUPANG_CHINA_ESIM_URL } from "@/lib/affiliate";
 import { resolveCityForGaode } from "@/lib/cityAliases";
@@ -366,8 +365,6 @@ export default function HomePage() {
           <p className="affiliate-disclosure">{t.affiliateDisclosure}</p>
         </aside>
       </div>
-
-      <CoupangDynamicBanner disclosure={t.affiliateDisclosure} />
 
       {modalOpen ? (
         <div
