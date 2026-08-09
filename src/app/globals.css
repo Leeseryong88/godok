@@ -52,12 +52,15 @@ input {
   position: relative;
   min-height: 100dvh;
   overflow-x: clip;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
   padding:
     calc(24px + var(--safe-top))
     calc(20px + var(--safe-right))
-    calc(24px + var(--safe-bottom))
+    calc(16px + var(--safe-bottom))
     calc(20px + var(--safe-left));
 }
 
@@ -241,6 +244,65 @@ input {
 
 .search-box.is-disabled {
   opacity: 0.72;
+}
+
+.affiliate {
+  margin-top: 14px;
+  text-align: center;
+}
+
+.affiliate-link {
+  display: inline-block;
+  color: #9fd9c8;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(159, 217, 200, 0.45);
+}
+
+.affiliate-link:hover {
+  color: #c6eee2;
+  text-decoration-color: rgba(198, 238, 226, 0.7);
+}
+
+.affiliate-disclosure {
+  margin: 6px 8px 0;
+  color: rgba(231, 243, 239, 0.42);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.coupang-banner {
+  position: relative;
+  z-index: 1;
+  width: min(680px, 100%);
+  margin-top: auto;
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.coupang-banner-slot {
+  width: 100%;
+  min-height: 140px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.coupang-banner-slot iframe {
+  max-width: 100%;
+}
+
+.coupang-banner-disclosure {
+  margin: 8px 8px 0;
+  color: rgba(231, 243, 239, 0.42);
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: center;
 }
 
 .search-divider {

@@ -27,6 +27,8 @@ export type Messages = {
   installPrimary: string;
   installSecondary: string;
   dismiss: string;
+  affiliateLink: string;
+  affiliateDisclosure: string;
   cities: Record<string, string>;
   placeTypes: Record<string, string>;
 };
@@ -93,6 +95,9 @@ export const MESSAGES: Record<Locale, Messages> = {
     installPrimary: "Install Amap",
     installSecondary: "Open download page",
     dismiss: "Close",
+    affiliateLink: "China travel eSIM & Wi‑Fi",
+    affiliateDisclosure:
+      "Coupang Partners affiliate link. A commission may be earned.",
     cities: citiesEn,
     placeTypes: placeTypesEn,
   },
@@ -125,6 +130,9 @@ export const MESSAGES: Record<Locale, Messages> = {
     installPrimary: "Instalar Amap",
     installSecondary: "Abrir página de descarga",
     dismiss: "Cerrar",
+    affiliateLink: "eSIM y Wi‑Fi para viajar a China",
+    affiliateDisclosure:
+      "Enlace de afiliado de Coupang Partners. Puede generarse una comisión.",
     cities: {
       "": "Todas",
       北京: "Pekín",
@@ -185,6 +193,9 @@ export const MESSAGES: Record<Locale, Messages> = {
     installPrimary: "Amap इंस्टॉल करें",
     installSecondary: "डाउनलोड पेज खोलें",
     dismiss: "बंद करें",
+    affiliateLink: "चीन यात्रा eSIM और वाई‑फाई",
+    affiliateDisclosure:
+      "Coupang Partners अफ़िलिएट लिंक। कमीशन मिल सकता है।",
     cities: {
       "": "सभी",
       北京: "बीजिंग",
@@ -245,6 +256,9 @@ export const MESSAGES: Record<Locale, Messages> = {
     installPrimary: "تثبيت Amap",
     installSecondary: "فتح صفحة التحميل",
     dismiss: "إغلاق",
+    affiliateLink: "eSIM وواي فاي للسفر إلى الصين",
+    affiliateDisclosure:
+      "رابط تسويق بالعمولة عبر Coupang Partners. قد تُحتسب عمولة.",
     cities: {
       "": "الكل",
       北京: "بكين",
@@ -305,6 +319,9 @@ export const MESSAGES: Record<Locale, Messages> = {
     installPrimary: "Amap 설치하기",
     installSecondary: "다운로드 페이지 열기",
     dismiss: "닫기",
+    affiliateLink: "중국 여행 유심·와이파이 보기",
+    affiliateDisclosure:
+      "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
     cities: {
       "": "전체",
       北京: "베이징",

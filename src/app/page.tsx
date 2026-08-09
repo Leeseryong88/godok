@@ -9,7 +9,10 @@ import {
   useRef,
   useState,
 } from "react";
+import { track } from "@vercel/analytics";
+import { CoupangDynamicBanner } from "@/components/CoupangDynamicBanner";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { COUPANG_CHINA_ESIM_URL } from "@/lib/affiliate";
 import { resolveCityForGaode } from "@/lib/cityAliases";
 import { CITIES } from "@/lib/cities";
 import {
@@ -317,7 +320,22 @@ export default function HomePage() {
             </p>
           ) : null}
         </form>
+
+        <aside className="affiliate" aria-label={t.affiliateLink}>
+          <a
+            className="affiliate-link"
+            href={COUPANG_CHINA_ESIM_URL}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            onClick={() => track("coupang_china_esim_click")}
+          >
+            {t.affiliateLink}
+          </a>
+          <p className="affiliate-disclosure">{t.affiliateDisclosure}</p>
+        </aside>
       </div>
+
+      <CoupangDynamicBanner disclosure={t.affiliateDisclosure} />
 
       {modalOpen ? (
         <div
