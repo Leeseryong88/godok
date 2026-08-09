@@ -2,12 +2,14 @@
 
 import {
   FormEvent,
+  KeyboardEvent,
   useEffect,
   useId,
   useRef,
   useState,
 } from "react";
 import { resolveCityForGaode } from "@/lib/cityAliases";
+import { CITIES } from "@/lib/cities";
 import { openInGaodeApp } from "@/lib/gaode";
 import { loadSavedCity, saveCity } from "@/lib/history";
 import { PLACE_TYPES } from "@/lib/placeTypes";
@@ -15,6 +17,15 @@ import { PLACE_TYPES } from "@/lib/placeTypes";
 type TranslateResponse = {
   keyword: string;
 };
+
+function normalizeSavedCity(saved: string): string {
+  const raw = saved.trim();
+  if (!raw) return "";
+  const zh = resolveCityForGaode(raw);
+  if (CITIES.some((c) => c.value === zh)) return zh;
+  if (CITIES.some((c) => c.value === raw)) return raw;
+  return "";
+}
 
 export default function HomePage() {
   const [city, setCity] = useState("");
@@ -24,6 +35,7 @@ export default function HomePage() {
   const [customType, setCustomType] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [formError, setFormError] = useState("");
   const [ready, setReady] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -31,11 +43,8 @@ export default function HomePage() {
   const titleId = useId();
 
   useEffect(() => {
-    setCity(loadSavedCity(""));
+    setCity(normalizeSavedCity(loadSavedCity("")));
     setReady(true);
-
-    const wide = window.matchMedia("(min-width: 720px)").matches;
-    if (wide) inputRef.current?.focus();
   }, []);
 
   useEffect(() => {
@@ -49,11 +58,10 @@ export default function HomePage() {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const onKey = (e: KeyboardEvent) => {
+    const onKey = (e: globalThis.KeyboardEvent) => {
       if (e.key === "Escape" && !loading) closeModal();
     };
     window.addEventListener("keydown", onKey);
-
     window.setTimeout(() => customRef.current?.focus(), 50);
 
     return () => {
@@ -66,6 +74,7 @@ export default function HomePage() {
     setPendingQuery(trimmed);
     setCustomType("");
     setError("");
+    setFormError("");
     setModalOpen(true);
   }
 
@@ -76,12 +85,34 @@ export default function HomePage() {
     setCustomType("");
   }
 
-  function onSearchSubmit(e: FormEvent) {
-    e.preventDefault();
+  function tryOpenSearch() {
+    if (loading) return;
     const trimmed = query.trim();
-    if (!trimmed || loading) return;
+    if (!trimmed) {
+      setFormError("검색어를 입력해 주세요.");
+      inputRef.current?.focus();
+      return;
+    }
     inputRef.current?.blur();
     openModal(trimmed);
+  }
+
+  function onSearchSubmit(e: FormEvent) {
+    e.preventDefault();
+    tryOpenSearch();
+  }
+
+  function onCityChange(value: string) {
+    setCity(value);
+    setFormError("");
+    // 도시 고른 뒤 바로 검색어 입력 가능하도록
+    window.setTimeout(() => inputRef.current?.focus(), 0);
+  }
+
+  function onQueryKeyDown(e: KeyboardEvent<HTMLInputElement>) {
+    if (e.key !== "Enter") return;
+    e.preventDefault();
+    tryOpenSearch();
   }
 
   async function runSearch(opts: {
@@ -108,11 +139,10 @@ export default function HomePage() {
       const data = (await res.json()) as TranslateResponse & { error?: string };
       if (!res.ok) throw new Error(data.error || "검색에 실패했습니다.");
 
-      const cityZh = resolveCityForGaode(city);
       setModalOpen(false);
       setPendingQuery("");
       setCustomType("");
-      openInGaodeApp(data.keyword, cityZh || undefined);
+      openInGaodeApp(data.keyword, city || undefined);
     } catch (err) {
       setError(err instanceof Error ? err.message : "검색에 실패했습니다.");
     } finally {
@@ -131,7 +161,10 @@ export default function HomePage() {
     void runSearch({ placeTypeCustom: custom });
   }
 
-  const cityZhPreview = resolveCityForGaode(city);
+  const cityLabel =
+    CITIES.find((c) => c.value === city)?.short ||
+    CITIES.find((c) => c.value === city)?.label ||
+    "";
 
   return (
     <main className="page">
@@ -157,44 +190,41 @@ export default function HomePage() {
           </h1>
         </header>
 
-        <form className="search" onSubmit={onSearchSubmit} aria-label="장소 검색">
+        <form
+          className="search"
+          onSubmit={onSearchSubmit}
+          aria-label="장소 검색"
+          noValidate
+        >
           <div className="search-box">
-            <input
-              className="field city-field"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              placeholder="도시"
-              maxLength={40}
-              disabled={loading}
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="none"
-              spellCheck={false}
-              enterKeyHint="next"
-              aria-label="도시"
-              list="city-suggestions"
-            />
-            <datalist id="city-suggestions">
-              <option value="상하이" />
-              <option value="베이징" />
-              <option value="광저우" />
-              <option value="선전" />
-              <option value="청두" />
-              <option value="항저우" />
-              <option value="시안" />
-              <option value="난징" />
-              <option value="上海" />
-              <option value="北京" />
-            </datalist>
+            <label className="city-wrap">
+              <span className="sr-only">도시</span>
+              <select
+                className="city-select"
+                value={city}
+                onChange={(e) => onCityChange(e.target.value)}
+                disabled={loading}
+                aria-label="도시 선택"
+              >
+                {CITIES.map((c) => (
+                  <option key={c.value || "all"} value={c.value}>
+                    {c.short}
+                  </option>
+                ))}
+              </select>
+            </label>
             <span className="search-divider" aria-hidden="true" />
             <input
               ref={inputRef}
               className="field"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="장소 검색"
+              onChange={(e) => {
+                setQuery(e.target.value);
+                if (formError) setFormError("");
+              }}
+              onKeyDown={onQueryKeyDown}
+              placeholder="장소 검색 후 Enter"
               maxLength={80}
-              required
               disabled={loading}
               autoComplete="off"
               autoCorrect="off"
@@ -205,6 +235,11 @@ export default function HomePage() {
               aria-label="장소 검색어"
             />
           </div>
+          {formError ? (
+            <p className="error form-error" role="alert">
+              {formError}
+            </p>
+          ) : null}
         </form>
       </div>
 
@@ -226,7 +261,7 @@ export default function HomePage() {
               <div>
                 <p className="modal-kicker">
                   검색어
-                  {cityZhPreview ? ` · ${city.trim() || cityZhPreview}` : ""}
+                  {cityLabel ? ` · ${cityLabel}` : ""}
                 </p>
                 <p className="modal-query">{pendingQuery}</p>
               </div>
@@ -245,8 +280,8 @@ export default function HomePage() {
               어떤 장소인가요?
             </h2>
             <p className="modal-desc">
-              {cityZhPreview
-                ? `${cityZhPreview}에서 유형에 맞춰 검색해요`
+              {city
+                ? `${cityLabel}에서 유형에 맞춰 검색해요`
                 : "유형을 고르면 더 정확하게 찾아요"}
             </p>
 
