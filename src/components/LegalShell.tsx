@@ -14,11 +14,10 @@ import {
 } from "@/lib/i18n/locales";
 
 type Props = {
-  title: (t: LegalCopy) => string;
   children: (t: LegalCopy, locale: Locale) => ReactNode;
 };
 
-export function LegalShell({ title, children }: Props) {
+export function LegalShell({ children }: Props) {
   const [locale, setLocale] = useState<Locale>(DEFAULT_LOCALE);
   const [ready, setReady] = useState(false);
   const t = getLegalCopy(locale);
@@ -50,8 +49,7 @@ export function LegalShell({ title, children }: Props) {
         <Link href="/" className="legal-back">
           ← {t.backHome}
         </Link>
-        <h1 className="legal-title">{title(t)}</h1>
-        <div className="legal-body">{children(t, locale)}</div>
+        {children(t, locale)}
         <SiteFooter locale={locale} />
       </div>
     </main>
