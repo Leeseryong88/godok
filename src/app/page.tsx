@@ -13,8 +13,10 @@ import { track } from "@vercel/analytics";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { COUPANG_CHINA_ESIM_URL } from "@/lib/affiliate";
 import {
-  CITY_GUIDES,
+  DEFAULT_SPOTS_CITY,
   getAttractionLabel,
+  getCityGuide,
+  SPOTS_CITY_TABS,
   type Attraction,
 } from "@/lib/attractions";
 import { resolveCityForGaode } from "@/lib/cityAliases";
@@ -64,12 +66,14 @@ export default function HomePage() {
   const [platform, setPlatform] = useState<DevicePlatform>("desktop");
   const [locale, setLocale] = useState<Locale>(DEFAULT_LOCALE);
   const [tab, setTab] = useState<"search" | "spots">("search");
+  const [spotsCity, setSpotsCity] = useState(DEFAULT_SPOTS_CITY);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const searchTabId = useId();
   const spotsTabId = useId();
   const searchPanelId = useId();
   const spotsPanelId = useId();
+  const cityTabsId = useId();
   const customRef = useRef<HTMLInputElement>(null);
   const modalDialogRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
@@ -296,8 +300,9 @@ export default function HomePage() {
   }
 
   const cityLabel = t.cities[city] || "";
-  // 우선 상하이 가이드부터 노출 (이후 도시 확장)
-  const featuredGuides = CITY_GUIDES;
+  const spotsCityLabel = t.cities[spotsCity] || spotsCity;
+  const activeGuide = getCityGuide(spotsCity);
+  const spotsHeading = t.spotsTitle.replace("{city}", spotsCityLabel);
 
   const installHref =
     platform === "ios" ? GAODE_INSTALL.ios : GAODE_INSTALL.androidWeb;
@@ -462,25 +467,59 @@ export default function HomePage() {
             </p>
           ) : null}
 
-          {featuredGuides.map((guide) => (
-            <section
-              key={guide.city}
-              className="spots"
-              aria-label={t.spotsTitle}
-            >
-              <div className="spots-head">
-                <h2 className="spots-title">{t.spotsTitle}</h2>
-                <p className="spots-desc">{t.spotsDesc}</p>
-              </div>
+          <div
+            className="city-tabs"
+            role="tablist"
+            aria-label={t.cityTabsAria}
+            id={cityTabsId}
+          >
+            {SPOTS_CITY_TABS.map((opt) => {
+              const label = t.cities[opt.city] || opt.city;
+              const selected = spotsCity === opt.city;
+              return (
+                <button
+                  key={opt.city}
+                  type="button"
+                  role="tab"
+                  className={`city-tab${selected ? " is-active" : ""}${
+                    !opt.enabled ? " is-disabled" : ""
+                  }`}
+                  aria-selected={selected}
+                  disabled={!opt.enabled || loading}
+                  title={!opt.enabled ? t.spotsComingSoon : label}
+                  onClick={() => {
+                    if (!opt.enabled) return;
+                    setSpotsCity(opt.city);
+                    setFormError("");
+                  }}
+                >
+                  {label}
+                  {!opt.enabled ? (
+                    <span className="city-tab-soon">{t.spotsComingSoon}</span>
+                  ) : null}
+                </button>
+              );
+            })}
+          </div>
+
+          <section className="spots" aria-label={spotsHeading}>
+            <div className="spots-head">
+              <h2 className="spots-title">{spotsHeading}</h2>
+              <p className="spots-desc">
+                {activeGuide ? t.spotsDesc : t.spotsComingSoon}
+              </p>
+            </div>
+
+            {activeGuide ? (
               <div className="spots-grid" role="list">
-                {guide.attractions.map((spot) => (
+                {activeGuide.attractions.map((spot) => (
                   <button
                     key={spot.id}
                     type="button"
                     className="spot-chip"
                     role="listitem"
                     disabled={loading || isDesktop}
-                    onClick={() => void openAttraction(guide.city, spot)}
+                    onClick={() => void openAttraction(activeGuide.city, spot)}
                   >
                     <span className="spot-label">
                       {getAttractionLabel(spot, locale)}
@@ -491,8 +530,8 @@ export default function HomePage() {
                   </button>
                 ))}
               </div>
-            </section>
-          ))}
+            ) : null}
+          </section>
         </div>
       </div>
 

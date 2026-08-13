@@ -31,8 +31,10 @@ export type Messages = {
   affiliateDisclosure: string;
   tabSearch: string;
   tabSpots: string;
+  cityTabsAria: string;
   spotsTitle: string;
   spotsDesc: string;
+  spotsComingSoon: string;
   cities: Record<string, string>;
   placeTypes: Record<string, string>;
 };
@@ -104,8 +106,10 @@ export const MESSAGES: Record<Locale, Messages> = {
       "Coupang Partners affiliate link. A commission may be earned.",
     tabSearch: "Search",
     tabSpots: "Popular spots",
-    spotsTitle: "Shanghai · popular spots",
+    cityTabsAria: "Select city",
+    spotsTitle: "{city} · popular spots",
     spotsDesc: "Tap a place to open it in Amap",
+    spotsComingSoon: "Coming soon",
     cities: citiesEn,
     placeTypes: placeTypesEn,
   },
@@ -143,8 +147,10 @@ export const MESSAGES: Record<Locale, Messages> = {
       "Enlace de afiliado de Coupang Partners. Puede generarse una comisión.",
     tabSearch: "Buscar",
     tabSpots: "Lugares populares",
-    spotsTitle: "Shanghái · lugares populares",
+    cityTabsAria: "Elegir ciudad",
+    spotsTitle: "{city} · lugares populares",
     spotsDesc: "Toca un lugar para abrirlo en Amap",
+    spotsComingSoon: "Próximamente",
     cities: {
       "": "Todas",
       北京: "Pekín",
@@ -210,8 +216,10 @@ export const MESSAGES: Record<Locale, Messages> = {
       "Coupang Partners अफ़िलिएट लिंक। कमीशन मिल सकता है।",
     tabSearch: "खोज",
     tabSpots: "लोकप्रिय स्थल",
-    spotsTitle: "शंघाई · लोकप्रिय स्थल",
+    cityTabsAria: "शहर चुनें",
+    spotsTitle: "{city} · लोकप्रिय स्थल",
     spotsDesc: "Amap में खोलने के लिए जगह चुनें",
+    spotsComingSoon: "जल्द आ रहा है",
     cities: {
       "": "सभी",
       北京: "बीजिंग",
@@ -277,8 +285,10 @@ export const MESSAGES: Record<Locale, Messages> = {
       "رابط تسويق بالعمولة عبر Coupang Partners. قد تُحتسب عمولة.",
     tabSearch: "بحث",
     tabSpots: "أماكن شائعة",
-    spotsTitle: "شنغهاي · أماكن شائعة",
+    cityTabsAria: "اختر المدينة",
+    spotsTitle: "{city} · أماكن شائعة",
     spotsDesc: "اضغط على مكان لفتحه في Amap",
+    spotsComingSoon: "قريبًا",
     cities: {
       "": "الكل",
       北京: "بكين",
@@ -344,8 +354,10 @@ export const MESSAGES: Record<Locale, Messages> = {
       "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
     tabSearch: "검색",
     tabSpots: "인기 명소",
-    spotsTitle: "상하이 · 인기 명소",
+    cityTabsAria: "도시 선택",
+    spotsTitle: "{city} · 인기 명소",
     spotsDesc: "장소를 누르면 Amap에서 바로 열려요",
+    spotsComingSoon: "준비 중",
     cities: {
       "": "전체",
       北京: "베이징",
