@@ -29,6 +29,8 @@ export type Messages = {
   dismiss: string;
   affiliateLink: string;
   affiliateDisclosure: string;
+  spotsTitle: string;
+  spotsDesc: string;
   cities: Record<string, string>;
   placeTypes: Record<string, string>;
 };
@@ -98,6 +100,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateLink: "China travel eSIM & Wi‑Fi",
     affiliateDisclosure:
       "Coupang Partners affiliate link. A commission may be earned.",
+    spotsTitle: "Shanghai · popular spots",
+    spotsDesc: "Tap a place to open it in Amap",
     cities: citiesEn,
     placeTypes: placeTypesEn,
   },
@@ -133,6 +137,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateLink: "eSIM y Wi‑Fi para viajar a China",
     affiliateDisclosure:
       "Enlace de afiliado de Coupang Partners. Puede generarse una comisión.",
+    spotsTitle: "Shanghái · lugares populares",
+    spotsDesc: "Toca un lugar para abrirlo en Amap",
     cities: {
       "": "Todas",
       北京: "Pekín",
@@ -196,6 +202,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateLink: "चीन यात्रा eSIM और वाई‑फाई",
     affiliateDisclosure:
       "Coupang Partners अफ़िलिएट लिंक। कमीशन मिल सकता है।",
+    spotsTitle: "शंघाई · लोकप्रिय स्थल",
+    spotsDesc: "Amap में खोलने के लिए जगह चुनें",
     cities: {
       "": "सभी",
       北京: "बीजिंग",
@@ -259,6 +267,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateLink: "eSIM وواي فاي للسفر إلى الصين",
     affiliateDisclosure:
       "رابط تسويق بالعمولة عبر Coupang Partners. قد تُحتسب عمولة.",
+    spotsTitle: "شنغهاي · أماكن شائعة",
+    spotsDesc: "اضغط على مكان لفتحه في Amap",
     cities: {
       "": "الكل",
       北京: "بكين",
@@ -322,6 +332,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateLink: "중국 여행 유심·와이파이 보기",
     affiliateDisclosure:
       "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+    spotsTitle: "상하이 · 인기 명소",
+    spotsDesc: "장소를 누르면 Amap에서 바로 열려요",
     cities: {
       "": "전체",
       北京: "베이징",

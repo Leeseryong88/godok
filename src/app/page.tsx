@@ -12,6 +12,11 @@ import {
 import { track } from "@vercel/analytics";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { COUPANG_CHINA_ESIM_URL } from "@/lib/affiliate";
+import {
+  CITY_GUIDES,
+  getAttractionLabel,
+  type Attraction,
+} from "@/lib/attractions";
 import { resolveCityForGaode } from "@/lib/cityAliases";
 import { CITIES } from "@/lib/cities";
 import {
@@ -255,7 +260,39 @@ export default function HomePage() {
     openGaodeInstallPage(platform === "desktop" ? "android" : platform);
   }
 
+  async function openAttraction(guideCity: string, attraction: Attraction) {
+    if (loading) return;
+
+    if (isDesktop) {
+      setFormError(t.desktopOnly);
+      return;
+    }
+
+    setFormError("");
+    setError("");
+    setLoading(true);
+    setCity(guideCity);
+    saveCity(guideCity);
+    dismissKeyboard();
+
+    try {
+      track("attraction_open", {
+        city: guideCity,
+        id: attraction.id,
+        keyword: attraction.keyword,
+      });
+      const result = await openInGaodeApp(attraction.keyword, guideCity);
+      if (result === "not_installed" || result === "desktop") {
+        setInstallOpen(true);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const cityLabel = t.cities[city] || "";
+  // 우선 상하이 가이드부터 노출 (이후 도시 확장)
+  const featuredGuides = CITY_GUIDES;
 
   const installHref =
     platform === "ios" ? GAODE_INSTALL.ios : GAODE_INSTALL.androidWeb;
@@ -351,6 +388,38 @@ export default function HomePage() {
             </p>
           ) : null}
         </form>
+
+        {featuredGuides.map((guide) => (
+          <section
+            key={guide.city}
+            className="spots"
+            aria-label={t.spotsTitle}
+          >
+            <div className="spots-head">
+              <h2 className="spots-title">{t.spotsTitle}</h2>
+              <p className="spots-desc">{t.spotsDesc}</p>
+            </div>
+            <div className="spots-grid" role="list">
+              {guide.attractions.map((spot) => (
+                <button
+                  key={spot.id}
+                  type="button"
+                  className="spot-chip"
+                  role="listitem"
+                  disabled={loading || isDesktop}
+                  onClick={() => void openAttraction(guide.city, spot)}
+                >
+                  <span className="spot-label">
+                    {getAttractionLabel(spot, locale)}
+                  </span>
+                  <span className="spot-zh" lang="zh-CN">
+                    {spot.keyword}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </section>
+        ))}
 
         <aside className="affiliate" aria-label={t.affiliateLink}>
           <a
