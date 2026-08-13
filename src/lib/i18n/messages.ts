@@ -29,6 +29,8 @@ export type Messages = {
   dismiss: string;
   affiliateLink: string;
   affiliateDisclosure: string;
+  tabSearch: string;
+  tabSpots: string;
   spotsTitle: string;
   spotsDesc: string;
   cities: Record<string, string>;
@@ -100,6 +102,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateLink: "China travel eSIM & Wi‑Fi",
     affiliateDisclosure:
       "Coupang Partners affiliate link. A commission may be earned.",
+    tabSearch: "Search",
+    tabSpots: "Popular spots",
     spotsTitle: "Shanghai · popular spots",
     spotsDesc: "Tap a place to open it in Amap",
     cities: citiesEn,
@@ -137,6 +141,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateLink: "eSIM y Wi‑Fi para viajar a China",
     affiliateDisclosure:
       "Enlace de afiliado de Coupang Partners. Puede generarse una comisión.",
+    tabSearch: "Buscar",
+    tabSpots: "Lugares populares",
     spotsTitle: "Shanghái · lugares populares",
     spotsDesc: "Toca un lugar para abrirlo en Amap",
     cities: {
@@ -202,6 +208,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateLink: "चीन यात्रा eSIM और वाई‑फाई",
     affiliateDisclosure:
       "Coupang Partners अफ़िलिएट लिंक। कमीशन मिल सकता है।",
+    tabSearch: "खोज",
+    tabSpots: "लोकप्रिय स्थल",
     spotsTitle: "शंघाई · लोकप्रिय स्थल",
     spotsDesc: "Amap में खोलने के लिए जगह चुनें",
     cities: {
@@ -267,6 +275,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateLink: "eSIM وواي فاي للسفر إلى الصين",
     affiliateDisclosure:
       "رابط تسويق بالعمولة عبر Coupang Partners. قد تُحتسب عمولة.",
+    tabSearch: "بحث",
+    tabSpots: "أماكن شائعة",
     spotsTitle: "شنغهاي · أماكن شائعة",
     spotsDesc: "اضغط على مكان لفتحه في Amap",
     cities: {
@@ -332,6 +342,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateLink: "중국 여행 유심·와이파이 보기",
     affiliateDisclosure:
       "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+    tabSearch: "검색",
+    tabSpots: "인기 명소",
     spotsTitle: "상하이 · 인기 명소",
     spotsDesc: "장소를 누르면 Amap에서 바로 열려요",
     cities: {

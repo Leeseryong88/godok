@@ -63,8 +63,13 @@ export default function HomePage() {
   const [ready, setReady] = useState(false);
   const [platform, setPlatform] = useState<DevicePlatform>("desktop");
   const [locale, setLocale] = useState<Locale>(DEFAULT_LOCALE);
+  const [tab, setTab] = useState<"search" | "spots">("search");
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const searchTabId = useId();
+  const spotsTabId = useId();
+  const searchPanelId = useId();
+  const spotsPanelId = useId();
   const customRef = useRef<HTMLInputElement>(null);
   const modalDialogRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
@@ -337,102 +342,158 @@ export default function HomePage() {
           </p>
         ) : null}
 
-        <form
-          className="search"
-          onSubmit={onSearchSubmit}
-          aria-label={t.searchAria}
-          noValidate
+        <div className="tabs" role="tablist" aria-label={t.brand}>
+          <button
+            type="button"
+            id={searchTabId}
+            role="tab"
+            className={`tab${tab === "search" ? " is-active" : ""}`}
+            aria-selected={tab === "search"}
+            aria-controls={searchPanelId}
+            tabIndex={tab === "search" ? 0 : -1}
+            onClick={() => {
+              setTab("search");
+              setFormError("");
+            }}
+          >
+            {t.tabSearch}
+          </button>
+          <button
+            type="button"
+            id={spotsTabId}
+            role="tab"
+            className={`tab${tab === "spots" ? " is-active" : ""}`}
+            aria-selected={tab === "spots"}
+            aria-controls={spotsPanelId}
+            tabIndex={tab === "spots" ? 0 : -1}
+            onClick={() => {
+              dismissKeyboard();
+              setTab("spots");
+              setFormError("");
+            }}
+          >
+            {t.tabSpots}
+          </button>
+        </div>
+
+        <div
+          id={searchPanelId}
+          role="tabpanel"
+          aria-labelledby={searchTabId}
+          hidden={tab !== "search"}
+          className="tab-panel"
         >
-          <div className={`search-box${isDesktop ? " is-disabled" : ""}`}>
-            <label className="city-wrap">
-              <span className="sr-only">{t.cityAria}</span>
-              <select
-                className="city-select"
-                value={city}
-                onChange={(e) => onCityChange(e.target.value)}
+          <form
+            className="search"
+            onSubmit={onSearchSubmit}
+            aria-label={t.searchAria}
+            noValidate
+          >
+            <div className={`search-box${isDesktop ? " is-disabled" : ""}`}>
+              <label className="city-wrap">
+                <span className="sr-only">{t.cityAria}</span>
+                <select
+                  className="city-select"
+                  value={city}
+                  onChange={(e) => onCityChange(e.target.value)}
+                  disabled={loading || isDesktop}
+                  aria-label={t.cityAria}
+                >
+                  {CITIES.map((c) => (
+                    <option key={c.value || "all"} value={c.value}>
+                      {t.cities[c.value] || c.short}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <span className="search-divider" aria-hidden="true" />
+              <input
+                ref={inputRef}
+                className="field"
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  if (formError) setFormError("");
+                }}
+                onKeyDown={onQueryKeyDown}
+                placeholder={t.placeholder}
+                maxLength={80}
                 disabled={loading || isDesktop}
-                aria-label={t.cityAria}
-              >
-                {CITIES.map((c) => (
-                  <option key={c.value || "all"} value={c.value}>
-                    {t.cities[c.value] || c.short}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <span className="search-divider" aria-hidden="true" />
-            <input
-              ref={inputRef}
-              className="field"
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                if (formError) setFormError("");
-              }}
-              onKeyDown={onQueryKeyDown}
-              placeholder={t.placeholder}
-              maxLength={80}
-              disabled={loading || isDesktop}
-              autoComplete="off"
-              autoCorrect="off"
-              autoCapitalize="none"
-              spellCheck={false}
-              enterKeyHint="search"
-              inputMode="search"
-              aria-label={t.queryAria}
-            />
-          </div>
-          {formError ? (
-            <p className="error form-error" role="alert">
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="none"
+                spellCheck={false}
+                enterKeyHint="search"
+                inputMode="search"
+                aria-label={t.queryAria}
+              />
+            </div>
+            {formError && tab === "search" ? (
+              <p className="error form-error" role="alert">
+                {formError}
+              </p>
+            ) : null}
+          </form>
+
+          <aside className="affiliate" aria-label={t.affiliateLink}>
+            <a
+              className="affiliate-link"
+              href={COUPANG_CHINA_ESIM_URL}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              onClick={() => track("coupang_china_esim_click")}
+            >
+              {t.affiliateLink}
+            </a>
+            <p className="affiliate-disclosure">{t.affiliateDisclosure}</p>
+          </aside>
+        </div>
+
+        <div
+          id={spotsPanelId}
+          role="tabpanel"
+          aria-labelledby={spotsTabId}
+          hidden={tab !== "spots"}
+          className="tab-panel"
+        >
+          {formError && tab === "spots" ? (
+            <p className="error form-error spots-error" role="alert">
               {formError}
             </p>
           ) : null}
-        </form>
 
-        {featuredGuides.map((guide) => (
-          <section
-            key={guide.city}
-            className="spots"
-            aria-label={t.spotsTitle}
-          >
-            <div className="spots-head">
-              <h2 className="spots-title">{t.spotsTitle}</h2>
-              <p className="spots-desc">{t.spotsDesc}</p>
-            </div>
-            <div className="spots-grid" role="list">
-              {guide.attractions.map((spot) => (
-                <button
-                  key={spot.id}
-                  type="button"
-                  className="spot-chip"
-                  role="listitem"
-                  disabled={loading || isDesktop}
-                  onClick={() => void openAttraction(guide.city, spot)}
-                >
-                  <span className="spot-label">
-                    {getAttractionLabel(spot, locale)}
-                  </span>
-                  <span className="spot-zh" lang="zh-CN">
-                    {spot.keyword}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </section>
-        ))}
-
-        <aside className="affiliate" aria-label={t.affiliateLink}>
-          <a
-            className="affiliate-link"
-            href={COUPANG_CHINA_ESIM_URL}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            onClick={() => track("coupang_china_esim_click")}
-          >
-            {t.affiliateLink}
-          </a>
-          <p className="affiliate-disclosure">{t.affiliateDisclosure}</p>
-        </aside>
+          {featuredGuides.map((guide) => (
+            <section
+              key={guide.city}
+              className="spots"
+              aria-label={t.spotsTitle}
+            >
+              <div className="spots-head">
+                <h2 className="spots-title">{t.spotsTitle}</h2>
+                <p className="spots-desc">{t.spotsDesc}</p>
+              </div>
+              <div className="spots-grid" role="list">
+                {guide.attractions.map((spot) => (
+                  <button
+                    key={spot.id}
+                    type="button"
+                    className="spot-chip"
+                    role="listitem"
+                    disabled={loading || isDesktop}
+                    onClick={() => void openAttraction(guide.city, spot)}
+                  >
+                    <span className="spot-label">
+                      {getAttractionLabel(spot, locale)}
+                    </span>
+                    <span className="spot-zh" lang="zh-CN">
+                      {spot.keyword}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
       </div>
 
       {modalOpen ? (

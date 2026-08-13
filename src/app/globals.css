@@ -191,7 +191,46 @@ input {
 
 .hero {
   text-align: center;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 18px;
+  padding: 4px;
+  border-radius: 16px;
+  background: rgba(243, 247, 246, 0.08);
+  border: 1px solid rgba(247, 251, 250, 0.12);
+}
+
+.tab {
+  min-height: 42px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: rgba(238, 246, 244, 0.72);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.tab.is-active {
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+}
+
+.tab-panel {
+  width: 100%;
+}
+
+.tab-panel[hidden] {
+  display: none;
 }
 
 .brand {
@@ -247,8 +286,12 @@ input {
 }
 
 .spots {
-  margin-top: 28px;
+  margin-top: 0;
   width: 100%;
+}
+
+.spots-error {
+  margin-bottom: 10px;
 }
 
 .spots-head {
