@@ -9,8 +9,11 @@ import {
   useRef,
   useState,
 } from "react";
+import Link from "next/link";
 import { track } from "@vercel/analytics";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { SiteFooter } from "@/components/SiteFooter";
+import { CITY_ARTICLES } from "@/lib/guides";
 import { COUPANG_CHINA_ESIM_URL } from "@/lib/affiliate";
 import {
   DEFAULT_SPOTS_CITY,
@@ -347,6 +350,20 @@ export default function HomePage() {
           </p>
         ) : null}
 
+        <p className="home-quick-links">
+          <Link href="/guides">
+            {locale === "ko" ? "여행 가이드" : "Travel guides"}
+          </Link>
+          <span aria-hidden="true"> · </span>
+          <Link href="/about">
+            {locale === "ko" ? "소개" : "About"}
+          </Link>
+          <span aria-hidden="true"> · </span>
+          <Link href="/privacy">
+            {locale === "ko" ? "개인정보" : "Privacy"}
+          </Link>
+        </p>
+
         <div className="tabs" role="tablist" aria-label={t.brand}>
           <button
             type="button"
@@ -531,8 +548,26 @@ export default function HomePage() {
                 ))}
               </div>
             ) : null}
+
+            {(() => {
+              const guideSlug = CITY_ARTICLES.find(
+                (a) => a.cityZh === spotsCity
+              )?.slug;
+              if (!guideSlug) return null;
+              return (
+                <p className="spots-guide-link">
+                  <Link href={`/guides/${guideSlug}`}>
+                    {locale === "ko"
+                      ? "이 도시 여행 가이드 읽기 →"
+                      : "Read this city guide →"}
+                  </Link>
+                </p>
+              );
+            })()}
           </section>
         </div>
+
+        <SiteFooter locale={locale} />
       </div>
 
       {modalOpen ? (

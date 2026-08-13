@@ -1,11 +1,19 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import { SITE } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Amap Search",
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: "Amap Search",
+    template: "%s · Amap Search",
+  },
   description: "Search places and open them in the Amap app by AutoNavi.",
   applicationName: "Amap Search",
+  alternates: {
+    canonical: "/",
+  },
   appleWebApp: {
     capable: true,
     title: "Amap Search",
