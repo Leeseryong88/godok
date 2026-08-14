@@ -30,7 +30,6 @@ export function SiteFooter({ locale: localeProp }: Props) {
     <footer className="site-footer">
       <nav className="site-footer-nav" aria-label="Site">
         <Link href="/">{t.backHome}</Link>
-        <Link href="/guides">{t.navGuides}</Link>
         <Link href="/about">{t.navAbout}</Link>
         <Link href="/privacy">{t.navPrivacy}</Link>
         <Link href="/contact">{t.navContact}</Link>

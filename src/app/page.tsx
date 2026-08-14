@@ -13,13 +13,11 @@ import Link from "next/link";
 import { track } from "@vercel/analytics";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { SiteFooter } from "@/components/SiteFooter";
-import { CITY_ARTICLES } from "@/lib/guides";
+import { SpotsMap } from "@/components/SpotsMap";
 import { COUPANG_CHINA_ESIM_URL } from "@/lib/affiliate";
 import {
   DEFAULT_SPOTS_CITY,
-  getAttractionLabel,
   getCityGuide,
-  SPOTS_CITY_TABS,
   type Attraction,
 } from "@/lib/attractions";
 import { resolveCityForGaode } from "@/lib/cityAliases";
@@ -76,7 +74,6 @@ export default function HomePage() {
   const spotsTabId = useId();
   const searchPanelId = useId();
   const spotsPanelId = useId();
-  const cityTabsId = useId();
   const customRef = useRef<HTMLInputElement>(null);
   const modalDialogRef = useRef<HTMLDivElement>(null);
   const titleId = useId();
@@ -305,7 +302,6 @@ export default function HomePage() {
   const cityLabel = t.cities[city] || "";
   const spotsCityLabel = t.cities[spotsCity] || spotsCity;
   const activeGuide = getCityGuide(spotsCity);
-  const spotsHeading = t.spotsTitle.replace("{city}", spotsCityLabel);
 
   const installHref =
     platform === "ios" ? GAODE_INSTALL.ios : GAODE_INSTALL.androidWeb;
@@ -351,10 +347,6 @@ export default function HomePage() {
         ) : null}
 
         <p className="home-quick-links">
-          <Link href="/guides">
-            {locale === "ko" ? "여행 가이드" : "Travel guides"}
-          </Link>
-          <span aria-hidden="true"> · </span>
           <Link href="/about">
             {locale === "ko" ? "소개" : "About"}
           </Link>
@@ -484,87 +476,22 @@ export default function HomePage() {
             </p>
           ) : null}
 
-          <div
-            className="city-tabs"
-            role="tablist"
-            aria-label={t.cityTabsAria}
-            id={cityTabsId}
-          >
-            {SPOTS_CITY_TABS.map((opt) => {
-              const label = t.cities[opt.city] || opt.city;
-              const selected = spotsCity === opt.city;
-              return (
-                <button
-                  key={opt.city}
-                  type="button"
-                  role="tab"
-                  className={`city-tab${selected ? " is-active" : ""}${
-                    !opt.enabled ? " is-disabled" : ""
-                  }`}
-                  aria-selected={selected}
-                  disabled={!opt.enabled || loading}
-                  title={!opt.enabled ? t.spotsComingSoon : label}
-                  onClick={() => {
-                    if (!opt.enabled) return;
-                    setSpotsCity(opt.city);
-                    setFormError("");
-                  }}
-                >
-                  {label}
-                  {!opt.enabled ? (
-                    <span className="city-tab-soon">{t.spotsComingSoon}</span>
-                  ) : null}
-                </button>
-              );
-            })}
-          </div>
-
-          <section className="spots" aria-label={spotsHeading}>
-            <div className="spots-head">
-              <h2 className="spots-title">{spotsHeading}</h2>
-              <p className="spots-desc">
-                {activeGuide ? t.spotsDesc : t.spotsComingSoon}
-              </p>
-            </div>
-
-            {activeGuide ? (
-              <div className="spots-grid" role="list">
-                {activeGuide.attractions.map((spot) => (
-                  <button
-                    key={spot.id}
-                    type="button"
-                    className="spot-chip"
-                    role="listitem"
-                    disabled={loading || isDesktop}
-                    onClick={() => void openAttraction(activeGuide.city, spot)}
-                  >
-                    <span className="spot-label">
-                      {getAttractionLabel(spot, locale)}
-                    </span>
-                    <span className="spot-zh" lang="zh-CN">
-                      {spot.keyword}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            ) : null}
-
-            {(() => {
-              const guideSlug = CITY_ARTICLES.find(
-                (a) => a.cityZh === spotsCity
-              )?.slug;
-              if (!guideSlug) return null;
-              return (
-                <p className="spots-guide-link">
-                  <Link href={`/guides/${guideSlug}`}>
-                    {locale === "ko"
-                      ? "이 도시 여행 가이드 읽기 →"
-                      : "Read this city guide →"}
-                  </Link>
-                </p>
-              );
-            })()}
-          </section>
+          <SpotsMap
+            locale={locale}
+            t={t}
+            cityZh={spotsCity}
+            cityLabel={spotsCityLabel}
+            guide={activeGuide}
+            loading={loading}
+            disabled={isDesktop}
+            onCityChange={(nextCity) => {
+              setSpotsCity(nextCity);
+              setFormError("");
+            }}
+            onOpenAmap={(guideCity, spot) => {
+              void openAttraction(guideCity, spot);
+            }}
+          />
         </div>
 
         <SiteFooter locale={locale} />

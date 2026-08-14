@@ -4,7 +4,6 @@ import { DEFAULT_LOCALE } from "./locales";
 export type LegalCopy = {
   backHome: string;
   navAbout: string;
-  navGuides: string;
   navPrivacy: string;
   navContact: string;
   aboutTitle: string;
@@ -22,14 +21,13 @@ export type LegalCopy = {
 const KO: LegalCopy = {
   backHome: "홈으로",
   navAbout: "소개",
-  navGuides: "여행 가이드",
   navPrivacy: "개인정보처리방침",
   navContact: "문의",
   aboutTitle: "서비스 소개",
   aboutBody: [
     "Amap Search는 중국 여행 중 장소를 쉽게 찾아 AutoNavi의 Amap(高德地图) 앱에서 바로 열 수 있도록 돕는 비공식 웹 도구입니다.",
-    "검색어를 입력하면 장소 유형을 고른 뒤, 중국어 검색 키워드로 변환하여 Amap 앱 검색을 실행합니다. 인기 명소 탭에서는 도시별 주요 관광지를 바로 열 수 있습니다.",
-    "상하이·베이징 등 주요 도시의 여행 가이드도 제공합니다. 동선·교통·명소 팁을 읽다가 Amap으로 바로 열 수 있습니다.",
+    "검색어를 입력하면 장소 유형을 고른 뒤, 중국어 검색 키워드로 변환하여 Amap 앱 검색을 실행합니다.",
+    "명소 지도 탭에서는 도시별 관광지 핀을 눌러 짧은 설명을 보고, 같은 화면에서 Amap으로 열 수 있습니다.",
     "이 서비스는 AutoNavi·Alibaba·Amap의 공식 제품이 아니며, 제휴·승인 관계가 없습니다. 지도 데이터와 검색 결과는 Amap 앱에서 제공됩니다.",
     "다국어 인터페이스를 지원하며, 선택한 언어와 도시는 브라우저에 저장되어 다음 방문 시에도 유지됩니다.",
   ],
@@ -58,14 +56,13 @@ const KO: LegalCopy = {
 const EN: LegalCopy = {
   backHome: "Home",
   navAbout: "About",
-  navGuides: "Travel guides",
   navPrivacy: "Privacy Policy",
   navContact: "Contact",
   aboutTitle: "About",
   aboutBody: [
     "Amap Search is an unofficial web tool that helps travelers find places in China and open them directly in AutoNavi’s Amap app.",
-    "Enter a query, pick a place type, and we convert it into a Chinese keyword for Amap search. The Popular spots tab opens major attractions by city.",
-    "We also publish city travel guides for Shanghai, Beijing, and more — with routes, transit tips, and one-tap Amap links.",
+    "Enter a query, pick a place type, and we convert it into a Chinese keyword for Amap search.",
+    "The spot map tab lets you tap a city’s attraction pins, read a short description, and open the same place in Amap.",
     "This service is not an official AutoNavi, Alibaba, or Amap product and has no partnership or endorsement. Map data and search results are provided inside the Amap app.",
     "The interface supports multiple languages. Your language and city choices are saved in the browser for later visits.",
   ],

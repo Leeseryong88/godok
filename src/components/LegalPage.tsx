@@ -13,7 +13,7 @@ type Props = {
 export function LegalPage({ kind }: Props) {
   return (
     <LegalShell>
-      {(t, locale) => {
+      {(t) => {
         if (kind === "about") {
           return (
             <>
@@ -23,11 +23,7 @@ export function LegalPage({ kind }: Props) {
                   <p key={para.slice(0, 24)}>{para}</p>
                 ))}
                 <p className="legal-inline-links">
-                  <Link href="/guides">
-                    {locale === "ko"
-                      ? "도시별 여행 가이드 보기"
-                      : "Browse city guides"}
-                  </Link>
+                  <Link href="/">{t.backHome}</Link>
                   <span aria-hidden="true"> · </span>
                   <Link href="/contact">{t.navContact}</Link>
                   <span aria-hidden="true"> · </span>
@@ -54,7 +50,7 @@ export function LegalPage({ kind }: Props) {
                   <span aria-hidden="true"> · </span>
                   <Link href="/about">{t.navAbout}</Link>
                   <span aria-hidden="true"> · </span>
-                  <Link href="/guides">{t.navGuides}</Link>
+                  <Link href="/">{t.backHome}</Link>
                 </p>
               </div>
             </>
@@ -95,9 +91,7 @@ export function LegalPage({ kind }: Props) {
               </ul>
 
               <p className="legal-inline-links">
-                <Link href="/guides">
-                  {locale === "ko" ? "여행 가이드" : "Travel guides"}
-                </Link>
+                <Link href="/">{t.backHome}</Link>
                 <span aria-hidden="true"> · </span>
                 <Link href="/about">{t.navAbout}</Link>
                 <span aria-hidden="true"> · </span>

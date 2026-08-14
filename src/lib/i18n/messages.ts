@@ -35,6 +35,10 @@ export type Messages = {
   spotsTitle: string;
   spotsDesc: string;
   spotsComingSoon: string;
+  spotsHint: string;
+  spotsMapAria: string;
+  spotDetail: string;
+  openInAmap: string;
   cities: Record<string, string>;
   placeTypes: Record<string, string>;
 };
@@ -105,11 +109,15 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateDisclosure:
       "Coupang Partners affiliate link. A commission may be earned.",
     tabSearch: "Search",
-    tabSpots: "Popular spots",
+    tabSpots: "Spot map",
     cityTabsAria: "Select city",
-    spotsTitle: "{city} · popular spots",
-    spotsDesc: "Tap a place to open it in Amap",
+    spotsTitle: "{city} · spots",
+    spotsDesc: "Tap a pin to read the place, then open it in Amap",
     spotsComingSoon: "Coming soon",
+    spotsHint: "Tap a numbered pin on the map",
+    spotsMapAria: "Tourist map",
+    spotDetail: "Place details",
+    openInAmap: "Open in Amap",
     cities: citiesEn,
     placeTypes: placeTypesEn,
   },
@@ -146,11 +154,15 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateDisclosure:
       "Enlace de afiliado de Coupang Partners. Puede generarse una comisión.",
     tabSearch: "Buscar",
-    tabSpots: "Lugares populares",
+    tabSpots: "Mapa",
     cityTabsAria: "Elegir ciudad",
-    spotsTitle: "{city} · lugares populares",
-    spotsDesc: "Toca un lugar para abrirlo en Amap",
+    spotsTitle: "{city} · lugares",
+    spotsDesc: "Toca un pin para ver la descripción y abrirla en Amap",
     spotsComingSoon: "Próximamente",
+    spotsHint: "Toca un pin numerado en el mapa",
+    spotsMapAria: "Mapa turístico",
+    spotDetail: "Detalle del lugar",
+    openInAmap: "Abrir en Amap",
     cities: {
       "": "Todas",
       北京: "Pekín",
@@ -215,11 +227,15 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateDisclosure:
       "Coupang Partners अफ़िलिएट लिंक। कमीशन मिल सकता है।",
     tabSearch: "खोज",
-    tabSpots: "लोकप्रिय स्थल",
+    tabSpots: "मानचित्र",
     cityTabsAria: "शहर चुनें",
-    spotsTitle: "{city} · लोकप्रिय स्थल",
-    spotsDesc: "Amap में खोलने के लिए जगह चुनें",
+    spotsTitle: "{city} · स्थल",
+    spotsDesc: "पिन दबाकर विवरण देखें, फिर Amap में खोलें",
     spotsComingSoon: "जल्द आ रहा है",
+    spotsHint: "मानचित्र पर नंबर वाला पिन दबाएँ",
+    spotsMapAria: "पर्यटन मानचित्र",
+    spotDetail: "स्थान विवरण",
+    openInAmap: "Amap में खोलें",
     cities: {
       "": "सभी",
       北京: "बीजिंग",
@@ -284,11 +300,15 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateDisclosure:
       "رابط تسويق بالعمولة عبر Coupang Partners. قد تُحتسب عمولة.",
     tabSearch: "بحث",
-    tabSpots: "أماكن شائعة",
+    tabSpots: "الخريطة",
     cityTabsAria: "اختر المدينة",
-    spotsTitle: "{city} · أماكن شائعة",
-    spotsDesc: "اضغط على مكان لفتحه في Amap",
+    spotsTitle: "{city} · معالم",
+    spotsDesc: "اضغط الدبوس لقراءة الوصف ثم افتحه في Amap",
     spotsComingSoon: "قريبًا",
+    spotsHint: "اضغط دبوسًا مرقمًا على الخريطة",
+    spotsMapAria: "خريطة سياحية",
+    spotDetail: "تفاصيل المكان",
+    openInAmap: "فتح في Amap",
     cities: {
       "": "الكل",
       北京: "بكين",
@@ -353,11 +373,15 @@ export const MESSAGES: Record<Locale, Messages> = {
     affiliateDisclosure:
       "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
     tabSearch: "검색",
-    tabSpots: "인기 명소",
+    tabSpots: "명소 지도",
     cityTabsAria: "도시 선택",
-    spotsTitle: "{city} · 인기 명소",
-    spotsDesc: "장소를 누르면 Amap에서 바로 열려요",
+    spotsTitle: "{city} · 명소",
+    spotsDesc: "지도의 핀을 눌러 설명을 보고, Amap으로 여세요",
     spotsComingSoon: "준비 중",
+    spotsHint: "지도의 번호 핀을 눌러 보세요",
+    spotsMapAria: "관광 지도",
+    spotDetail: "명소 설명",
+    openInAmap: "Amap에서 열기",
     cities: {
       "": "전체",
       北京: "베이징",

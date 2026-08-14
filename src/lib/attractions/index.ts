@@ -18,8 +18,9 @@ import { XIAN_GUIDE } from "./xian";
 import type { Attraction, CityGuide } from "./types";
 
 export type { Attraction, CityGuide };
+export { getSpotBlurb, getSpotMeta } from "./meta";
 
-/** 앱에 등록된 전체 도시 가이드 */
+/** 앱에 등록된 도시별 명소 */
 export const CITY_GUIDES: CityGuide[] = [
   SHANGHAI_GUIDE,
   BEIJING_GUIDE,
@@ -40,7 +41,7 @@ export const CITY_GUIDES: CityGuide[] = [
   HARBIN_GUIDE,
 ];
 
-/** 인기 명소 탭 도시 목록 (가이드가 있는 도시만, 모두 선택 가능) */
+/** 명소 지도 탭 도시 목록 */
 export const SPOTS_CITY_TABS: { city: string; enabled: boolean }[] =
   CITY_GUIDES.map((g) => ({ city: g.city, enabled: true }));
 

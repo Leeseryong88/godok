@@ -1,0 +1,243 @@
+import type { Locale } from "@/lib/i18n/locales";
+
+export type SpotMeta = {
+  lat: number;
+  lng: number;
+  ko: string;
+  en: string;
+};
+
+function M(lat: number, lng: number, ko: string, en: string): SpotMeta {
+  return { lat, lng, ko, en };
+}
+
+/** 도시별 관광지 좌표·짧은 설명 (대략 위치, 관광지도용) */
+export const SPOT_META: Record<string, Record<string, SpotMeta>> = {
+  上海: {
+    bund: M(31.2404, 121.4905, "황푸강 서안 야경. 해질녘부터 조명이 켜지며 2·10호선 난징둥루에서 걸어 갑니다.", "West-bank skyline. Lights from dusk; walk from Nanjing East Road (metro 2/10)."),
+    "oriental-pearl": M(31.2396, 121.4998, "푸둥의 상징 타워. 낮엔 전망대, 밤엔 외탄에서 올려다보는 사진이 잘 나옵니다.", "Pudong’s landmark tower. Deck by day, or shoot it from the Bund at night."),
+    yuyuan: M(31.227, 121.4921, "고전 정원과 상점 골목. 오전 개장 직후가 덜 붐비고 성황묘와 반나절을 묶기 좋습니다.", "Classic garden and lanes. Go at opening; pair with City God Temple."),
+    chenghuangmiao: M(31.2275, 121.4926, "예원 옆 상점가. 간식·기념품이 몰려 식사 피크는 피하세요.", "Market by Yu Garden. Snack prices run high at peak hours."),
+    "nanjing-road": M(31.2348, 121.475, "보행거리·백화점 축. 낮 쇼핑 후 외탄 일몰로 이어가기 좋습니다.", "Pedestrian shopping spine. Easy walk to the Bund at sunset."),
+    lujiazui: M(31.2387, 121.5055, "금융 지구 스카이라인. 센트럴 녹지와 강변을 함께 돌면 각도가 늘어납니다.", "Finance-district skyline. Loop the green and river path for more angles."),
+    "shanghai-tower": M(31.2337, 121.5056, "초고층 전망대. 맑은 오전 티켓이 유리하고 흐린 날은 미루는 편이 낫습니다.", "Supertall observation deck. Book a clear morning; skip on haze."),
+    disneyland: M(31.1433, 121.6573, "하루가 필요한 테마파크. 시내에서 멀어 당일 야경과 섞지 마세요.", "Full-day park far east of downtown. Don’t stack with a Bund night."),
+    tianzifang: M(31.2104, 121.4668, "리롱 개조 골목. 좁아서 비 오는 저녁 산책·카페에 잘 맞습니다.", "Converted lilong lanes. Best for rainy-evening cafés."),
+    xintiandi: M(31.2194, 121.4741, "스쿠먼 레스토랑 거리. 저녁 식사 거점으로 쓰기 좋습니다.", "Shikumen dining streets. A solid dinner base."),
+    "shanghai-museum": M(31.2284, 121.4754, "인민광장 옆 대형 박물관. 예약 후 오전 입장, 가방은 작게.", "People’s Square museum. Reserve morning entry; travel light."),
+    "jingan-temple": M(31.2234, 121.4458, "도심 금빛 사찰. 짧은 참배 스톱으로 2·7호선과 붙어 있습니다.", "Gold-roofed city temple. Quick stop on metro lines 2 and 7."),
+    "wukang-road": M(31.2078, 121.4386, "플라타너스 주택가. 오전 카페 산책이 쾌적하고 주말 한낮은 붐빕니다.", "Plane-tree residential walk. Mornings beat weekend noon crowds."),
+    zhujiajiao: M(31.1114, 121.051, "물골목 고진. 오전에 출발해 반나절만 쓰고 시내로 돌아오세요.", "Canal town west of the city. Half-day, morning start."),
+  },
+  北京: {
+    "forbidden-city": M(39.9163, 116.3972, "궁궐 핵심. 예약 후 중축선 위주로, 오전이 덜 붐빕니다.", "Palace core. Book ahead, walk the axis, go early."),
+    tiananmen: M(39.9054, 116.3976, "광장과 성루. 보안 검색·신분증을 감안해 여유를 두세요.", "Square and gate. Budget extra time for security checks."),
+    "great-wall": M(40.3594, 116.02, "팔달령 당일치기. 이른 출발이 필수이며 시내 저녁은 가볍게.", "Badaling day trip. Leave early; keep the evening light."),
+    "summer-palace": M(39.999, 116.2755, "쿤밍호와 복랑. 유람선까지 하면 반나절, 서북 전용 하루로 잡으세요.", "Kunming Lake and corridors. Half-day, or a northwest park day."),
+    "temple-of-heaven": M(39.8822, 116.4066, "넓은 제례 공원. 남문–기년전 짧은 코스가 효율적입니다.", "Ceremonial park. South gate to Hall of Prayer is the efficient loop."),
+    yuanmingyuan: M(40.0077, 116.2978, "유적 정원 산책. 이화원과 같은 서북 블록으로 묶기 좋습니다.", "Ruins garden. Pair with the Summer Palace to the northwest."),
+    nanluoguxiang: M(39.9375, 116.403, "후통 상점 거리. 아침·저녁이 덜 붐비고 스차하이와 이어집니다.", "Hutong shopping lane. Quieter morning/evening; walk to Shichahai."),
+    "bird-nest": M(39.9929, 116.3969, "올림픽 공원 경기장. 외관·야경 사진에 좋고 지하철 접근이 쉽습니다.", "Olympic stadium. Good exterior shots; easy metro access."),
+    beihai: M(39.9254, 116.3892, "도심 호수 공원. 자금성 다음 날 여유 코스로 적합합니다.", "City lake park. A gentle day after the Forbidden City."),
+    yonghegong: M(39.9474, 116.417, "티베트 불교 사원. 오전 분위기가 좋고 후통과 이어가기 쉽습니다.", "Lama temple. Morning mood; easy to pair with hutongs."),
+    shichahai: M(39.94, 116.389, "후하이 호수와 바. 해질녘 산책이 인기입니다.", "Houhai lakes and bars. Best at dusk."),
+    "798": M(39.9842, 116.4955, "갤러리·카페 단지. 도보 구역이 넓어 반나절을 배정하세요.", "Gallery-café compound. Wide walking area—give it a half day."),
+  },
+  广州: {
+    "canton-tower": M(23.1064, 113.3245, "강변 전망 타워. 해질녘 입장하면 주강 야경이 한 번에 보입니다.", "River tower. Dusk tickets catch Pearl River lights."),
+    "pearl-river": M(23.1088, 113.319, "주강 야경 크루즈. 타워 인근 선착장에서 저녁 슬롯을 고르세요.", "Night cruise. Pick an evening slot near the tower piers."),
+    "chen-clan": M(23.1264, 113.2466, "광동 서원·목조 장식. 오전이 한적하고 리완과 묶어 걷기 좋습니다.", "Lingnan ancestral hall. Quiet mornings; walk Liwan after."),
+    shameen: M(23.1069, 113.2436, "사몐 섬 식민지 거리. 그늘 산책·카페에 잘 맞습니다.", "Shamian island streets. Shade, cafés, slow walking."),
+    baiyun: M(23.1866, 113.295, "시내 산행. 케이블카 또는 이른 아침 등반이 덜 덥습니다.", "City mountain. Cable car or an early hike beats the heat."),
+    chimelong: M(22.9986, 113.3268, "하루짜리 리조트·사파리. 시내 야경과 같은 날에 섞지 마세요.", "Full-day resort/safari. Don’t mix with a downtown night."),
+    "beijing-road": M(23.1252, 113.2698, "보행 쇼핑 거리. 낮 간식 후 웨슈공원으로 이어갈 수 있습니다.", "Pedestrian shopping. Snacks by day, Yuexiu Park next."),
+    yongqingfang: M(23.1156, 113.2395, "리완 개조 골목. 짧은 사진·카페 스톱으로 사몐과 가깝습니다.", "Renovated Liwan lanes. Short café stop near Shamian."),
+    yuexiu: M(23.1395, 113.266, "오양석상과 공원. 아침 운동 풍경이 볼거리입니다.", "Five Rams statue and park. Morning exercise scenes."),
+    "sacred-heart": M(23.1172, 113.2548, "석실 고딕 성당. 외관 사진 후 베이징로와 이어가기 쉽습니다.", "Gothic stone cathedral. Pair with Beijing Road nearby."),
+  },
+  深圳: {
+    "window-world": M(22.5378, 113.9746, "미니어처 테마파크. 반나절, 해피밸리와 같은 华侨城 권역입니다.", "Miniature-world park. Half-day in the OCT cluster."),
+    "happy-valley": M(22.5426, 113.982, "놀이공원. 주말 오전이 대기 줄이 짧습니다.", "Theme park. Weekend mornings have shorter queues."),
+    dameisha: M(22.5955, 114.3108, "동부 해변. 수영·산책용이며 시내에서 이동 시간이 깁니다.", "East beach. Swim/walk; allow extra transit from downtown."),
+    lianhuashan: M(22.5536, 114.0595, "덩샤오핑 동상이 있는 도심 공원. 일몰 전망이 좋습니다.", "Downtown park with Deng statue. Good sunset views."),
+    "shenzhen-bay": M(22.5194, 113.9755, "만 공원 자전거·산책. 해질녘 홍콩 스카이라인이 보입니다.", "Bay park cycling. Dusk Hong Kong skyline views."),
+    "zhongying-street": M(22.5518, 114.2285, "중영가 쇼핑 골목. 신분증·혼잡을 감안하세요.", "Chung Ying Street shops. Bring ID; expect crowds."),
+    "oct-east": M(22.626, 114.416, "동부 리조트. 하루 일정으로 잡고 시내와 섞지 마세요.", "East resort. Treat as a full day away from downtown."),
+    jiaochangwei: M(22.595, 114.46, "다펑 해변 게스트하우스 거리. 주말 밤이 붐빕니다.", "Dapeng beach guesthouse strip. Busy weekend nights."),
+    huaqiangbei: M(22.5456, 114.0858, "전자상가. 부품·가젯 구경용이지 관광 산책로는 아닙니다.", "Electronics market. Gadgets, not a scenic stroll."),
+    "ping-an": M(22.5335, 114.0556, "초고층 전망. 맑은 날에만 의미가 있습니다.", "Supertall deck. Worth it only on a clear day."),
+  },
+  成都: {
+    kuanzhai: M(30.6738, 104.0546, "콴자이 골목. 저녁 간식·사진이 핵심이고 오전은 한적합니다.", "Wide-narrow alleys. Evening snacks; quieter mornings."),
+    jinli: M(30.6472, 104.0488, "우후츠 옆 고가. 야시장 분위기로 사당과 같은 반나절을 묶으세요.", "Old street by Wuhou. Night-market feel; pair with the shrine."),
+    "panda-base": M(30.733, 104.146, "오전 먹이 시간이 판다를 보기 쉽습니다. 반나절을 배정하세요.", "Morning feeding is the best panda window. Half-day."),
+    chunxi: M(30.6558, 104.0815, "번화가·타이구이 쇼핑. 비 오는 날 실내 일정으로 적합합니다.", "Shopping spine by Taikoo Li. Good rainy-day indoor plan."),
+    wuhou: M(30.6464, 104.048, "삼국 사당. 진리와 붙여 오전에 짧게 보기 좋습니다.", "Three Kingdoms shrine. Short morning with Jinli."),
+    dufu: M(30.6605, 104.0288, "시인 기념 정원. 한적한 산책, 인민공원과 서쪽으로 이어집니다.", "Poet’s garden. Quiet walk; west toward People’s Park."),
+    dujiangyan: M(31.0089, 103.6096, "관개 유적 당일치기. 청청산과 묶어 하루로 나가세요.", "Irrigation works day trip. Pair with Qingcheng."),
+    qingcheng: M(30.9006, 103.5647, "도교 명산. 도강언과 같은 교외 하루가 기본입니다.", "Daoist mountain. Same outbound day as Dujiangyan."),
+    "taikoo-li": M(30.6548, 104.0832, "대사 옆 오픈몰. 저녁 식사·카페 거점입니다.", "Open-air mall by the big temple. Dinner and café base."),
+    "people-park": M(30.6608, 104.0584, "차 하우스와 춤. 오전 현지 일상에 가장 가깝습니다.", "Tea houses and dancing. Closest to local morning life."),
+  },
+  杭州: {
+    "west-lake": M(30.2487, 120.1486, "시후 순환. 자전거 또는 북선 산책이 기본 코스입니다.", "West Lake loop. Bike or walk the north shore first."),
+    lingyin: M(30.2428, 120.1012, "석굴·사찰. 오전이 덜 붐비고 룽징 쪽과 서쪽으로 이어집니다.", "Grottoes and temple. Morning crowds; west toward Longjing."),
+    xixi: M(30.2746, 120.0635, "습지 보트. 반나절, 모기·그늘을 준비하세요.", "Wetland boats. Half-day; pack shade and repellent."),
+    songcheng: M(30.1975, 120.113, "야간 공연 테마파크. 공연 시간을 먼저 맞추세요.", "Night-show park. Lock the performance time first."),
+    hefang: M(30.2422, 120.1715, "허팡제 간식 거리. 청허팡과 거의 한 구역입니다.", "Snack street. Same cluster as Qinghefang."),
+    leifeng: M(30.2313, 120.1489, "호수 남쪽 탑. 일몰 전망과 단교를 나눠 찍기 좋습니다.", "South-lake pagoda. Split sunset shots with Broken Bridge."),
+    "broken-bridge": M(30.2594, 120.1518, "시후 북단 다리. 아침 안개 사진이 상징적입니다.", "North-lake bridge. Classic misty morning photos."),
+    longjing: M(30.2206, 120.1035, "차밭 마을. 오후에 찻집, 링인스와 같은 서쪽 블록.", "Tea village. Afternoon tasting; west block with Lingyin."),
+    qiandao: M(29.605, 119.028, "시내에서 먼 호수. 하루를 통째로 쓰거나 숙박하세요.", "Far lake from the city. Full day or overnight."),
+    qinghefang: M(30.2415, 120.1705, "청허팡 역사 거리. 허팡제와 붙여 저녁 간식 루프.", "Historic street. Evening snack loop with Hefang."),
+  },
+  重庆: {
+    hongyadong: M(29.5626, 106.5788, "절벽 야경 상점가. 해 진 뒤 강 건너 사진이 핵심입니다.", "Cliffside night market. Best shot is from across the river after dark."),
+    jiefangbei: M(29.557, 106.577, "번화가 기념비. 쇼핑·식사 거점으로 홍야둥과 가깝습니다.", "Downtown monument. Shopping base, walk to Hongyadong."),
+    ciqikou: M(29.5816, 106.4478, "자기 고진. 반나절, 오전이 덜 붐빕니다.", "Porcelain old town. Half-day, quieter in the morning."),
+    cableway: M(29.5588, 106.5865, "창장 케이블카. 낮 전망·사진용이며 대기 줄을 보세요.", "Yangtze cableway. Day views; watch the queue."),
+    liziba: M(29.5508, 106.5318, "건물 통과 경궤. 열차 시간에 맞춰 짧은 인증 스톱.", "Train-through-building stop. Time it to a passing train."),
+    chaotianmen: M(29.5688, 106.5868, "두 강이 만나는 광장. 저녁 강풍이 셉니다.", "Confluence plaza. Windy at night."),
+    nanshan: M(29.55, 106.62, "난산 야경 전망. 시내 조명을 한눈에 보려면 해질녘에 올라가세요.", "South-bank night view. Go at dusk for the whole city."),
+    wulong: M(29.433, 107.9, "카르스트 다리. 당일치기 교외, 시내와 섞지 마세요.", "Karst bridges. Outbound day—don’t mix with downtown."),
+    dazu: M(29.701, 105.711, "석각 당일치기. 이동이 길어 하루를 배정하세요.", "Rock carvings day trip. Long transfer; give it a full day."),
+    egean: M(29.5622, 106.5512, "삼협 박물관. 비 오는 오전, 제팡베이와 가깝습니다.", "Three Gorges Museum. Rainy morning near Jiefangbei."),
+  },
+  西安: {
+    terracotta: M(34.3853, 109.2788, "병마용. 하루의 절반, 이른 입장권이 대기 줄에 유리합니다.", "Warriors. Half-day; early tickets beat queues."),
+    "dayan-pagoda": M(34.2196, 108.9642, "대야탑과 북광장. 저녁 분수가 있으면 야간 일정을 맞추세요.", "Giant Wild Goose Pagoda. Time evening fountain shows."),
+    "city-wall": M(34.258, 108.947, "자전거 성벽. 남문 출발이 흔하고 한낮 더위를 피하세요.", "Bike the wall. South gate start; avoid midday heat."),
+    "muslim-quarter": M(34.2618, 108.9428, "회민가 간식. 저녁이 핵심이며 종루와 붙여 걷습니다.", "Snack streets. Evening peak; walk from the Bell Tower."),
+    "bell-tower": M(34.261, 108.9425, "시내 중심 종루. 야경 사진·회민가 입구입니다.", "City-center tower. Night photos and Muslim Quarter entry."),
+    huaqing: M(34.3625, 109.2136, "온천 궁. 병마용과 같은 동부 하루로 묶기 쉽습니다.", "Hot-spring palace. Same east day as the warriors."),
+    "tang-night": M(34.2185, 108.9648, "대당불야성. 야간 보행 거리, 대야탑과 한 블록입니다.", "Tang night mall. Pedestrian nights by the pagoda."),
+    "history-museum": M(34.2255, 108.952, "섬서 역사박물관. 예약 필수, 오전이 한적합니다.", "Shaanxi History Museum. Reserve; quieter mornings."),
+    xiaoyan: M(34.2394, 108.9395, "소야탑. 짧은 스톱, 박물관과 가깝습니다.", "Small pagoda. Short stop near the museum."),
+    daming: M(34.2955, 108.9595, "대명궁 유적. 넓은 터라 그늘·물을 챙기세요.", "Daming Palace ruins. Wide site—bring shade and water."),
+  },
+  南京: {
+    "fuzi-miao": M(32.0216, 118.7885, "夫子庙 야시장. 친화이허 유람과 저녁을 묶으세요.", "Confucius Temple night market. Pair with a Qinhuai boat."),
+    "sun-yat-sen": M(32.0622, 118.848, "중산릉. 계단이 길어 오전에 오르고 명효릉과 같은 산 블록.", "Mausoleum stairs. Morning climb; same hill as Ming Xiaoling."),
+    presidential: M(32.0448, 118.7985, "총통부. 실내 전시라 비 오는 날에 적합합니다.", "Presidential Palace. Indoor exhibits—good in rain."),
+    xuanwu: M(32.0765, 118.796, "쉬안우호 순환. 자전거·유람선, 성벽과 북쪽으로 이어집니다.", "Xuanwu Lake loop. Bike or boat; north toward the wall."),
+    museum: M(32.0418, 118.8472, "난징 박물관. 예약 후 오전, 중산릉 가는 길에 넣기 쉽습니다.", "Nanjing Museum. Morning booking; on the way to the mausoleum."),
+    laomendong: M(32.0168, 118.7948, "라오먼둥 골목. 푸쯔먀오보다 한적한 저녁 식사 거리.", "Old-gate lanes. Quieter dinner than Fuzi Miao."),
+    "ming-xiaoling": M(32.0548, 118.837, "명효릉 신도. 중산릉과 같은 쯔진산 하루로 묶으세요.", "Sacred way. Same Purple Mountain day as Sun Yat-sen."),
+    jiming: M(32.0605, 118.7948, "지밍스와 성벽. 벚꽃 철이면 오전 일찍.", "Temple and wall. Cherry season: go extra early."),
+    "city-wall": M(32.0588, 118.792, "난징 성벽 일부. 지밍스·호수와 붙여 걷기 좋습니다.", "Wall section. Walk with Jiming Temple and the lake."),
+    qinhuai: M(32.021, 118.7915, "친화이허 야경. 유람선은 해 진 뒤 슬롯이 핵심입니다.", "Qinhuai night river. Boat slots after dark."),
+  },
+  武汉: {
+    "yellow-crane": M(30.5455, 114.2985, "황학루. 강과 대교가 한눈에, 오전이 대기 줄이 짧습니다.", "Yellow Crane Tower. River-and-bridge views; shorter morning lines."),
+    "east-lake": M(30.555, 114.388, "둥후 녹지. 자전거 반나절, 여름엔 그늘을 찾으세요.", "East Lake greenway. Half-day bike; seek shade in summer."),
+    "hubu-alley": M(30.5518, 114.2955, "후부샹 분식. 점심 전에 가고 황학루와 가깝습니다.", "Snack alley. Go before lunch; next to the tower."),
+    "wuhan-uni": M(30.5386, 114.3615, "캠퍼스 벚꽃·건축. 개화 철 주말은 출입을 확인하세요.", "Campus blossoms and architecture. Check access on bloom weekends."),
+    "yangtze-bridge": M(30.5488, 114.2895, "창장대교 전망. 황학루 사진 포인트와 이어집니다.", "Yangtze bridge views. Same photo set as the tower."),
+    guiyuan: M(30.5512, 114.2568, "구이위안스. 짧은 참배, 한양 쪽 오전 스톱.", "Temple stop. Short Hanyang morning visit."),
+    chuhe: M(30.5568, 114.3485, "추허한제 쇼핑 거리. 저녁 산책·식사 거점.", "Chuhe Hanjie. Evening walk and dinner."),
+    qingchuan: M(30.5575, 114.2865, "칭촨거. 황학루를 강 건너 바라보는 각도입니다.", "Pavilion facing Yellow Crane Tower across the river."),
+    lihuangpi: M(30.5845, 114.298, "리황피루 역사 거리. 한커우 강변과 붙여 걷기 좋습니다.", "Historic street. Walk on to the Hankou bund."),
+    "hankou-bund": M(30.5848, 114.3045, "한커우 강변 야경. 해질녘부터 조명이 살아납니다.", "Hankou riverfront. Lights from dusk."),
+  },
+  苏州: {
+    humble: M(31.3258, 120.6288, "졸정원. 오전이 한적하고 박물관·핑장루와 한 권역입니다.", "Humble Administrator’s Garden. Morning; museum and Pingjiang nearby."),
+    hanshan: M(31.3122, 120.5648, "한산사. 짧은 참배, 산탕제와 서쪽으로 이어집니다.", "Hanshan Temple. Short stop; west toward Shantang."),
+    huqiu: M(31.3378, 120.5765, "호구 사탑. 반나절 산책, 기울어진 탑이 상징입니다.", "Tiger Hill. Half-day walk; leaning pagoda is the icon."),
+    pingjiang: M(31.3178, 120.6325, "핑장루 수향 골목. 저녁 산책이 가장 예쁩니다.", "Pingjiang canal lane. Prettiest in the evening."),
+    zhouzhuang: M(31.1175, 120.856, "저우좡 고진. 당일치기, 오전에 출발하세요.", "Zhouzhuang water town. Day trip, morning start."),
+    lingering: M(31.3165, 120.5985, "유원. 졸정원과 정원 취향이 겹치면 하나만 깊게 보세요.", "Lingering Garden. Pick one garden if time is tight."),
+    jinji: M(31.3188, 120.705, "진지호 신도시 호수. 야경·자전거, 고성에서 동쪽으로 떨어져 있습니다.", "Jinji Lake new town. Night lights; east of the old city."),
+    shantang: M(31.3172, 120.5755, "산탕제. 한산사 후 저녁 등불 거리가 핵심입니다.", "Shantang Street. Lanterns after Hanshan Temple."),
+    tongli: M(31.1595, 120.7155, "퉁리 고진. 저우좡보다 한적한 대안 당일치기.", "Tongli. Quieter water-town alternative to Zhouzhuang."),
+    museum: M(31.3228, 120.628, "쑤저우 박물관. 졸정원 옆, 예약 후 오전.", "Suzhou Museum. Next to the Humble Garden; book morning."),
+  },
+  天津: {
+    eye: M(39.1538, 117.1765, "톈진의 눈 대관람차. 하이허 야경과 함께 저녁에 타세요.", "Tianjin Eye ferris wheel. Ride at night with Haihe lights."),
+    "ancient-culture": M(39.1465, 117.1858, "고문화가. 간식·기념품, 구루와 붙어 있습니다.", "Culture street snacks. Next to the Drum Tower."),
+    "five-avenues": M(39.1155, 117.2, "우다다오 풍정 건축. 오전 도보가 쾌적합니다.", "Five Avenues villas. Pleasant morning walk."),
+    "italian-style": M(39.1368, 117.2048, "이태리 풍정구. 카페·사진, 하이허 북쪽에 있습니다.", "Italian concession streets. Cafés north of the Haihe."),
+    "porcelain-house": M(39.1188, 117.1975, "쯔팡쯔. 짧은 관람, 우다다오와 같은 블록.", "Porcelain House. Short visit on the Five Avenues block."),
+    haihe: M(39.136, 117.195, "하이허 강변. 야경 산책이 톈진의 기본 코스입니다.", "Haihe riverwalk. The city’s default night stroll."),
+    panshan: M(40.092, 117.28, "판산. 시외 반나절 산행, 평일과 주말 교통을 확인하세요.", "Mount Panshan. Half-day hike; check weekend transport."),
+    museum: M(39.0865, 117.2145, "톈진 박물관. 비 오는 날 실내, 문화중심에 있습니다.", "Tianjin Museum. Indoor rainy-day stop in the cultural center."),
+    binjiangdao: M(39.1255, 117.2055, "빈장다오 쇼핑. 우다다오에서 이어지는 번화가입니다.", "Binjiang shopping. Continues from the Five Avenues."),
+    "drum-tower": M(39.1468, 117.1848, "구루. 고문화가 입구의 짧은 랜드마크.", "Drum Tower. Short landmark at Culture Street."),
+  },
+  青岛: {
+    zhanqiao: M(36.06, 120.3225, "잔차오 방파제. 아침 바다가 한적하고 성당 쪽으로 이어집니다.", "Zhanqiao pier. Quiet morning sea; walk toward the cathedral."),
+    badaguan: M(36.0538, 120.3555, "바다관 풍정 가로. 플라타너스 산책, 한낮 관광버스는 피하세요.", "Badaguan villas. Plane-tree walk; skip midday tour buses."),
+    "may-fourth": M(36.0618, 120.3895, "오사광장과 조각. 해질녘 조명이 사진에 잘 나옵니다.", "May Fourth Square. Lights photograph well at dusk."),
+    laoshan: M(36.17, 120.62, "라오산. 당일치기 산·해안, 시내와 하루를 나누세요.", "Mount Lao. Split a full day from downtown."),
+    "beer-museum": M(36.0885, 120.3535, "맥주박물관. 시음·공장 투어, 오후 슬롯이 여유롭습니다.", "Beer museum tasting. Afternoon slots feel less rushed."),
+    "golden-beach": M(35.968, 120.292, "금사탄. 황도 쪽 해변, 이동 시간을 넣으세요.", "Golden Beach on Huangdao. Add transit time."),
+    "signal-hill": M(36.0665, 120.3305, "신호산 전망. 짧은 오르막, 잔차오 야경과 이어집니다.", "Signal Hill lookout. Short climb; Bund-style night with Zhanqiao."),
+    cathedral: M(36.0678, 120.3288, "성 미카엘 성당. 외관 사진 후 잔차오와 가깝습니다.", "St. Michael’s. Facade photos, then the pier."),
+    aquarium: M(36.0555, 120.3365, "해저세계. 비·아이 동반 날에 적합합니다.", "Underwater World. Good for rain or kids."),
+    pichaiyuan: M(36.0688, 120.3275, "피차이위안 간식 골목. 저녁 해산물·분식.", "Pichaiyuan snacks. Evening seafood and small eats."),
+  },
+  厦门: {
+    gulangyu: M(24.4475, 118.0668, "구랑위. 배편·도보 전용, 하루를 통째로 쓰세요.", "Gulangyu. Ferry and walking only—give it a full day."),
+    zhongshan: M(24.4578, 118.0825, "중산로 보행거리. 부두·야식으로 섬 일정 전후에 넣기 좋습니다.", "Zhongshan Road. Snacks before/after the island ferry."),
+    nanputuo: M(24.4418, 118.0928, "남보타사. 샤먼대와 붙어 오전 참배·캠퍼스 산책.", "Nanputuo Temple. Morning with Xiamen University next door."),
+    zengcuoan: M(24.4325, 118.1455, "쩡춰안 해안 카페. 해질녘이 예쁘고 주말은 붐빕니다.", "Coastal cafés. Dusk is pretty; weekends crowd up."),
+    "xiamen-uni": M(24.4378, 118.0978, "샤먼대학. 남보타사와 같은 블록, 개학기 출입을 확인하세요.", "Xiamen University. Same block as Nanputuo; check term-time access."),
+    huandao: M(24.432, 118.16, "환다오루 해안도로. 자전거·버스, 후리산까지 이어집니다.", "Island-ring road. Bike or bus toward Hulishan."),
+    hulishan: M(24.4315, 118.141, "후리산 포대. 짧은 군사 유적, 환다오루 중간에 있습니다.", "Hulishan fortress. Short stop on Huandao Road."),
+    botanical: M(24.4555, 118.1025, "식물원. 그늘 산책, 더운 오후에 적합합니다.", "Botanical garden. Shade walk for hot afternoons."),
+    jimei: M(24.5665, 118.0975, "지메이 학촌. 반나절 교외, 도보 다리 사진이 상징입니다.", "Jimei school village. Half-day; the walking bridge is the shot."),
+    shapowei: M(24.4395, 118.0895, "사포웨이 옛 항구. 카페·저녁, 대학가와 가깝습니다.", "Old harbour cafés. Evening near the university."),
+  },
+  昆明: {
+    "stone-forest": M(24.818, 103.324, "스린 카르스트. 당일치기, 이른 버스를 타세요.", "Stone Forest karst. Day trip; take an early bus."),
+    dianchi: M(24.85, 102.68, "뎬츠 호숫가. 시산·민족촌과 남서쪽 하루로 묶습니다.", "Dianchi lakeshore. Southwest day with Xishan and Ethnic Village."),
+    cuihu: M(25.0495, 102.7025, "취이후 공원. 도심 아침 산책, 갈대·갈매기가 볼거리입니다.", "Green Lake Park. Downtown morning; gulls in season."),
+    xishan: M(24.96, 102.63, "시산 용문. 계단이 길어 오전 등반 또는 차.", "Western Hills Dragon Gate. Long stairs—morning climb or a ride."),
+    "ethnic-village": M(24.9665, 102.6605, "윈난 민족촌. 공연 시간을 보고 반나절을 배정하세요.", "Ethnic Village. Check show times; half-day."),
+    jinma: M(25.0328, 102.7178, "금마벽계방. 짧은 랜드마크, 근처 식사와 붙입니다.", "Golden Horse arch. Short landmark plus nearby food."),
+    daguan: M(24.9695, 102.6668, "다관루. 호수 누각, 민족촌과 가깝습니다.", "Daguan Pavilion. Lakeside, near Ethnic Village."),
+    "flower-city": M(24.91, 102.78, "더우난 꽃시장. 새벽·오전이 가장 활기차습니다.", "Dounan flower market. Dawn and morning are liveliest."),
+    jiuxiang: M(24.98, 103.38, "주샹 동굴. 스린과 같은 방향으로 당일치기 선택이 됩니다.", "Jiuxiang caves. Optional same-direction day as Stone Forest."),
+    yuantong: M(25.0555, 102.7125, "위안퉁스. 도심 사찰, 취이후와 붙여 오전 블록.", "Yuantong Temple. Downtown morning with Green Lake."),
+  },
+  大连: {
+    xinghai: M(38.8825, 121.5865, "싱하이 광장. 바다·조형, 저녁 산책이 기본입니다.", "Xinghai Square. Sea and sculptures; default evening walk."),
+    "tiger-beach": M(38.8855, 121.68, "라오후탄 해양공원. 반나절, 빈하이로와 이어집니다.", "Tiger Beach park. Half-day on the Binhai Road strip."),
+    jinshitan: M(39.08, 122.0, "진스탄. 교외 해안, 하루를 배정하세요.", "Golden Pebble Beach. Outbound coast—full day."),
+    "russian-street": M(38.9215, 121.6125, "러시아 풍정가. 짧은 사진 거리, 중산광장과 가깝습니다.", "Russian Street. Short photo strip near Zhongshan Square."),
+    bangchui: M(38.88, 121.695, "방추이섬. 해안 전망, 라오후탄에서 이어집니다.", "Bangchui Island views. Continues from Tiger Beach."),
+    binhai: M(38.89, 121.65, "빈하이로 드라이브·버스. 해안 절경을 이어서 봅니다.", "Binhai Road. String of coastal viewpoints."),
+    zhongshan: M(38.9218, 121.6388, "중산 광장. 원형 유럽풍 건축, 시내 거점입니다.", "Zhongshan Square. Circular European facades; downtown hub."),
+    zoo: M(38.9, 121.62, "삼림동물원. 아이 동반·반나절.", "Forest Zoo. Kids, half-day."),
+    lvshun: M(38.815, 121.26, "뤼순. 역사 당일치기, 시내와 하루를 나누세요.", "Lushun history day. Split from downtown."),
+    discoveryland: M(39.09, 121.95, "발견왕국 테마파크. 진스탄 권역, 하루 일정.", "Discoveryland park. Jinshitan area, full day."),
+  },
+  哈尔滨: {
+    "central-street": M(45.7705, 126.62, "중앙대가. 석재 보행거리, 성 소피아와 붙여 걷습니다.", "Central Street stones. Walk on to St. Sophia."),
+    sophia: M(45.7698, 126.6295, "성 소피아 성당. 야경 조명이 상징, 광장 사진 스톱.", "St. Sophia. Night lights are the postcard shot."),
+    "ice-world": M(45.785, 126.58, "빙설대세계. 겨울 밤 입장, 두꺼운 옷이 필수입니다.", "Ice and Snow World. Winter nights; dress very warm."),
+    "sun-island": M(45.79, 126.6, "태양섬. 강 건너 공원, 여름 산책·겨울 눈 조각.", "Sun Island. Cross-river park; snow sculpture in winter."),
+    "flood-monument": M(45.7778, 126.6185, "방홍기념탑. 강변 짧은 스톱, 중앙대가 북쪽.", "Flood monument. Short river stop north of Central Street."),
+    volga: M(45.82, 126.72, "볼가 장원. 반나절 교외 러시아 풍경.", "Volga Manor. Half-day Russian-themed suburb."),
+    laodaowai: M(45.7785, 126.645, "라오다오와이. 바르거 풍 거리, 음식·사진.", "Laodaowai. Baroque-style street for food and photos."),
+    polarland: M(45.7865, 126.575, "극지관. 실내, 아이·추운 날에 적합합니다.", "Polarland. Indoor, good for kids and bitter cold."),
+    zhaolin: M(45.7735, 126.6255, "자오린 공원. 겨울 얼음등, 성당에서 가깝습니다.", "Zhaolin Park. Ice lanterns in winter, near the cathedral."),
+    yabuli: M(44.78, 128.45, "야부리 스키. 시내에서 멀어 숙박 또는 하루를 통째로.", "Yabuli ski. Far from town—overnight or a full day."),
+  },
+};
+
+export function getSpotMeta(
+  cityZh: string,
+  attractionId: string
+): SpotMeta | undefined {
+  return SPOT_META[cityZh]?.[attractionId];
+}
+
+export function getSpotBlurb(
+  cityZh: string,
+  attractionId: string,
+  locale: Locale | string
+): string {
+  const meta = getSpotMeta(cityZh, attractionId);
+  if (!meta) return "";
+  return locale === "ko" ? meta.ko : meta.en;
+}
