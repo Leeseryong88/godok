@@ -88,7 +88,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     searchAria: "Place search",
     cityAria: "Select city",
     queryAria: "Search query",
-    placeholder: "Search places",
+    placeholder: "Search — Amap",
     desktopBanner:
       "This service works on mobile only. Open it on your phone to search in the Amap app.",
     desktopOnly: "You can only search with the Amap app on mobile.",
@@ -138,7 +138,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     searchAria: "Buscar lugares",
     cityAria: "Elegir ciudad",
     queryAria: "Término de búsqueda",
-    placeholder: "Buscar lugares",
+    placeholder: "Buscar — Amap",
     desktopBanner:
       "Este servicio solo funciona en el móvil. Ábrelo en el teléfono para buscar en la app Amap.",
     desktopOnly: "Solo puedes buscar con la app Amap en el móvil.",
@@ -216,7 +216,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     searchAria: "स्थान खोज",
     cityAria: "शहर चुनें",
     queryAria: "खोज शब्द",
-    placeholder: "स्थान खोजें",
+    placeholder: "खोज — Amap",
     desktopBanner:
       "यह सेवा केवल मोबाइल पर चलती है। Amap ऐप में खोजने के लिए फ़ोन पर खोलें।",
     desktopOnly: "Amap ऐप से खोज केवल मोबाइल पर संभव है।",
@@ -294,7 +294,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     searchAria: "البحث عن مكان",
     cityAria: "اختر المدينة",
     queryAria: "كلمة البحث",
-    placeholder: "ابحث عن أماكن",
+    placeholder: "بحث — Amap",
     desktopBanner:
       "هذه الخدمة تعمل على الجوال فقط. افتحها على هاتفك للبحث في تطبيق Amap.",
     desktopOnly: "يمكنك البحث عبر تطبيق Amap على الجوال فقط.",
@@ -372,7 +372,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     searchAria: "장소 검색",
     cityAria: "도시 선택",
     queryAria: "장소 검색어",
-    placeholder: "장소 검색",
+    placeholder: "검색- Amap연동",
     desktopBanner:
       "이 서비스는 모바일에서만 사용할 수 있어요. 휴대폰 브라우저로 열어 Amap 앱으로 검색하세요.",
     desktopOnly: "모바일에서만 Amap 앱으로 검색할 수 있어요.",
