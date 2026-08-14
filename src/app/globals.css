@@ -943,6 +943,10 @@ a.spots-city-guide {
   gap: 10px;
 }
 
+.home-cities-extra {
+  margin-top: 10px;
+}
+
 .home-city-card {
   display: grid;
   gap: 6px;
@@ -982,14 +986,21 @@ a.spots-city-guide {
   text-align: center;
 }
 
-.home-cities-all a {
+.home-cities-all a,
+.home-cities-toggle {
   color: var(--brand);
   font-size: 13px;
   font-weight: 700;
   text-decoration: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
 }
 
-.home-cities-all a:hover {
+.home-cities-all a:hover,
+.home-cities-toggle:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
 }

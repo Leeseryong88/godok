@@ -1,16 +1,30 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { CITY_ARTICLES } from "@/lib/cityPages";
 import { getCityArticleCopy } from "@/lib/cityPages/copy";
 import { getMessages } from "@/lib/i18n/messages";
 import type { Locale } from "@/lib/i18n/locales";
+import type { CityArticle } from "@/lib/cityPages/types";
 
 type Props = {
   locale: Locale;
 };
 
+const PREVIEW_SLUGS = ["shanghai", "beijing"] as const;
+const PREVIEW_SET = new Set<string>(PREVIEW_SLUGS);
+
 export function HomeCityGuides({ locale }: Props) {
   const t = getMessages(locale);
   const titleId = "home-cities-title";
+  const [expanded, setExpanded] = useState(false);
+
+  const preview = PREVIEW_SLUGS.map((slug) =>
+    CITY_ARTICLES.find((article) => article.slug === slug)
+  ).filter((article): article is CityArticle => Boolean(article));
+  const extra = CITY_ARTICLES.filter((article) => !PREVIEW_SET.has(article.slug));
+  const visible = expanded ? [...preview, ...extra] : preview;
 
   return (
     <section className="home-cities" aria-labelledby={titleId}>
@@ -19,7 +33,7 @@ export function HomeCityGuides({ locale }: Props) {
       </h2>
       <p className="home-cities-lede">{t.homeCitiesLede}</p>
       <ul className="home-cities-list">
-        {CITY_ARTICLES.map((article) => {
+        {visible.map((article) => {
           const copy = getCityArticleCopy(article, locale);
           const name = t.cities[article.cityZh] || article.cityZh;
           return (
@@ -36,9 +50,18 @@ export function HomeCityGuides({ locale }: Props) {
           );
         })}
       </ul>
-      <p className="home-cities-all">
-        <Link href="/cities">{t.homeCitiesAll}</Link>
-      </p>
+      {extra.length > 0 ? (
+        <p className="home-cities-all">
+          <button
+            type="button"
+            className="home-cities-toggle"
+            aria-expanded={expanded}
+            onClick={() => setExpanded((open) => !open)}
+          >
+            {expanded ? t.homeCitiesLess : t.homeCitiesMore}
+          </button>
+        </p>
+      ) : null}
     </section>
   );
 }

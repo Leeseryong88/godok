@@ -30,6 +30,8 @@ export type Messages = {
   homeCitiesTitle: string;
   homeCitiesLede: string;
   homeCitiesRead: string;
+  homeCitiesMore: string;
+  homeCitiesLess: string;
   homeCitiesAll: string;
   tabSearch: string;
   tabSpots: string;
@@ -119,6 +121,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     homeCitiesLede:
       "History, how to get there, tickets, and season for each city. Search in Amap on a phone; read the articles here.",
     homeCitiesRead: "Read the guide",
+    homeCitiesMore: "Show more",
+    homeCitiesLess: "Show less",
     homeCitiesAll: "All city guides",
     tabSearch: "Search",
     tabSpots: "Spot map",
@@ -174,6 +178,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     homeCitiesLede:
       "Historia, cómo llegar, entradas y temporada de cada ciudad. Busca en Amap en el móvil; lee los artículos aquí.",
     homeCitiesRead: "Leer la guía",
+    homeCitiesMore: "Ver más",
+    homeCitiesLess: "Ver menos",
     homeCitiesAll: "Todas las guías",
     tabSearch: "Buscar",
     tabSpots: "Mapa",
@@ -257,6 +263,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     homeCitiesLede:
       "हर शहर का इतिहास, पहुँच, टिकट और मौसम। फ़ोन पर Amap खोज; लेख यहीं पढ़ें।",
     homeCitiesRead: "गाइड पढ़ें",
+    homeCitiesMore: "और देखें",
+    homeCitiesLess: "कम देखें",
     homeCitiesAll: "सभी शहर गाइड",
     tabSearch: "खोज",
     tabSpots: "मानचित्र",
@@ -340,6 +348,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     homeCitiesLede:
       "تاريخ كل مدينة، الوصول، التذاكر والموسم. ابحث في Amap على الجوال واقرأ المقالات هنا.",
     homeCitiesRead: "اقرأ الدليل",
+    homeCitiesMore: "عرض المزيد",
+    homeCitiesLess: "عرض أقل",
     homeCitiesAll: "كل أدلة المدن",
     tabSearch: "بحث",
     tabSpots: "الخريطة",
@@ -423,6 +433,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     homeCitiesLede:
       "도시마다 명소의 역사, 가는 법, 입장과 계절을 정리했습니다. Amap 검색은 휴대폰에서, 안내 글은 이 화면에서 읽을 수 있습니다.",
     homeCitiesRead: "글 읽기",
+    homeCitiesMore: "더보기",
+    homeCitiesLess: "접기",
     homeCitiesAll: "도시 안내 모두 보기",
     tabSearch: "검색",
     tabSpots: "명소 지도",
