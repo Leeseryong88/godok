@@ -103,6 +103,9 @@ export default function HomePage() {
     setCity(normalizeSavedCity(loadSavedCity("")));
     setSpotsCity(resolveSpotsCity(loadSpotsCityCookie()));
     setPlatform(detectPlatform(navigator.userAgent || ""));
+    if (new URLSearchParams(window.location.search).get("tab") === "spots") {
+      setTab("spots");
+    }
     setReady(true);
   }, []);
 

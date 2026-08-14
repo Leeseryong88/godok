@@ -25,6 +25,8 @@ export function LegalPage({ kind }: Props) {
                 <p className="legal-inline-links">
                   <Link href="/">{t.backHome}</Link>
                   <span aria-hidden="true"> · </span>
+                  <Link href="/cities">{t.navCities}</Link>
+                  <span aria-hidden="true"> · </span>
                   <Link href="/contact">{t.navContact}</Link>
                   <span aria-hidden="true"> · </span>
                   <Link href="/privacy">{t.navPrivacy}</Link>

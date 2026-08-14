@@ -35,6 +35,7 @@ export type Messages = {
   spotsPickCity: string;
   spotsPickCityDesc: string;
   spotsChangeCity: string;
+  spotsCityGuide: string;
   spotsTitle: string;
   spotsDesc: string;
   spotsComingSoon: string;
@@ -42,6 +43,8 @@ export type Messages = {
   spotsFar: string;
   spotsMapAria: string;
   spotDetail: string;
+  spotAbout: string;
+  spotReadMore: string;
   openInAmap: string;
   howToGo: string;
   cities: Record<string, string>;
@@ -119,6 +122,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     spotsPickCity: "Choose a city",
     spotsPickCityDesc: "Pick a city to open its spot map",
     spotsChangeCity: "Change city",
+    spotsCityGuide: "City sights guide",
     spotsTitle: "{city} · spots",
     spotsDesc: "Tap a pin to read the place, then open it in Amap",
     spotsComingSoon: "Coming soon",
@@ -126,6 +130,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     spotsFar: "Day trip",
     spotsMapAria: "Tourist map",
     spotDetail: "Place details",
+    spotAbout: "What this place is",
+    spotReadMore: "Read the full guide",
     openInAmap: "Open in Amap",
     howToGo: "Getting there",
     cities: citiesEn,
@@ -169,6 +175,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     spotsPickCity: "Elige una ciudad",
     spotsPickCityDesc: "Elige una ciudad para ver su mapa",
     spotsChangeCity: "Cambiar ciudad",
+    spotsCityGuide: "Guía de lugares",
     spotsTitle: "{city} · lugares",
     spotsDesc: "Toca un pin para ver la descripción y abrirla en Amap",
     spotsComingSoon: "Próximamente",
@@ -176,6 +183,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     spotsFar: "Excursión",
     spotsMapAria: "Mapa turístico",
     spotDetail: "Detalle del lugar",
+    spotAbout: "Qué es este lugar",
+    spotReadMore: "Leer la guía completa",
     openInAmap: "Abrir en Amap",
     howToGo: "Cómo llegar",
     cities: {
@@ -247,6 +256,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     spotsPickCity: "शहर चुनें",
     spotsPickCityDesc: "मानचित्र देखने के लिए शहर चुनें",
     spotsChangeCity: "शहर बदलें",
+    spotsCityGuide: "स्थलों की जानकारी",
     spotsTitle: "{city} · स्थल",
     spotsDesc: "पिन दबाकर विवरण देखें, फिर Amap में खोलें",
     spotsComingSoon: "जल्द आ रहा है",
@@ -254,6 +264,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     spotsFar: "दिन भर",
     spotsMapAria: "पर्यटन मानचित्र",
     spotDetail: "स्थान विवरण",
+    spotAbout: "यह स्थान क्या है",
+    spotReadMore: "पूरी जानकारी पढ़ें",
     openInAmap: "Amap में खोलें",
     howToGo: "कैसे जाएँ",
     cities: {
@@ -325,6 +337,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     spotsPickCity: "اختر مدينة",
     spotsPickCityDesc: "اختر مدينة لفتح خريطة المعالم",
     spotsChangeCity: "تغيير المدينة",
+    spotsCityGuide: "دليل المعالم",
     spotsTitle: "{city} · معالم",
     spotsDesc: "اضغط الدبوس لقراءة الوصف ثم افتحه في Amap",
     spotsComingSoon: "قريبًا",
@@ -332,6 +345,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     spotsFar: "رحلة يوم",
     spotsMapAria: "خريطة سياحية",
     spotDetail: "تفاصيل المكان",
+    spotAbout: "ما هذا المكان",
+    spotReadMore: "اقرأ الدليل الكامل",
     openInAmap: "فتح في Amap",
     howToGo: "كيف تصل",
     cities: {
@@ -403,6 +418,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     spotsPickCity: "도시를 선택하세요",
     spotsPickCityDesc: "명소 지도를 볼 도시를 고르세요",
     spotsChangeCity: "도시 변경",
+    spotsCityGuide: "도시 관광지 설명",
     spotsTitle: "{city} · 명소",
     spotsDesc: "지도의 핀을 눌러 설명을 보고, Amap으로 여세요",
     spotsComingSoon: "준비 중",
@@ -410,6 +426,8 @@ export const MESSAGES: Record<Locale, Messages> = {
     spotsFar: "교외",
     spotsMapAria: "관광 지도",
     spotDetail: "명소 설명",
+    spotAbout: "어떤 곳인가요",
+    spotReadMore: "이 명소 더 읽기",
     openInAmap: "Amap에서 열기",
     howToGo: "가는 법",
     cities: {

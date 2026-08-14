@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useState } from "react";
+import Link from "next/link";
 import { createPortal } from "react-dom";
 import {
   getAttractionLabel,
@@ -8,8 +9,10 @@ import {
   type Attraction,
   type CityGuide,
 } from "@/lib/attractions";
-import { getSpotMeta, getSpotParagraphs } from "@/lib/attractions/meta";
+import { getSpotMeta } from "@/lib/attractions/meta";
+import { getSpotAbout, getSpotHowTo } from "@/lib/attractions/spotCopy";
 import {
+  CITY_MAP_SLUG,
   chinaMapSrc,
   cityMapSrc,
   getMapViewForCity,
@@ -140,12 +143,14 @@ export function SpotsMap({
     setPickerOpen(false);
   }
 
-  const heading = cityZh
-    ? t.spotsTitle.replace("{city}", cityLabel)
-    : t.spotsPickCity;
-  const paragraphs = selected
-    ? getSpotParagraphs(cityZh, selected.id, locale)
+  const heading = cityZh ? cityLabel : t.spotsPickCity;
+  const about = selected
+    ? getSpotAbout(cityZh, selected.id, locale)
     : [];
+  const howTo = selected
+    ? getSpotHowTo(cityZh, selected.id, locale)
+    : [];
+  const guideSlug = cityZh ? CITY_MAP_SLUG[cityZh] : "";
 
   const picker =
     mounted && pickerOpen
@@ -278,9 +283,30 @@ export function SpotsMap({
               </div>
 
               <div className="spot-detail-body">
-                {paragraphs.map((para) => (
-                  <p key={para.slice(0, 28)}>{para}</p>
-                ))}
+                {about.length ? (
+                  <>
+                    <h3 className="spot-detail-h">{t.spotAbout}</h3>
+                    {about.map((para) => (
+                      <p key={para.slice(0, 28)}>{para}</p>
+                    ))}
+                  </>
+                ) : null}
+                {howTo.length ? (
+                  <>
+                    <h3 className="spot-detail-h">{t.howToGo}</h3>
+                    {howTo.map((para) => (
+                      <p key={para.slice(0, 28)}>{para}</p>
+                    ))}
+                  </>
+                ) : null}
+                {guideSlug && selected ? (
+                  <Link
+                    href={`/cities/${guideSlug}#${selected.id}`}
+                    className="spot-detail-more"
+                  >
+                    {t.spotReadMore}
+                  </Link>
+                ) : null}
               </div>
 
               <button
@@ -301,16 +327,35 @@ export function SpotsMap({
     <section className="spots" aria-label={heading}>
       <div className="spots-head">
         <div className="spots-head-row">
-          <h2 className="spots-title">{heading}</h2>
-          {cityZh ? (
-            <button
-              type="button"
-              className="spots-change-city"
-              disabled={loading}
-              onClick={openPicker}
+          <h2 className="spots-title">
+            {cityZh ? (
+              <>
+                <button
+                  type="button"
+                  className="spots-city-name"
+                  disabled={loading}
+                  onClick={openPicker}
+                  aria-label={`${cityLabel}, ${t.spotsChangeCity}`}
+                  aria-haspopup="dialog"
+                  aria-expanded={pickerOpen}
+                >
+                  {cityLabel}
+                  <span className="spots-city-caret" aria-hidden="true">
+                    ▾
+                  </span>
+                </button>
+              </>
+            ) : (
+              heading
+            )}
+          </h2>
+          {cityZh && CITY_MAP_SLUG[cityZh] ? (
+            <Link
+              href={`/cities/${CITY_MAP_SLUG[cityZh]}`}
+              className="spots-change-city spots-city-guide"
             >
-              {t.spotsChangeCity}
-            </button>
+              {t.spotsCityGuide}
+            </Link>
           ) : null}
         </div>
         <p className="spots-desc">{t.spotsDesc}</p>

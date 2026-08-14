@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     title: "Amap Search",
-    statusBarStyle: "black-translucent",
+    statusBarStyle: "default",
   },
   formatDetection: {
     telephone: false,
@@ -29,7 +29,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   viewportFit: "cover",
-  themeColor: "#0b1c24",
+  themeColor: "#f3efe8",
 };
 
 export default function RootLayout({

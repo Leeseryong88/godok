@@ -19,6 +19,7 @@ import type { Attraction, CityGuide } from "./types";
 
 export type { Attraction, CityGuide };
 export { getSpotBlurb, getSpotMeta } from "./meta";
+export { getSpotAbout, getSpotHowTo } from "./spotCopy";
 export { cityMapSrc, getMapViewForCity } from "./mapView";
 
 /** 앱에 등록된 도시별 명소 */
