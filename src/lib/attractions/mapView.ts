@@ -178,6 +178,52 @@ export function cityMapSrc(cityZh: string): string | null {
   return slug ? `/maps/${slug}.png?v=3` : null;
 }
 
+/** 도시 선택 모달용 중국 개요 지도 */
+export const CHINA_MAP_VIEW: MapView = {
+  slug: "china",
+  centerLat: 35.1,
+  centerLng: 106.4,
+  zoom: 4,
+  width: 800,
+  height: 500,
+};
+
+/** 개요 지도에 찍을 도심 좌표 */
+export const CITY_ANCHORS: Record<string, { lat: number; lng: number }> = {
+  上海: { lat: 31.2304, lng: 121.4737 },
+  北京: { lat: 39.9042, lng: 116.4074 },
+  广州: { lat: 23.1291, lng: 113.2644 },
+  深圳: { lat: 22.5431, lng: 114.0579 },
+  成都: { lat: 30.5728, lng: 104.0668 },
+  杭州: { lat: 30.2741, lng: 120.1551 },
+  重庆: { lat: 29.563, lng: 106.5516 },
+  西安: { lat: 34.3416, lng: 108.9398 },
+  南京: { lat: 32.0603, lng: 118.7969 },
+  武汉: { lat: 30.5928, lng: 114.3055 },
+  苏州: { lat: 31.2989, lng: 120.5853 },
+  天津: { lat: 39.3434, lng: 117.3616 },
+  青岛: { lat: 36.0671, lng: 120.3826 },
+  厦门: { lat: 24.4798, lng: 118.0894 },
+  昆明: { lat: 25.0389, lng: 102.7183 },
+  大连: { lat: 38.914, lng: 121.6147 },
+  哈尔滨: { lat: 45.8038, lng: 126.534 },
+};
+
+export function chinaMapSrc(): string {
+  return "/maps/china.png?v=1";
+}
+
+export function projectChinaCities(): ProjectedPin[] {
+  return projectPins(
+    Object.entries(CITY_ANCHORS).map(([id, p]) => ({
+      id,
+      lat: p.lat,
+      lng: p.lng,
+    })),
+    CHINA_MAP_VIEW
+  );
+}
+
 export function projectPins(points: MapPoint[], view: MapView): ProjectedPin[] {
   const cx = mercatorX(view.centerLng, view.zoom);
   const cy = mercatorY(view.centerLat, view.zoom);

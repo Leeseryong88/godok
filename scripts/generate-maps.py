@@ -75,8 +75,11 @@ def render_job(job: dict) -> None:
 
 
 def main() -> None:
+    import sys
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    jobs = json.loads(JOBS.read_text(encoding="utf-8"))
+    jobs_path = Path(sys.argv[1]) if len(sys.argv) > 1 else JOBS
+    jobs = json.loads(jobs_path.read_text(encoding="utf-8"))
     for job in jobs:
         render_job(job)
 

@@ -408,7 +408,90 @@ input {
 }
 
 .city-picker-modal {
-  max-width: 22rem;
+  max-width: 26rem;
+}
+
+.china-map {
+  position: relative;
+  margin-top: 12px;
+  aspect-ratio: 8 / 5;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #d7e2dc;
+  border: 1px solid rgba(18, 36, 43, 0.1);
+}
+
+.china-map-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+}
+
+.china-map-city {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  transform: translate(-50%, -110%);
+  cursor: pointer;
+}
+
+.china-map-city.is-right {
+  flex-direction: row;
+  transform: translate(2px, -50%);
+}
+
+.china-map-city.is-left {
+  flex-direction: row-reverse;
+  transform: translate(calc(-100% - 2px), -50%);
+}
+
+.china-map-city.is-below {
+  transform: translate(-50%, 2px);
+}
+
+.china-map-city.is-above {
+  transform: translate(-50%, calc(-100% - 2px));
+}
+
+.china-map-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d6452e;
+  box-shadow: 0 0 0 2px #fff;
+}
+
+.china-map-name {
+  max-width: 4.6rem;
+  padding: 1px 5px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #12242b;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.25;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+}
+
+.china-map-city.is-active .china-map-dot {
+  background: #1f6f5c;
+}
+
+.china-map-city.is-active .china-map-name {
+  background: #1f6f5c;
+  color: #f4fbf8;
 }
 
 .city-picker-list {

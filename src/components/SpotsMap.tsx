@@ -10,12 +10,31 @@ import {
 } from "@/lib/attractions";
 import { getSpotMeta, getSpotParagraphs } from "@/lib/attractions/meta";
 import {
+  chinaMapSrc,
   cityMapSrc,
   getMapViewForCity,
+  projectChinaCities,
   projectPins,
 } from "@/lib/attractions/mapView";
 import type { Locale } from "@/lib/i18n/locales";
 import type { Messages } from "@/lib/i18n/messages";
+
+const CHINA_LABEL_SIDE: Record<string, string> = {
+  深圳: "is-below",
+  广州: "is-left",
+  上海: "is-right",
+  苏州: "is-left",
+  杭州: "is-below",
+  南京: "is-above",
+  北京: "is-left",
+  天津: "is-right",
+  成都: "is-left",
+  重庆: "is-right",
+  武汉: "is-above",
+  青岛: "is-right",
+  大连: "is-right",
+  厦门: "is-right",
+};
 
 type Props = {
   locale: Locale;
@@ -72,6 +91,8 @@ export function SpotsMap({
   const pinById = useMemo(() => {
     return new Map(pins.map((p) => [p.id, p]));
   }, [pins]);
+
+  const chinaPins = useMemo(() => projectChinaCities(), []);
 
   useEffect(() => {
     setMounted(true);
@@ -167,6 +188,35 @@ export function SpotsMap({
                 )}
               </div>
               <p className="modal-desc">{t.spotsPickCityDesc}</p>
+              <div className="china-map" aria-label={t.cityTabsAria}>
+                <img
+                  className="china-map-image"
+                  src={chinaMapSrc()}
+                  alt=""
+                  draggable={false}
+                />
+                {chinaPins.map((pin) => {
+                  if (!pin.inView) return null;
+                  const label = t.cities[pin.id] || pin.id;
+                  const active = cityZh === pin.id;
+                  const side = CHINA_LABEL_SIDE[pin.id] || "";
+                  return (
+                    <button
+                      key={pin.id}
+                      type="button"
+                      className={`china-map-city${active ? " is-active" : ""}${
+                        side ? ` ${side}` : ""
+                      }`}
+                      style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
+                      disabled={loading}
+                      onClick={() => pickCity(pin.id)}
+                    >
+                      <span className="china-map-dot" aria-hidden="true" />
+                      <span className="china-map-name">{label}</span>
+                    </button>
+                  );
+                })}
+              </div>
               <div className="city-picker-list" role="list" aria-label={t.cityTabsAria}>
                 {SPOTS_CITY_TABS.map((opt) => {
                   const label = t.cities[opt.city] || opt.city;
