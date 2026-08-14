@@ -6,9 +6,9 @@ export const SHANGHAI_ARTICLE: CityArticle = {
   ko: {
     title: "상하이, 황푸강이 가르는 중국 근현대의 교차점",
     lede:
-      "상하이는 장강 삼각주의 끝에서 황푸강과 장강이 만나는 자리에 서서, 어촌이었던 기억이 조약항의 석조 건물과 푸동의 초고층으로 겹쳐진 도시다.",
+      "황푸강 페리가 와이탄과 루자쭈이를 오가는 몇 분 동안, 상하이는 한 세기의 석조와 다른 세기의 유리를 같은 강물에 비춘다.",
     intro: [
-      "상하이는 중국 동부 해안의 장강 삼각주 평야에 자리한다. 북쪽과 동쪽으로는 장강 하구와 동중국해가 열리고, 도시를 남북으로 가르는 황푸강이 푸시와 푸동의 풍경을 서로 마주 보게 한다. 평탄한 지형은 운하와 부두를 키웠고, 그 물길은 오래전부터 강남 일대의 쌀과 비단, 차와 소문을 실어 날랐다.",
+      "강 서쪽 화강암 파사드는 은행과 세관이 서던 자리이고, 동쪽 초고층은 1990년 이후의 실험이다. 그 사이 물은 물건을 나르던 습관을 아직 버리지 않았다. 조약항의 기억이 어촌을 지운 것이 아니라, 부두의 방향만 바꿨다. 상하이를 이해하려면 전망대보다 먼저 강을 한 번 건너야 한다.",
       "이 도시의 성격은 어느 한 왕조의 도읍이 아니라, 열린 항구로서의 습관에서 온다. 19세기 중엽 이후 영국, 프랑스, 미국 등 여러 나라가 조계를 두었고, 은행과 신문, 영화와 백화점, 노동조합과 정치 결사가 같은 구역에서 자랐다. 그 결과 상하이는 중국 대륙에서 가장 먼저 근대적 대중문화와 금융 제도를 몸에 익힌 도시가 되었다.",
       "문화적으로 상하이는 강남의 온화한 오어와 각지에서 몰려든 이주민의 말, 서양의 석조 양식과 중국의 석고문 주택이 한 블록 안에서 공존하는 곳이다. 해파 문화는 요리와 복식만이 아니라, 실용과 유행을 동시에 추구하는 태도이기도 하다. 사람들은 강 건너 스카이라인을 자랑하면서도, 골목의 노점과 오래된 찻집을 쉽게 버리지 않는다.",
       "오늘날 상하이는 중국의 경제와 무역, 디자인과 전시를 연결하는 관문이다. 루자쭈이의 금융가, 와이탄의 역사 건축, 프랑스 조계의 가로수 길은 같은 도시의 서로 다른 시간대를 보여 준다. 여행자가 이 도시를 찾는 이유는 한 장의 야경이 아니라, 근현대 중국이 세계와 어떻게 마주했는지를 거리 위에서 읽을 수 있기 때문이다.",
@@ -144,9 +144,9 @@ export const SHANGHAI_ARTICLE: CityArticle = {
   en: {
     title: "Shanghai, where the Huangpu keeps two centuries in view",
     lede:
-      "Shanghai sits at the mouth of the Yangtze, a former county port whose stone Bund and glass towers still argue across the Huangpu about what modernity should look like.",
+      "A few minutes on the Huangpu ferry, the Bund’s stone and Lujiazui’s glass share the same water. Shanghai explains itself in that crossing, not on a skyline postcard.",
     intro: [
-      "The city occupies the alluvial edge of the Yangtze Delta, a low plain where the Huangpu River splits Puxi from Pudong before both waters meet the estuary. Geography here is not dramatic. It is useful. Canals, wharves, and silt made a harbor long before diplomats drew concession lines on a map.",
+      "Granite on the west bank is where banks and a customs house once stood; the towers to the east are an experiment after 1990. Between them the river has not given up the habit of carrying cargo. Treaty-port memory did not erase a fishing village so much as turn the docks to face a new century. To read Shanghai, cross the river before you collect observation decks.",
       "Shanghai's character is that of a hinge rather than a throne. It was never the ceremonial capital of a dynasty, yet it became the place where China learned the habits of banks, newspapers, department stores, and film studios. People arrived from Ningbo, Guangdong, Jiangsu, and the hinterland, and the city absorbed their dialects into a practical cosmopolitanism.",
       "Culturally the city is a collage of Jiangnan taste and imported form. Shikumen lanes sit a short walk from neoclassical banks. A temple courtyard can open onto a boulevard of plane trees planted for a French municipality. Haipai, the Shanghai style, is less a costume than a willingness to mix, to prize usefulness and fashion in the same gesture.",
       "That mixture is why Shanghai still matters. The Bund records a century of forced opening. Lujiazui records a later century of planned ascent. Between them, gardens, museums, and surviving alleys keep an older county town from disappearing under the skyline. To walk the river is to watch China rehearse its relationship with the world in architecture.",

@@ -13,8 +13,8 @@ import Link from "next/link";
 import { track } from "@vercel/analytics";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { SiteFooter } from "@/components/SiteFooter";
+import { HomeCityGuides } from "@/components/HomeCityGuides";
 import { SpotsMap } from "@/components/SpotsMap";
-import { COUPANG_CHINA_ESIM_URL } from "@/lib/affiliate";
 import {
   getCityGuide,
   resolveSpotsCity,
@@ -328,7 +328,7 @@ export default function HomePage() {
     platform === "ios" ? GAODE_INSTALL.ios : GAODE_INSTALL.androidWeb;
 
   return (
-    <main className={`page${overlayOpen ? " is-overlay-open" : ""}`}>
+    <main className={`page home-page${overlayOpen ? " is-overlay-open" : ""}`}>
       <LanguageSwitcher
         locale={locale}
         label={t.language}
@@ -368,12 +368,20 @@ export default function HomePage() {
         ) : null}
 
         <p className="home-quick-links">
+          <Link href="/cities">
+            {locale === "ko" ? "도시 안내" : "City guides"}
+          </Link>
+          <span aria-hidden="true"> · </span>
           <Link href="/about">
             {locale === "ko" ? "소개" : "About"}
           </Link>
           <span aria-hidden="true"> · </span>
           <Link href="/privacy">
             {locale === "ko" ? "개인정보" : "Privacy"}
+          </Link>
+          <span aria-hidden="true"> · </span>
+          <Link href="/contact">
+            {locale === "ko" ? "문의" : "Contact"}
           </Link>
         </p>
 
@@ -469,19 +477,6 @@ export default function HomePage() {
               </p>
             ) : null}
           </form>
-
-          <aside className="affiliate" aria-label={t.affiliateLink}>
-            <a
-              className="affiliate-link"
-              href={COUPANG_CHINA_ESIM_URL}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              onClick={() => track("coupang_china_esim_click")}
-            >
-              {t.affiliateLink}
-            </a>
-            <p className="affiliate-disclosure">{t.affiliateDisclosure}</p>
-          </aside>
         </div>
 
         <div
@@ -519,6 +514,8 @@ export default function HomePage() {
             onModalOpenChange={setSpotModalOpen}
           />
         </div>
+
+        <HomeCityGuides locale={locale} />
 
         <SiteFooter locale={locale} />
       </div>

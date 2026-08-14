@@ -5,9 +5,9 @@ export const XIAN_ARTICLE: CityArticle = {
   cityZh: "西安",
   ko: {
     title: "시안 — 장안의 먼지 위에 선 고도의 시간",
-    lede: "관중 평원의 관문에서 시안은 여러 왕조의 수도 장안이었다. 병마용과 성벽, 이슬람 거리와 당의 탑이 같은 황토 바람 아래 겹쳐 있다.",
+    lede: "명 성벽 위에서 자전거를 한 바퀴 돌리면, 시안은 병마용 이전에 장안이라는 격자였음이 먼저 보인다.",
     intro: [
-      "시안은 위수 남쪽, 관중 분지의 중심에 자리한다. 동쪽의 함곡과 서쪽의 농산 사이, 이 평원은 중원을 지키는 관문이자 실크로드가 시작되는 문턱이었다. 흙은 황갈이고 하늘은 건조하며, 겨울 바람은 고원의 먼지를 성안으로 밀어 넣는다. 지리가 먼저 수도를 고른 도시에 가깝다.",
+      "성문마다 대여 자전거가 늘어서고, 황토 바람이 타이어보다 먼저 얼굴을 친다. 종루와 회민가의 숯불, 대야탑의 벽돌은 그 격자 안의 다른 세기이다. 진시황의 지하 군대는 동북쪽 교외의 우물에서 나왔고, 도시 자체는 한·수·당이 같은 평원에 수도를 반복한 결과다. 병마용만 보면 시장과 성벽이 가려진다.",
       "오늘 여행자가 시안을 찾는 이유는 대개 진시황의 병마용이다. 그러나 도시 자체는 진의 함양 옆에서 한의 장안, 수의 대흥, 당의 장안으로 이름을 바꾸며 동아시아 최대의 계획 수도가 되었다. 명대의 성벽이 그 거대한 격자 일부를 오늘날까지 감싸고 있다.",
       "문화적으로 시안은 한자의 정통 서사와 서역의 교역이 한 시장에서 만난 자리다. 회민가의 양고기 국수와 모스크는 당대 실크로드의 후예이고, 대야탑은 현장 법사가 인도에서 가져온 경전을 보관한 벽돌의 기억이다. 고도는 유물 창고가 아니라 여러 문명이 번역되던 터미널이었다.",
       "현대 시안은 서부 내륙의 항공·교육 거점으로 커졌으면서도, 성벽 안의 종루와 성벽 밖의 대명궁 유지를 지워 버리지 않았다. 대당불야성의 조명은 당을 무대로 재현하지만, 박물관의 당삼채와 비석은 그 무대의 대본이다. 과거는 분장이 아니라 도시의 골격으로 남아 있다.",
@@ -110,9 +110,9 @@ export const XIAN_ARTICLE: CityArticle = {
   },
   en: {
     title: "Xi'an: Walking the Dust of Chang'an",
-    lede: "On the threshold of the Guanzhong plain, Xi'an was Chang'an, capital of successive dynasties. Terracotta ranks, a Ming wall, a Muslim street, and Tang pagodas share the same loess wind.",
+    lede: "Cycle the Ming wall once and Xi’an shows itself as Chang’an’s grid before it is a terracotta pit.",
     intro: [
-      "Xi'an sits south of the Wei River, at the center of the Guanzhong basin. Between the eastern passes and the western hills, this plain was both a gate that guarded the Central Plains and the sill where the Silk Road began. The soil is ochre, the sky dry; winter wind pushes highland dust through the gates. Geography chose a capital here before any emperor did.",
+      "Hire bikes wait at the gates; loess wind hits the face before the tires. Bell Tower charcoal, Hui-quarter smoke, and Giant Wild Goose brick are other centuries inside that grid. Qin’s underground host came out of a well in the northeast suburbs; the city itself is dynasties repeating a capital on one plain. See only the warriors and the market and wall go dark.",
       "Most travelers come for Qin Shi Huang's terracotta army. The city itself, however, shifted from Qin's neighbor Xianyang to Han Chang'an, Sui Daxing, and Tang Chang'an, becoming East Asia's greatest planned capital. A Ming wall still holds a fragment of that vast grid.",
       "Culturally Xi'an is where the orthodox story of Chinese writing met western trade in one market. Mutton noodles and a mosque in the Hui quarter are heirs of the Tang Silk Road; the Giant Wild Goose Pagoda is brick memory of scriptures Xuanzang brought from India. The old capital was not a warehouse of relics. It was a terminal where civilizations were translated.",
       "Modern Xi'an has grown into a western hub of aviation and universities without erasing the Bell Tower inside the wall or the Daming Palace grounds beyond it. Lights at the Tang night mall restage the dynasty; sancai and steles in the museum are the script of that stage. The past remains as civic bone, not as makeup.",

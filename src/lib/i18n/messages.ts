@@ -27,8 +27,10 @@ export type Messages = {
   installPrimary: string;
   installSecondary: string;
   dismiss: string;
-  affiliateLink: string;
-  affiliateDisclosure: string;
+  homeCitiesTitle: string;
+  homeCitiesLede: string;
+  homeCitiesRead: string;
+  homeCitiesAll: string;
   tabSearch: string;
   tabSpots: string;
   cityTabsAria: string;
@@ -93,7 +95,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     queryAria: "Search query",
     placeholder: "Search — Amap",
     desktopBanner:
-      "This service works on mobile only. Open it on your phone to search in the Amap app.",
+      "Amap search works on phones. City guides below can be read on this screen.",
     desktopOnly: "You can only search with the Amap app on mobile.",
     emptyQuery: "Please enter a search term.",
     searchFailed: "Search failed.",
@@ -113,9 +115,11 @@ export const MESSAGES: Record<Locale, Messages> = {
     installPrimary: "Install Amap",
     installSecondary: "Open download page",
     dismiss: "Close",
-    affiliateLink: "China travel eSIM & Wi‑Fi",
-    affiliateDisclosure:
-      "Coupang Partners affiliate link. A commission may be earned.",
+    homeCitiesTitle: "City guides",
+    homeCitiesLede:
+      "History, how to get there, tickets, and season for each city. Search in Amap on a phone; read the articles here.",
+    homeCitiesRead: "Read the guide",
+    homeCitiesAll: "All city guides",
     tabSearch: "Search",
     tabSpots: "Spot map",
     cityTabsAria: "Select city",
@@ -146,7 +150,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     queryAria: "Término de búsqueda",
     placeholder: "Buscar — Amap",
     desktopBanner:
-      "Este servicio solo funciona en el móvil. Ábrelo en el teléfono para buscar en la app Amap.",
+      "La búsqueda en Amap funciona en el móvil. Las guías de ciudad se pueden leer en esta pantalla.",
     desktopOnly: "Solo puedes buscar con la app Amap en el móvil.",
     emptyQuery: "Introduce un término de búsqueda.",
     searchFailed: "Error en la búsqueda.",
@@ -166,9 +170,11 @@ export const MESSAGES: Record<Locale, Messages> = {
     installPrimary: "Instalar Amap",
     installSecondary: "Abrir página de descarga",
     dismiss: "Cerrar",
-    affiliateLink: "eSIM y Wi‑Fi para viajar a China",
-    affiliateDisclosure:
-      "Enlace de afiliado de Coupang Partners. Puede generarse una comisión.",
+    homeCitiesTitle: "Guías de ciudad",
+    homeCitiesLede:
+      "Historia, cómo llegar, entradas y temporada de cada ciudad. Busca en Amap en el móvil; lee los artículos aquí.",
+    homeCitiesRead: "Leer la guía",
+    homeCitiesAll: "Todas las guías",
     tabSearch: "Buscar",
     tabSpots: "Mapa",
     cityTabsAria: "Elegir ciudad",
@@ -227,7 +233,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     queryAria: "खोज शब्द",
     placeholder: "खोज — Amap",
     desktopBanner:
-      "यह सेवा केवल मोबाइल पर चलती है। Amap ऐप में खोजने के लिए फ़ोन पर खोलें।",
+      "Amap खोज फ़ोन पर चलती है। शहर गाइड यहीं पढ़े जा सकते हैं।",
     desktopOnly: "Amap ऐप से खोज केवल मोबाइल पर संभव है।",
     emptyQuery: "कृपया खोज शब्द दर्ज करें।",
     searchFailed: "खोज विफल रही।",
@@ -247,9 +253,11 @@ export const MESSAGES: Record<Locale, Messages> = {
     installPrimary: "Amap इंस्टॉल करें",
     installSecondary: "डाउनलोड पेज खोलें",
     dismiss: "बंद करें",
-    affiliateLink: "चीन यात्रा eSIM और वाई‑फाई",
-    affiliateDisclosure:
-      "Coupang Partners अफ़िलिएट लिंक। कमीशन मिल सकता है।",
+    homeCitiesTitle: "शहर गाइड",
+    homeCitiesLede:
+      "हर शहर का इतिहास, पहुँच, टिकट और मौसम। फ़ोन पर Amap खोज; लेख यहीं पढ़ें।",
+    homeCitiesRead: "गाइड पढ़ें",
+    homeCitiesAll: "सभी शहर गाइड",
     tabSearch: "खोज",
     tabSpots: "मानचित्र",
     cityTabsAria: "शहर चुनें",
@@ -308,7 +316,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     queryAria: "كلمة البحث",
     placeholder: "بحث — Amap",
     desktopBanner:
-      "هذه الخدمة تعمل على الجوال فقط. افتحها على هاتفك للبحث في تطبيق Amap.",
+      "البحث في Amap يعمل على الجوال. يمكن قراءة أدلة المدن في هذه الشاشة.",
     desktopOnly: "يمكنك البحث عبر تطبيق Amap على الجوال فقط.",
     emptyQuery: "يرجى إدخال كلمة بحث.",
     searchFailed: "فشل البحث.",
@@ -328,9 +336,11 @@ export const MESSAGES: Record<Locale, Messages> = {
     installPrimary: "تثبيت Amap",
     installSecondary: "فتح صفحة التحميل",
     dismiss: "إغلاق",
-    affiliateLink: "eSIM وواي فاي للسفر إلى الصين",
-    affiliateDisclosure:
-      "رابط تسويق بالعمولة عبر Coupang Partners. قد تُحتسب عمولة.",
+    homeCitiesTitle: "أدلة المدن",
+    homeCitiesLede:
+      "تاريخ كل مدينة، الوصول، التذاكر والموسم. ابحث في Amap على الجوال واقرأ المقالات هنا.",
+    homeCitiesRead: "اقرأ الدليل",
+    homeCitiesAll: "كل أدلة المدن",
     tabSearch: "بحث",
     tabSpots: "الخريطة",
     cityTabsAria: "اختر المدينة",
@@ -389,7 +399,7 @@ export const MESSAGES: Record<Locale, Messages> = {
     queryAria: "장소 검색어",
     placeholder: "검색- Amap연동",
     desktopBanner:
-      "이 서비스는 모바일에서만 사용할 수 있어요. 휴대폰 브라우저로 열어 Amap 앱으로 검색하세요.",
+      "Amap 앱 검색은 휴대폰에서만 됩니다. 도시 안내 글은 아래에서 바로 읽을 수 있습니다.",
     desktopOnly: "모바일에서만 Amap 앱으로 검색할 수 있어요.",
     emptyQuery: "검색어를 입력해 주세요.",
     searchFailed: "검색에 실패했습니다.",
@@ -409,9 +419,11 @@ export const MESSAGES: Record<Locale, Messages> = {
     installPrimary: "Amap 설치하기",
     installSecondary: "다운로드 페이지 열기",
     dismiss: "닫기",
-    affiliateLink: "중국 여행 유심·와이파이 보기",
-    affiliateDisclosure:
-      "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+    homeCitiesTitle: "도시 관광지 안내",
+    homeCitiesLede:
+      "도시마다 명소의 역사, 가는 법, 입장과 계절을 정리했습니다. Amap 검색은 휴대폰에서, 안내 글은 이 화면에서 읽을 수 있습니다.",
+    homeCitiesRead: "글 읽기",
+    homeCitiesAll: "도시 안내 모두 보기",
     tabSearch: "검색",
     tabSpots: "명소 지도",
     cityTabsAria: "도시 선택",

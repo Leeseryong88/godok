@@ -5,9 +5,9 @@ export const CHONGQING_ARTICLE: CityArticle = {
   cityZh: "重庆",
   ko: {
     title: "충칭 — 두 강이 만나는 산의 도시",
-    lede: "창장과 자링강이 부딪치는 협곡 위에 충칭은 평지가 아니라 계단으로 자랐다. 안개와 야경, 전시 수도의 기억과 부두의 소음이 같은 절벽에 붙어 있다.",
+    lede: "리쯔바에서 열차가 아파트 사이로 지나갈 때, 충칭은 지도 앱의 직선이 거짓말임을 한 번에 보여 준다.",
     intro: [
-      "충칭은 쓰촨 분지의 동쪽 가장자리에서 두 강이 합류하는 지점이다. 유중 반도는 물로 삼면이 막히고, 남은 한 면은 산으로 치솟아 거리가 수평이 아니라 수직으로 쌓인다. 엘리베이터와 경궤, 돌계단이 버스 노선만큼 도시의 문법이다. 여행자가 평지의 격자 지도를 들고 오면 길을 잃는 이유가 여기에 있다.",
+      "계단과 엘리베이터, 경궤와 삭도가 버스 노선만큼 이 도시의 문법이다. 창장과 자링강이 반도를 삼면으로 가두고, 남은 한 면은 산으로 치솟아 거리가 수직으로 쌓인다. 안개는 시적 과장이 아니라 강이 가두는 수증기다. 야경이 극장처럼 보여도, 낮의 충칭은 짐을 들고 오르는 생활의 경사다.",
       "기후는 습하고 겨울 안개가 길다. 옛사람들이 안개의 수도라 부른 것은 시적 과장이 아니라 강과 산이 가두는 수증기의 사실이다. 그 습기는 화자오와 고추의 맛을 키웠고, 밤이면 네온이 물에 번져 절벽 도시를 극장처럼 보이게 한다.",
       "문화적으로 충칭은 바(巴)의 산악 기억과 부두 노동, 항전 시기 임시 수도의 무게가 겹친 도시다. 청두가 평원의 여유라면 충칭은 강물의 압력이고, 같은 쓰촨어권 안에서도 말의 속도와 음식의 화력이 다르다. 산성의 정체성은 풍경이 아니라 생활의 경사에서 나온다.",
       "1997년 직할시가 된 뒤 충칭은 삼협 댐 이주민과 내륙 공업, 초고층이 한꺼번에 밀려든 실험장이 되었다. 옛 조각루 가옥은 홍야둥처럼 재현되거나 철거되었고, 경궤는 아파트 중간층을 관통한다. 현대 충칭은 유산을 박물관에 가두지 않고 인프라 한가운데에 끼워 넣는 도시에 가깝다.",
@@ -110,9 +110,9 @@ export const CHONGQING_ARTICLE: CityArticle = {
   },
   en: {
     title: "Chongqing: A Mountain City at the Meeting of Two Rivers",
-    lede: "Where the Yangtze meets the Jialing, Chongqing grew as a stair, not a grid. Fog, night lights, the wartime capital, and dock noise cling to the same cliff.",
+    lede: "When a train threads an apartment block at Liziba, Chongqing shows at once that a straight line on a map is a lie.",
     intro: [
-      "Chongqing occupies the eastern edge of the Sichuan Basin at a confluence. The Yuzhong peninsula is boxed by water on three sides and lifted by hills on the fourth, so streets stack vertically. Elevators, a straddle rail, and stone stairs are as much the city’s grammar as bus lines. A flat grid map is how visitors get lost.",
+      "Stairs, lifts, light rail and a river cable are as much grammar here as bus lines. The Yangtze and Jialing box the peninsula on three sides; the fourth rises so streets stack. Fog is steam trapped by water, not a poem. Night lights look like a theatre; daylight Chongqing is the slope of carrying a bag uphill.",
       "The climate is damp and winter fog is long. Calling it a capital of mist was not poetry; it was steam trapped by river and mountain. That humidity fed the taste of Sichuan pepper and chili, and at night neon bleeds into the water until the cliff city looks like a theater.",
       "Culturally Chongqing layers Ba mountain memory, dock labor, and the weight of the wartime capital. If Chengdu is the ease of a plain, Chongqing is the pressure of a current; even within Sichuan speech the pace and the heat of the food diverge. The mountain city’s identity is not a view. It is the slope of daily life.",
       "After becoming a municipality in 1997, Chongqing became a laboratory of Three Gorges resettlement, inland industry, and towers arriving at once. Stilt houses were restaged at Hongyadong or demolished; the light rail threads a residential block. Modern Chongqing does not lock heritage in a museum so much as wedge it into infrastructure.",

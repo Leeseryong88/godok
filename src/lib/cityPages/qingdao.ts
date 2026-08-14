@@ -6,9 +6,9 @@ export const QINGDAO_ARTICLE: CityArticle = {
   ko: {
     title: "칭다오, 만과 붉은 지붕이 만든 해안 도시",
     lede:
-      "칭다오는 산둥 반도 남안의 만 도시다. 독일 조차지 시절의 석조와 붉은 기와, 잔차오의 방파제, 칭다오 맥주의 효모가 한 해안선에 남아 있다.",
+      "잔차오 방파제 끝에서 뒤를 돌아보면, 칭다오는 맥주의 도시가 아니라 붉은 기와가 바다를 향해 기울어진 조차지다.",
     intro: [
-      "칭다오는 황해로 열린 자오저우만의 입구에 자리한다. 라오산이 동쪽에서 바다를 누르고, 스난의 구릉이 붉은 지붕을 바다 쪽으로 기울인다. 해안선이 도시의 중심 가로나 다름없어, 사람들은 방파제와 그늘 가로수를 따라 도시를 읽는다.",
+      "독일 총독부가 올려 놓은 화강암과 효모 공장의 굴뚝이 한 해안선에 남았다. 스난의 구릉은 가로보다 오르막이 먼저고, 라오산은 동쪽에서 만의 입구를 누른다. 1898년의 조차가 어촌을 계획 도시로 바꿨고, 주인은 바뀌어도 실루엣은 쉽게 지워지지 않았다. 해수욕은 그 실루엣 위의 계절일 뿐이다.",
       "1897년 독일의 점령과 이듬해의 조차가 이 어촌을 계획 도시로 바꾸었다. 교회와 총독부, 맥주 공장과 항만이 유럽식 격자 위에 올라섰고, 그 재료는 화강암과 붉은 기와였다. 일본 점령과 민국, 신중국을 거치며 주인은 바뀌었지만 해안의 실루엣은 쉽게 지워지지 않았다.",
       "오사광장의 오월의 바람 조각과 바다관의 별장은 서로 다른 세기의 바다 취향이다. 한쪽은 민족 감정의 광장이고, 다른 한쪽은 조차지 엘리트의 그늘이다. 칭다오를 맥주와 해수욕만으로 소비하면 그 긴장이 보이지 않는다.",
       "오늘날 칭다오는 산둥의 해양 수도이자 항구·제조·관광이 겹친 도시다. 황도의 금사탄과 시내의 잔차오는 같은 바다를 다른 거리에서 만진다. 이 글은 그 거리가 어떤 역사에서 왔는지를 따라간다.",
@@ -111,9 +111,9 @@ export const QINGDAO_ARTICLE: CityArticle = {
   en: {
     title: "Qingdao, a bay city of red roofs and granite",
     lede:
-      "Qingdao sits on a Shandong bay. German-lease stone and tiles, Zhanqiao’s pier, and the yeast of Tsingtao beer remain on one shoreline.",
+      "Turn at the end of Zhanqiao and Qingdao is not a beer town first: it is a leased port whose red tiles still tip toward the water.",
     intro: [
-      "The city stands at the mouth of Jiaozhou Bay on the Yellow Sea. Laoshan presses the water from the east; Shinan’s hills tip red roofs toward the sea. The coast is the main street; people read the city along breakwaters and plane trees.",
+      "Granite from a German governorate and a brewery chimney share one shore. Shinan’s hills make uphill the avenue; Laoshan presses the bay from the east. The 1898 lease turned a fishing edge into a planned town, and the silhouette survived changes of master. Swimming is only a season on that silhouette.",
       "Germany’s 1897 occupation and 1898 lease turned a fishing shore into a planned town. Church, governor’s house, brewery, and harbor rose on a European grid of granite and red tile. Masters changed through Japanese rule, the Republic, and the PRC; the silhouette did not easily erase.",
       "The May Fourth Square sculpture and Badaguan villas are two centuries of sea taste. One is a civic square of national feeling; the other is concession-elite shade. Beer and swimming alone hide that tension.",
       "Qingdao is now Shandong’s maritime capital, mixing port, industry, and tourism. Huangdao’s Golden Beach and downtown Zhanqiao touch the same sea at different distances. This essay follows where those distances came from.",

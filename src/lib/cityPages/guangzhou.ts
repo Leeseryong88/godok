@@ -6,9 +6,9 @@ export const GUANGZHOU_ARTICLE: CityArticle = {
   ko: {
     title: "광저우, 남해의 관문에서 이어진 이천 년의 항구 도시",
     lede:
-      "광저우는 주장 삼각주의 심장에서 이천 년 가까이 바다와 내륙을 이은 도시다. 남월의 도읍, 광동 십삼행의 독점 무역항, 링난 건축과 월극의 본거지가 한 강변에 겹쳐 있다.",
+      "아침 차 한 잔이 나오기 전에 광저우는 이미 항구였다. 딤섬 증기와 주장의 조수는 같은 도시의 두 시계다.",
     intro: [
-      "주강이 남중국해로 벌어지기 직전, 광저우는 강과 조수가 만나는 자리에 자리 잡았다. 옛 이름 판위는 진한 시대부터 남해군과 남월국의 정치 중심이었고, 그 이후에도 이 도시는 북방 왕조의 변경이 아니라 해양 세계의 북쪽 끝으로 기능했다. 오늘날의 초고층과 고가도로 아래에도 그 방향성은 바뀌지 않았다.",
+      "서관 골목에서 아침차를 시키면, 접시보다 먼저 강 냄새가 올라온다. 남월의 도읍이었던 언덕, 십삼행이 독점하던 부두, 사몐의 베란다가 그 냄새의 다른 이름이다. 월요리는 유행이 아니라 이 무역이 남긴 식탁이다. 초고층은 그 식탁 위에 올라앉았을 뿐, 바다를 향한 방향을 바꾸지는 못했다.",
       "중국에서 서양과의 공식 무역이 가장 오래 지속된 항구가 이곳이다. 청대 광동 체제 아래 외국 상인은 오직 광저우의 십삼행을 통해서만 교역할 수 있었고, 그 독점의 기억은 사몐의 조계, 석실성당의 화강암 첨탑, 서관의 치러우 골목에 남아 있다. 광저우를 단지 광동 요리의 수도로만 읽는 것은 그 무역 역사의 두께를 놓치는 일이다.",
       "링난 문화는 이 도시의 말과 집과 제사에 스며 있다. 월어는 골목과 다실에서 여전히 일상어이고, 천자츠의 도자 지붕과 회조·목조는 광동 각지의 진 씨 일족이 모인 공동의 얼굴이다. 바이윈산의 안개와 웨슈의 오양 전설은 행정 수도가 되기 이전부터 이 땅을 신성한 지형으로 기억하게 했다.",
       "개혁개방 이후 주장 삼각주는 공장과 항만의 밀도로 세계를 바꾸었고, 광저우는 그 생산 네트워크의 오래된 중심이다. 2010년 아시안게임을 전후로 광저우탑과 주장 신도시가 하늘선을 다시 그렸지만, 베이징로의 유리 바닥 아래에는 당송의 포장석이 그대로 드러나 있다. 새 도시와 옛 도시가 충돌하기보다 지층을 이루는 곳이 광저우다.",
@@ -112,9 +112,9 @@ export const GUANGZHOU_ARTICLE: CityArticle = {
   en: {
     title: "Guangzhou, a millennial port at the gate of the South China Sea",
     lede:
-      "Guangzhou has joined inland rivers to the ocean for nearly two thousand years. The Nanyue capital, the Canton System’s single port, Lingnan craft, and Cantonese opera still share one tidal river.",
+      "Morning tea arrives after the port has already started. Dim-sum steam and the Pearl’s tide are two clocks in one city.",
     intro: [
-      "Just before the Pearl River opens into the South China Sea, Guangzhou occupies the meeting of current and tide. Ancient Panyu was already a political seat of the Nanhai Commandery and the Nanyue kingdom in the Qin–Han centuries, and the city has long behaved less like a northern frontier than like the northern edge of a maritime world. Expressways and towers have not reversed that orientation.",
+      "Order morning tea in a Xiguan lane and the river smell rises before the dishes. The Nanyue hill, the Thirteen Factories’ docks, and Shamian verandahs are other names for that smell. Cantonese cooking is the table that trade left behind, not a fashion. Towers sat down at that table; they did not turn the city away from the sea.",
       "No Chinese port kept official Western trade for longer. Under the Qing Canton System, foreign merchants could deal only through the Thirteen Factories, and that monopoly still ghosts Shamian’s concession streets, the granite spires of the Sacred Heart Cathedral, and the qilou arcades of Xiguan. To treat Guangzhou as a capital of dim sum alone is to miss the thickness of its commercial history.",
       "Lingnan culture lives in speech, houses, and ancestral rites. Cantonese remains the language of alleys and teahouses. The ceramic roofs and lime-and-wood carvings of the Chen Clan Academy are a collective face of Chen lineages from across Guangdong. The mists of Baiyun Mountain and the Five Rams legend of Yuexiu marked this ground as sacred topography long before it became a provincial capital.",
       "After reform and opening, the Pearl River Delta remade global manufacturing, and Guangzhou remained the old hub of that network. Around the 2010 Asian Games the Canton Tower and new riverfront redrew the skyline, yet Tang and Song pavements still show under glass on Beijing Road. New and old city here form strata more than they cancel each other.",

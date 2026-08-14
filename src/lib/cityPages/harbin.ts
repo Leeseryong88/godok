@@ -6,9 +6,9 @@ export const HARBIN_ARTICLE: CityArticle = {
   ko: {
     title: "하얼빈, 동청철도가 세운 빙설의 도시",
     lede:
-      "송화강 남안에 러시아가 철도 도시를 놓았고, 성 소피아 성당의 양파 돔이 그 결정을 하늘에 남겼다. 겨울이면 얼음 축제가 그 철도 도시의 또 다른 언어가 된다.",
+      "성 소피아 성당의 벽돌이 입김에 하얘질 때, 하얼빈은 축제의 도시가 아니라 동청철도가 세운 역전으로 먼저 보인다.",
     intro: [
-      "하얼빈은 헤이룽장성의 성도로, 송화강이 동북 평원을 가르는 자리에 있다. 항구 도시가 아니라 철도가 만든 내륙 대도시이며, 위도는 중국 주요 성도 가운데 가장 북쪽에 가깝다. 겨울의 길이와 강의 얼음이 도시의 시간을 재는 척도이다.",
+      "중앙대가의 돌 포장은 키타이스카야 거리의 후예이고, 송화강의 얼음은 그 철도 도시가 혹한을 자기 언어로 바꾼 후대의 발명이다. 항구가 아니라 궤도가 사람을 모았고, 겨울 밤은 영하 이십 도 근처에서 배터리부터 멈춘다. 여름의 강변은 그 이야기의 다른 계절일 뿐이다.",
       "시가지는 남강과 다오와이, 다오리를 철길이 나누듯 구획한다. 중앙대가의 돌 보도가 서구 상점가를 재현하고, 강 건너 태양섬이 범람원의 녹지를 펼친다. 동북의 다른 공업 도시보다 거리의 입면이 유럽의 문장을 많이 빌려 있다.",
       "문화적으로 하얼빈은 1898년 동청철도 건설과 함께 태어난 도시이다. 러시아인·유대인·중국 상인이 같은 역전에 모였고, 정교회 성당과 중국식 바로크가 골목을 나눴다. 얼음등 축제와 하얼빈 음악은 그 북방 교차로에서 자란 20세기의 층이다.",
       "여행자가 하얼빈에 오는 이유는 추위만이 아니다. 철도가 이식한 건축, 1957년 홍수를 기억하는 탑, 그리고 송화강의 얼음을 깎아 세우는 겨울 축제가 한 서사이다. 여름의 하얼빈은 그 서사의 다른 계절일 뿐이다.",
@@ -112,9 +112,9 @@ export const HARBIN_ARTICLE: CityArticle = {
   en: {
     title: "Harbin, a railway city that learned to speak in ice",
     lede:
-      "Russia planted a railway town on the south bank of the Songhua; St. Sophia's onion domes still announce that decision. In winter an ice festival becomes the town's other language.",
+      "When St. Sophia’s brick turns white with breath, Harbin shows itself as a Chinese Eastern Railway town before it is a festival.",
     intro: [
-      "Harbin, capital of Heilongjiang, sits where the Songhua River cuts the northeastern plain. It is not a seaport but an inland metropolis made by a railway, among the northernmost of China's major provincial capitals. The length of winter and the river's ice are how the city measures time.",
+      "Central Street’s stones are heirs of Kitaiskaya; Songhua ice is a later invention, the railway town turning bitter cold into a language. Tracks gathered people, not a harbour; winter nights near −20 °C stop batteries first. A summer riverbank is only another season of that story.",
       "Tracks still seem to partition Nangang, Daowai, and Daoli. Central Street's stone pavement restages a European shopping street; across the river, Sun Island spreads floodplain green. Façades borrow more European sentences than those of other northeastern industrial cities.",
       "Culturally Harbin was born with the Chinese Eastern Railway in 1898. Russians, Jews, and Chinese merchants met at the same railhead; Orthodox churches and Chinese Baroque split the lanes. Ice-lantern festivals and Harbin's musical life are twentieth-century layers grown at that northern crossing.",
       "Visitors come for more than cold. Architecture transplanted by the railway, a monument to the 1957 flood, and a winter festival carved from Songhua ice form one narrative. Summer Harbin is only another season of that story.",

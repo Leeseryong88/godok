@@ -4,6 +4,7 @@ import Link from "next/link";
 import { LegalShell } from "@/components/LegalShell";
 import { getCityGuide, getAttractionLabel } from "@/lib/attractions";
 import { getCityArticleCopy } from "@/lib/cityPages/copy";
+import { getCityVisit } from "@/lib/cityPages/visit";
 import type { CityArticle } from "@/lib/cityPages/types";
 import { CITY_MAP_SLUG } from "@/lib/attractions/mapView";
 import { getMessages } from "@/lib/i18n/messages";
@@ -20,6 +21,7 @@ export function CityArticleView({ article, related }: Props) {
     <LegalShell>
       {(legal, locale) => {
         const copy = getCityArticleCopy(article, locale);
+        const visit = getCityVisit(article.slug, locale);
         const t = getMessages(locale);
         const cityLabel = t.cities[article.cityZh] || article.cityZh;
         return (
@@ -40,6 +42,26 @@ export function CityArticleView({ article, related }: Props) {
                 <p key={para.slice(0, 32)}>{para}</p>
               ))}
             </div>
+
+            {visit ? (
+              <>
+                <h2 className="city-article-h2">{visit.visitTitle}</h2>
+                <section className="city-article-visit">
+                  <h3 className="city-article-h3">{visit.transportTitle}</h3>
+                  <div className="legal-body">
+                    <p>{visit.transport}</p>
+                  </div>
+                  <h3 className="city-article-h3">{visit.ticketsTitle}</h3>
+                  <div className="legal-body">
+                    <p>{visit.tickets}</p>
+                  </div>
+                  <h3 className="city-article-h3">{visit.seasonTitle}</h3>
+                  <div className="legal-body">
+                    <p>{visit.season}</p>
+                  </div>
+                </section>
+              </>
+            ) : null}
 
             <h2 className="city-article-h2">{copy.spotsTitle}</h2>
             {(guide?.attractions ?? []).map((spot) => {

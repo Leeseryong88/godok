@@ -911,31 +911,91 @@ a.spots-city-guide {
   text-align: center;
 }
 
-.affiliate {
-  margin-top: 22px;
+.page.home-page {
+  justify-content: flex-start;
+}
+
+.home-cities {
+  margin-top: 28px;
+  text-align: left;
+}
+
+.home-cities-title {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.home-cities-lede {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.home-cities-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.home-city-card {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  text-decoration: none;
+  color: inherit;
+}
+
+.home-city-card:hover {
+  border-color: rgba(13, 122, 111, 0.35);
+  background: var(--brand-soft);
+}
+
+.home-city-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.home-city-excerpt {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.home-city-more {
+  color: var(--brand);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.home-cities-all {
+  margin: 14px 0 0;
   text-align: center;
 }
 
-.affiliate-link {
-  display: inline-block;
+.home-cities-all a {
   color: var(--brand);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.home-cities-all a:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(159, 217, 200, 0.45);
 }
 
-.affiliate-link:hover {
-  color: #0a5f56;
-  text-decoration-color: rgba(13, 122, 111, 0.55);
-}
-
-.affiliate-disclosure {
-  margin: 6px 8px 0;
-  color: var(--muted);
-  font-size: 10px;
-  line-height: 1.4;
+.city-article-visit .city-article-h3 {
+  margin: 18px 0 8px;
 }
 
 .site-footer {

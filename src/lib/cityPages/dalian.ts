@@ -6,9 +6,9 @@ export const DALIAN_ARTICLE: CityArticle = {
   ko: {
     title: "다롄, 러시아와 일본이 설계한 항구",
     lede:
-      "랴오둥반도 남단에서 바다를 향해 열린 계획 도시이다. 러시아의 달니와 일본의 다이렌을 거쳐 중국의 다롄이 되었고, 광장과 해안도로, 뤼순의 요새가 그 이력을 남긴다.",
+      "중산 광장의 원에서 빈하이로로 빠지면, 다롄은 동북의 피서가 아니라 러시아가 그린 항구로 읽힌다.",
     intro: [
-      "다롄은 랴오닝성 남단, 황해와 보하이 사이에 돌출한 항구 도시이다. 산둥반도와 마주 보는 바다가 시계를 열고, 시내는 구릉과 만을 따라 접힌다. 동북의 내륙 공업 도시와 달리, 여기는 처음부터 바다를 전제로 그려졌다.",
+      "방사형 가로와 원형 잔디는 자연 발생한 옛 성이 아니다. 달니가 도면을 남기고 다이렌이 키웠으며, 뤼순의 요새는 그 도면이 가린 군항이다. 바다는 앞면이고, 구릉 계단은 지도의 짧은 선을 배신한다. 해수욕은 부동항을 둘러싼 전쟁 위에 얹힌 계절이다.",
       "거리는 원형 광장과 방사형 가로, 해안 절벽의 빈하이로가 성격을 나눈다. 싱하이 광장이 서쪽으로 큰 원을 그리고, 중산 광장이 옛 도심의 원을 지킨다. 바다는 장식이 아니라 도시의 앞면이다.",
       "문화적으로 다롄은 청말의 어촌 청니와가 열강의 조차지로 바뀐 자리이다. 1898년 러시아가 달니를 계획하고, 러일전쟁 뒤 일본이 다이렌으로 키웠다. 유럽풍 은행과 러시아 거리, 뤼순의 포대가 그 겹친 지배를 물질로 남긴다.",
       "여행자가 다롄에 오는 이유는 해변만이 아니다. 계획 도시의 원형 광장, 해안 지질 공원, 그리고 여순 요새의 전쟁사가 한 반도에 모여 있다. 동북의 여름 휴양지라는 말은 그 역사의 표면일 뿐이다.",
@@ -112,9 +112,9 @@ export const DALIAN_ARTICLE: CityArticle = {
   en: {
     title: "Dalian, a port drawn by Russia and Japan",
     lede:
-      "At the tip of the Liaodong Peninsula the city opens toward the sea. Russian Dalny and Japanese Dairen became Chinese Dalian; squares, a coastal road, and the forts of Lushun still hold that sequence.",
+      "Leave Zhongshan Square’s circle for Binhai Road and Dalian reads as a harbour Russia drew, not a northeastern beach town.",
     intro: [
-      "Dalian is a port at the southern end of Liaoning, between the Yellow Sea and the Bohai. Water facing Shandong opens the clock; the centre folds along hills and bays. Unlike inland industrial cities of the northeast, this one was drawn from the beginning on the premise of the sea.",
+      "Radial streets and round lawns are not an old walled town that grew by itself. Dalny left the drawing; Dairen enlarged it; Lushun’s forts are the naval history those circles partly hide. The sea is the front; hill stairs betray short lines on the map. Swimming is a season laid over a war for an ice-free port.",
       "Character splits among round squares, radial streets, and the cliff-top Binhai Road. Xinghai Square throws a great circle westward; Zhongshan Square keeps the old downtown circle. The sea is not decoration. It is the city's front.",
       "Culturally Dalian is the Qing fishing hamlet of Qingniwa turned into a leased territory of empires. Russia planned Dalny in 1898; after the Russo-Japanese War Japan grew Dairen. European banks, a Russian street, and Lushun's batteries keep that layered rule in matter.",
       "Visitors come for more than beaches. A planned city's round plazas, a coastal geology park, and the war history of Port Arthur gather on one peninsula. Calling Dalian the northeast's summer resort is only the surface of that history.",

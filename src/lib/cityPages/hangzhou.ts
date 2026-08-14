@@ -6,9 +6,9 @@ export const HANGZHOU_ARTICLE: CityArticle = {
   ko: {
     title: "항저우, 서호가 길러 낸 강남의 시와 차의 도시",
     lede:
-      "항저우는 첸탕강과 서호의 물 위에 서서, 남송의 수도였던 기억과 차밭의 연기를 아직도 같은 분지로 들이마시는 도시다.",
+      "안개가 서호 탑을 지울 때, 항저우는 명소가 아니라 물의 도시로 남는다. 그 물이 남송의 수도를 먹였다.",
     intro: [
-      "항저우는 저장성 북부의 항가호 평원에 자리하고, 첸탕강이 도시를 동남으로 열어 항저우만으로 나간다. 서호는 도심의 서쪽에 앉은 담수호로, 산과 둑과 섬이 호면을 여러 겹의 풍경으로 나눈다. 평야와 구릉, 강과 호수가 한 시야 안에서 만나는 이 지형은 강남에서도 드물게 완전한 산수 도시다.",
+      "소제 둑길을 새벽부터 걸으면 유람선보다 버들이 먼저 호수를 설명한다. 백제와 소식이 남긴 제방은 시인의 취향이 아니라, 호수를 도시 심장으로 남긴 토목이다. 링인사의 향과 룽징의 찻잎은 그 심장의 다른 박동이다. 전자상거래의 본사가 들어선 뒤에도, 하루의 목차는 여전히 호수 한 바퀴다.",
       "도시의 성격은 상업의 속도보다 완성의 취향에 가깝다. 오월의 나라와 남송의 임안은 항저우를 비단과 인쇄, 차와 도자기의 소비 중심이자 문인의 무대로 키웠다. 마르코 폴로가 기록한 거대 호수 도시라는 이미지는 과장일 수 있으나, 물과 시장과 사원이 한 고리로 연결된 구조는 사실이었다.",
       "문화적으로 항저우는 시와 전설의 수도다. 백거이와 소식이 둑을 쌓고 시를 남겼고, 백사전은 단교와 뇌봉탑에 몸을 붙였다. 룽징의 차는 황제의 입보다 먼저 산비탈의 안개를 기억한다. 사람들은 호수를 경치로만 보지 않는다. 그것은 도시의 숨과 계절을 재는 시계다.",
       "오늘날 항저우는 전자 상거래와 기술 기업의 본거지이면서, 2011년 세계유산에 오른 서호 문화 경관을 수도의 얼굴로 지킨다. 여행자가 찾는 이유는 테마파크의 불꽃보다, 강남 문명이 물 위에서 어떻게 세련을 축적했는지를 한 바퀴로 돌 수 있기 때문이다. 호수 한 바퀴는 단순한 산책이 아니라 도시사의 목차다.",
@@ -112,9 +112,9 @@ export const HANGZHOU_ARTICLE: CityArticle = {
   en: {
     title: "Hangzhou, a Jiangnan city written in lake, verse, and tea",
     lede:
-      "Hangzhou sits between the Qiantang River and West Lake, still breathing the air of a Southern Song capital and the mist that rises off Longjing tea slopes.",
+      "When mist erases the pagoda on West Lake, Hangzhou remains a city of water, not of sights. That water once fed a Southern Song capital.",
     intro: [
-      "The city occupies the Hangjiahu plain in northern Zhejiang, with the Qiantang opening southeast toward Hangzhou Bay. West Lake lies on the urban western edge, its dikes, hills, and islets folding the water into successive scenes. Plain and hill, river and lake meet in one basin, a completeness rare even in Jiangnan.",
+      "Walk the Su Causeway at dawn and willows explain the lake before any tour boat. The dikes Bai Juyi and Su Shi left are civil engineering that kept a lake as a civic heart, not a poet’s taste. Incense at Lingyin and Longjing leaves are other beats of that heart. After e-commerce headquarters arrived, the day’s table of contents is still one loop of water.",
       "Hangzhou's temper is closer to finish than to haste. The kingdom of Wuyue and the Southern Song court at Lin'an raised the city as a market of silk, print, tea, and porcelain, and as a stage for scholars. Marco Polo's great lake-city may be embroidered, but the loop of water, market, and monastery was real.",
       "Culturally Hangzhou is a capital of poems and legends. Bai Juyi and Su Shi built causeways and left verses; the White Snake story fastened itself to Broken Bridge and Leifeng Pagoda. Longjing tea remembers mountain fog before it remembers an emperor's palate. Locals do not treat the lake as scenery only. It is a clock for the city's breath and seasons.",
       "Today Hangzhou is a home of e-commerce and technology firms, and it still wears the West Lake Cultural Landscape, listed by UNESCO in 2011, as its public face. Travelers come less for fireworks than to circle, in one circuit, how Jiangnan civilization stored refinement on water. A loop of the lake is a table of contents, not a stroll.",

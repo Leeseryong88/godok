@@ -5,9 +5,9 @@ export const KUNMING_ARTICLE: CityArticle = {
   cityZh: "昆明",
   ko: {
     title: "쿤밍 — 고원의 봄이 머무는 꽃의 도시",
-    lede: "윈난 고원 호숫가에서 쿤밍은 사철 봄에 가깝다. 석림의 돌, 뎬츠의 물, 더우난의 꽃과 위안퉁사의 연못이 같은 고도에 모여 있다.",
+    lede: "취이후에 갈매기가 내려앉는 겨울 아침, 쿤밍의 봄성 별명은 날씨가 아니라 고도의 선물로 들린다.",
     intro: [
-      "쿤밍은 해발 천구백 미터 안팎의 분지에 자리한 윈난의 성도이다. 북위는 아열대를 가리키지만 고도가 한여름의 열기를 꺾고, 겨울에도 서리가 드물어 봄성의 별이 붙었다. 서쪽과 남쪽으로 뎬츠호가 열려 호수 도시이면서 산지의 입구이기도 하다. 하늘은 맑은 날이 많고, 자외선은 평지보다 세다.",
+      "해발 천구백 미터의 햇볕은 여름 물건이 아니다. 뎬츠가 분지를 열고, 석림의 카르스트는 시내와 다른 반나절이다. 이족·바이족의 언어가 평원과 산을 나눠 살았고, 꽃 경매는 새벽 더우난에서 열린다. 온화함에 속아 긴팔을 빼면, 저녁 호숫가가 먼저 춥다.",
       "이 고원은 한족만의 땅이 아니었다. 뎬 왕국의 청동 북, 이족과 바이족, 다이족의 언어가 평원과 산을 나누어 살았고, 쿤밍은 그 다성이 행정으로 모이는 자리였다. 오늘 여행자가 민족촌에서 보는 가옥은 전시이지만, 성 안의 시장과 사원은 그 공존이 오래되었음을 보여 준다.",
       "문화적으로 쿤밍은 중원의 정사가 남서로 미끄러진 끝이자, 동남아로 내려가는 고원의 문턱이다. 원대에 윈난행성(雲南行省)이 자리한 뒤 한문화와 토착 신앙이 섞였고, 1910년 윈난–베트남 철도는 호숫가 도시를 하노이와 이었다. 꽃과 차는 풍경이 아니라 고원 농업의 수출 언어다.",
       "현대 쿤밍은 아세안을 향한 내륙 거점으로 도로와 공항을 키우면서도, 취이후의 갈매기와 석림의 카르스트를 지워 버리지 않았다. 뎬츠의 오염과 복원은 봄성이 치를 대가다. 도시가 성장할수록 호수와 꽃 시장은 경관이 아니라 생태의 성적표가 된다.",
@@ -110,9 +110,9 @@ export const KUNMING_ARTICLE: CityArticle = {
   },
   en: {
     title: "Kunming: The Spring City on a Highland Lake",
-    lede: "On a Yunnan plateau lake, Kunming stays close to spring all year. Stone Forest pinnacles, Dianchi water, Dounan flowers, and Yuantong’s pond gather at the same altitude.",
+    lede: "On a winter morning when gulls drop onto Green Lake, Kunming’s Spring City name sounds like a gift of altitude, not weather copy.",
     intro: [
-      "Kunming is the capital of Yunnan, set in a basin near 1,900 meters. Latitude points to the subtropics, but altitude breaks midsummer heat, and frost is rare enough that the city is called Spring City. Dianchi opens to the west and south, so it is a lake town and a doorway to mountains. Skies are often clear; ultraviolet light is harder than on the plain.",
+      "Sun at 1,900 meters is not a summer object. Dianchi opens the basin; the Stone Forest is a different half-day of karst. Yi and Bai speech divided plain and hill; flower auctions start at dawn in Dounan. Skip a long sleeve because of the nickname, and the lakeshore chills first at dusk.",
       "This plateau was never only Han land. Bronze drums of the Dian kingdom, and the languages of Yi, Bai, and Dai, divided plain and hill; Kunming is where that polyphony meets administration. Houses in the Ethnic Village are display, yet markets and temples in the city show that coexistence is old.",
       "Culturally Kunming is where Central Plains history slides southwest and a highland threshold drops toward Southeast Asia. After the Yuan placed a Yunnan province here, Han culture mixed with local faith; the Yunnan–Vietnam railway of 1910 tied the lake city to Hanoi. Flowers and tea are not scenery. They are the export language of plateau farming.",
       "Modern Kunming has grown roads and an airport as an inland gate toward ASEAN without erasing gulls on Green Lake or the karst of the Stone Forest. Pollution and restoration of Dianchi are the price Spring City pays. As the city grows, the lake and the flower market become an ecological report card, not a backdrop.",

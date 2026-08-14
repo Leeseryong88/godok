@@ -6,9 +6,9 @@ export const TIANJIN_ARTICLE: CityArticle = {
   ko: {
     title: "톈진, 하이허가 가르는 조계의 항구",
     lede:
-      "베이징의 바다 문이면서 스스로 아홉 나라의 거리를 품었던 도시다. 하이허가 시내를 가르고, 우다다오의 별장과 이태리 풍정구가 그 물길 옆에 남아 있다.",
+      "우다다오 별장 거리를 오전에 걸으면, 톈진은 베이징의 외항이라는 문장보다 먼저 스스로의 조계 도시로 나타난다.",
     intro: [
-      "톈진은 하이허가 발해로 빠지는 하구의 직할시이다. 베이징에서 기차로 가까운 항구여서 수도의 물자와 사절이 여기를 거쳤다. 동시에 톈진은 수도의 부속이 아니라, 자체 조계와 상업을 가진 북방의 큰 도시였다.",
+      "하이허가 시내를 가르고, 아홉 나라의 벽돌이 강변에 남았다. 기차로 수도는 가깝지만, 우다다오와 이태리 광장은 수도의 복제가 아니다. 마조의 사당이 하구의 오래된 층이고, 해방교의 관람차가 새 층이다. 바다보다 강바람이 이 도시의 체감이다.",
       "시가지는 강을 축으로 접힌다. 하이허의 만곡이 옛 성곽 자리와 조계, 새 업무 지구를 차례로 스친다. 바다는 시내 중심에서 조금 물러나 있고, 도시의 성격은 해수욕보다 강과 거리에 가깝다.",
       "문화적으로 톈진은 염운과 창곡, 민간 연화의 고장인 동시에 근대 조계 건축의 전시장이다. 천후궁의 마조 신앙이 하구의 오래된 층이라면, 영국·이탈리아 등 아홉 나라 조계는 19세기 후반의 층이다. 두 층이 하이허를 사이에 두고 공존한다.",
       "여행자가 톈진에 머무는 이유는 베이징의 하루 연장만이 아니다. 우다다오의 정원 주택, 중국 유일의 이탈리아 조계, 강을 걸친 대관람차가 이 항구의 독자적인 근대사를 보여 준다. 수도의 그늘에서 벗어나야 거리가 읽힌다.",
@@ -112,9 +112,9 @@ export const TIANJIN_ARTICLE: CityArticle = {
   en: {
     title: "Tianjin, a treaty-port city cut by the Haihe",
     lede:
-      "It was Beijing's gate to the sea, and also a city that kept streets of nine foreign concessions. The Haihe splits the centre; villa avenues and an Italian quarter still stand along the water.",
+      "Walk the villa avenues of Wudadao in the morning and Tianjin appears as its own concession city before it is Beijing’s outer harbour.",
     intro: [
-      "Tianjin is a municipality at the Haihe's mouth toward the Bohai Sea. Close to Beijing by rail, it passed grain, goods, and envoys toward the capital. It was never only a suburb of that capital: it held its own concessions and northern commerce.",
+      "The Haihe splits downtown; brick of nine nations still lines the bank. The capital is close by rail, yet Five Great Avenues and the Italian square are not copies of Beijing. Mazu at the estuary is the older layer; the wheel on Jiefang Bridge is a new one. You feel river wind here more than sea breeze.",
       "The city folds around a river. Bends of the Haihe graze the old walled core, the concession belts, and newer business districts in turn. The sea sits back from downtown; character lives in the river and the streets more than in bathing beaches.",
       "Culturally Tianjin is a home of comic crosstalk, folk prints, and at the same time a gallery of treaty-port architecture. Mazu worship at Tianhou Temple is the older estuarine layer; nine concessions from the 1860s are the later one. They coexist across the Haihe.",
       "Staying here is not merely an extra day from Beijing. Garden houses on the Five Avenues, China's only Italian concession, and a Ferris wheel planted on a bridge tell a port history of its own. The streets become readable once they leave the capital's shadow.",

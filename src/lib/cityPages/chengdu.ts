@@ -5,9 +5,9 @@ export const CHENGDU_ARTICLE: CityArticle = {
   cityZh: "成都",
   ko: {
     title: "청두 — 차 한 잔에 담긴 천부의 평원",
-    lede: "민강이 적신 분지 한가운데, 청두는 서두르지 않고도 문명을 오래 붙잡아 온 도시다. 차 향과 매운 기름, 삼국의 사당과 두보의 초가가 같은 평원 위에 겹쳐 있다.",
+    lede: "공원 찻집의 대나무 의자부터 고르면, 청두는 판다보다 먼저 일상의 속도로 설명된다.",
     intro: [
-      "청두는 쓰촨 분지의 심장이다. 서쪽으로는 칭하이–티베트 고원으로 오르는 산줄기가 막고, 동쪽으로는 평평한 충적지가 이어진다. 이 지형 덕분에 겨울에도 극한의 추위가 드물고, 농사는 오래도록 풍요로웠다. 중국인들이 이곳을 천부의 나라라 부른 까닭은 구호가 아니라 물과 흙의 경험에서 나왔다.",
+      "덮개를 덮은 찻잔을 돌리는 습관은 관광 상품이 되기 전부터 있었다. 민강이 적신 분지는 겨울에도 극한의 추위가 드물고, 그 온기가 마작 소리와 훠궈의 기름으로 번졌다. 촉의 청동기와 제갈량의 사당, 두보의 초가는 그 느린 평원 위에 다른 세기를 얹는다. 판다를 보러 오는 발걸음도, 결국 찻집의 리듬을 밟게 된다.",
       "도시는 판다의 얼굴로 세계에 알려졌지만, 현지인에게 청두의 정체성은 그보다 일상적인 리듬에 가깝다. 공원 찻집의 대나무 의자, 마작 소리, 원탁 위의 훠궈가 관광 이미지보다 먼저 도시를 설명한다. 느림은 게으름이 아니라, 기후와 식량과 역사가 만들어 낸 태도다.",
       "문화적으로 청두는 중원의 정통 서사와는 다른 축을 갖고 있다. 고대 촉의 청동기와 금사 유적은 황하 문명과 병행한 또 하나의 고대 세계를 보여 주고, 삼국 시대 촉한의 기억은 사당과 골목 이름에 남아 있다. 두보가 전란을 피해 머문 초가는 시의 수도라는 별칭을 도시에 남겼다.",
       "현대 청두는 서부 내륙의 과학·항공·문화 거점으로 커졌으면서도, 구시가의 찻집과 사찰을 지우지 않았다. 춘시루와 타이구이 같은 상업 축이 대사(大慈寺)의 처마 옆에 붙어 있는 풍경이 그 공존을 상징한다. 여행자가 만나는 청두는 테마파크가 아니라, 오래된 평원이 21세기의 소비 공간을 삼킨 도시다.",
@@ -110,9 +110,9 @@ export const CHENGDU_ARTICLE: CityArticle = {
   },
   en: {
     title: "Chengdu: The Slow Capital of the Shu Plain",
-    lede: "On a basin watered by the Min River, Chengdu has held a civilization without hurry. Tea, chili oil, a Three Kingdoms shrine, and Du Fu’s cottage share the same alluvial ground.",
+    lede: "Start with a bamboo chair in a park teahouse and Chengdu explains itself as a tempo, not a panda logo.",
     intro: [
-      "Chengdu sits at the heart of the Sichuan Basin. Ranges that climb toward the Qinghai–Tibet plateau close the west; alluvial flats run east. Winters rarely turn brutal, and farming stayed generous for millennia. People called this the Land of Abundance not as a slogan but as a memory of soil and water.",
+      "Turning a covered teacup was a habit before it was a souvenir. The Min-watered basin rarely sees bitter cold, and that mildness spread into mahjong and chili oil. Shu bronzes, a shrine to Zhuge Liang, and Du Fu’s cottage stack other centuries on the same slow plain. Even a walk to see pandas ends by keeping teahouse time.",
       "The city is famous for giant pandas, yet locals explain Chengdu first through daily tempo: bamboo chairs in park teahouses, mahjong, a hotpot on a round table. Slowness here is not laziness. It is an attitude grown from climate, grain, and history.",
       "Culturally Chengdu does not simply echo the Central Plains. Bronze and gold from ancient Shu show a parallel antiquity beside the Yellow River world. The Shu Han of the Three Kingdoms still lives in shrine and street names. Du Fu’s cottage, raised in wartime exile, left the city a second nickname: a capital of poetry.",
       "Modern Chengdu has become a western hub of science, aviation, and culture without erasing teahouses and temples. Chunxi Road and Taikoo Li pressed against the eaves of Daci Temple make that coexistence visible. What a traveler meets is not a theme park but an old plain that has absorbed twenty-first-century commerce.",

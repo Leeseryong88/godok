@@ -6,9 +6,9 @@ export const XIAMEN_ARTICLE: CityArticle = {
   ko: {
     title: "샤먼, 섬과 해협이 만든 남양의 창",
     lede:
-      "샤먼은 타이완 해협을 마주한 항구 섬이다. 구랑위의 피아노와 남보타사의 향, 천가경의 학촌과 환다오의 해안이 한 도시의 호흡을 이룬다.",
+      "룬퉁 부두에서 선표를 기다리는 줄이, 샤먼을 정원 섬이 아니라 해협의 항구로 먼저 설명해 준다.",
     intro: [
-      "샤먼 본섬은 푸젠 남부 해안에 떠 있고, 서쪽으로 구랑위가, 북쪽으로 지메이 반도가 이어진다. 바닷바람과 아열대 빛, 반도와 다리의 지형이 도시를 닫힌 내륙이 아니라 열린 항구로 만든다. 사람들은 섬을 한 바퀴 도는 길을 일상의 축으로 삼는다.",
+      "구랑위는 차 없이 걷고, 본섬은 환다오로 한 바퀴를 돈다. 피아노와 베란다는 공동 조계의 겉면이고, 후리산의 포와 세관의 돌이 속면이다. 천가경이 남양 자본으로 학교를 지은 자리는 낭만이 아니라 귀국 화교의 행정이다. 페리가 끊기면 일정도 끊긴다.",
       "명청 시대 이 바다는 월항과 밀무역, 정성공의 북벌과 청의 해금이 교차한 전선이었다. 아편전쟁 이후 샤먼은 조약항이 되었고, 구랑위는 공동 조계의 섬이 되었다. 그 역사는 피아노와 베란다의 낭만으로만 남지 않고, 포대와 세관의 돌에도 새겨져 있다.",
       "화교의 돈이 고향으로 돌아온 도시이기도 하다. 천가경이 세운 지메이 학촌과 샤먼대학은 남양에서 번 부를 교육으로 되돌린 기념비다. 민남어와 남음, 굴전과 해안 사원은 그 귀향의 일상 언어다.",
       "오늘날 샤먼은 정원 도시와 관광 섬으로 불린다. 그러나 환다오루의 파도와 사포웨이의 조선소 흔적은, 이 도시가 휴양지이기 전에 노동과 항해의 항구였음을 잊지 않게 한다. 글을 따라 걸으면 섬의 겉면과 속면이 같이 보인다.",
@@ -111,9 +111,9 @@ export const XIAMEN_ARTICLE: CityArticle = {
   en: {
     title: "Xiamen, a southern window made of island and strait",
     lede:
-      "Xiamen is a harbor island facing the Taiwan Strait. Gulangyu’s pianos, Nanputuo’s incense, Tan Kah Kee’s school village, and the ring road share one breath.",
+      "The queue for a Gulangyu sailing at Lundu explains Xiamen as a strait harbour before it is a garden island.",
     intro: [
-      "Xiamen Island sits off southern Fujian, with Gulangyu to the west and the Jimei peninsula to the north. Wind, subtropical light, and bridges keep the city a port, not a closed interior. The road around the island is a daily axis.",
+      "Walk Gulangyu without cars; loop the main island on Huandao Road. Pianos and verandahs are the settlement’s face; Hulishan’s gun and customs stone are the other. Tan Kah Kee’s schools spent Nanyang capital as administration, not romance. When ferries stop, the day stops.",
       "In Ming and Qing times this sea mixed Yuegang trade, smuggling, Koxinga’s campaigns, and Qing maritime bans. After the Opium War Xiamen became a treaty port and Gulangyu an international settlement. That history lives in forts and customs stone as well as in verandahs.",
       "It is also a city of returned overseas capital. Tan Kah Kee’s Jimei schools and Xiamen University turned Nanyang wealth into classrooms. Minnan speech, nanyin, oyster omelets, and shore temples are the everyday language of that return.",
       "Today Xiamen is called a garden and tourist island. Huandao’s surf and Shapowei’s old docks still say it was a working harbor first. Walking the essay shows both skins of the island.",

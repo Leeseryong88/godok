@@ -6,9 +6,9 @@ export const NANJING_ARTICLE: CityArticle = {
   ko: {
     title: "난징, 여러 왕조가 수도로 삼았던 강남",
     lede:
-      "장강이 꺾이는 남안에 성을 쌓고, 명과 중화민국이 차례로 도읍을 둔 도시다. 난징의 거리에는 성벽과 능침, 총통부와 친화이허의 등불이 한 겹씩 남아 있다.",
+      "중화문 성벽에 오르면 난징은 한 장의 엽서가 아니라, 수도이기를 반복한 도시의 두께로 다가온다.",
     intro: [
-      "난징은 장쑤성의 성도로, 장강 하류의 남쪽에 자리한다. 북쪽이 정치의 중심을 오래 차지했다면 이곳은 여러 차례 강남의 서울로 불렸다. 지명 자체가 남쪽의 경성, 南京이다.",
+      "명 초의 벽돌이 발밑에서 이어지고, 아래로는 친화이허가 천천히 굽는다. 중산릉과 총통부는 같은 쯔진산 기슭에서 황제와 총통의 자리를 나눠 가졌다. 1937년의 침묵은 관광 일정 사이에 기념관으로 남아 있다. 플라타너스가 여름 거리를 어둡게 가릴 때, 난징은 상하이의 유리와는 다른 강남의 서울이다.",
       "시가지는 쯔진산과 쉬안우호, 명대 성벽에 둘러싸여 평평하지 않다. 플라타너스 가로수가 여름을 가리고, 남쪽 옛 성 안으로는 친화이허가 천천히 흐른다. 상하이처럼 유리 탑만으로 도시를 설명하기 어렵다.",
       "문화적으로 난징은 육조와 남당, 명 초, 태평천국, 중화민국이 겹친 자리이다. 문인과 과거 시험, 강남의 상업이 이곳에서 수도의 격식을 빌렸다. 동시에 1937년의 점령은 도시의 기억에서 지워지지 않는다.",
       "여행자가 난징에 머무는 이유는 한두 개의 랜드마크 때문이 아니다. 성벽 위를 걷고, 능침의 신도를 지나고, 강남의 시험장과 공화국의 관아를 이어서 보면 중국 근세의 전환이 한 도시 안에 압축되어 있다.",
@@ -112,9 +112,9 @@ export const NANJING_ARTICLE: CityArticle = {
   en: {
     title: "Nanjing, a southern capital that kept being chosen",
     lede:
-      "On a bend of the Yangtze, Ming emperors and Republican governments both planted a capital. Nanjing still wears that decision in walls, tombs, offices, and a lantern-lit river.",
+      "Climb Zhonghuamen’s wall and Nanjing arrives as the thickness of a city that kept being chosen as a capital, not as a postcard.",
     intro: [
-      "Nanjing sits on the south bank of the lower Yangtze as the capital of Jiangsu. If Beijing held the northern seat of power for centuries, this city was repeatedly named the capital of the south. The characters 南京 mean exactly that: the southern capital.",
+      "Early Ming brick runs underfoot; the Qinhuai bends slowly below. Sun Yat-sen’s tomb and the Presidential Palace share the same Purple Mountain slope as emperor and president. The silence of 1937 still has a memorial hall between tourist hours. When plane trees darken the summer avenues, Nanjing is Jiangnan’s southern seat, not Shanghai’s glass.",
       "The urban fabric is not a flat grid. Purple Mountain, Xuanwu Lake, and the Ming wall pinch and fold the streets. Plane trees shade the avenues; the inner Qinhuai slides through the old southern city. Glass towers exist, but they do not explain the place.",
       "Culturally Nanjing is a palimpsest of the Six Dynasties, Southern Tang, early Ming, the Taiping Heavenly Kingdom, and the Republic of China. Scholarship, the civil-service examinations, and Jiangnan commerce all borrowed the dignity of a capital here. The occupation of 1937 remains part of the same civic memory.",
       "Travelers stay not for a single postcard monument. Walking the wall, the spirit road of an imperial tomb, an examination compound, and a Republican palace shows how Chinese statehood shifted inside one city. The itinerary is a timeline you can cross on foot.",

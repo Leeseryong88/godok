@@ -16,8 +16,7 @@ export const SITE = {
   name: "Amap Search",
   companyNote: "AutoNavi / Amap unofficial helper",
   githubIssues: "https://github.com/Leeseryong88/godok/issues",
-  /** .env.local 에 NEXT_PUBLIC_CONTACT_EMAIL=you@domain.com */
-  contactEmail: process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || "",
+  contactEmail: "ai-riska@gmail.com",
   /**
    * 절대 URL (sitemap / metadata용)
    * 예: NEXT_PUBLIC_SITE_URL=https://your-domain.vercel.app

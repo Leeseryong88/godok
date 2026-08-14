@@ -6,9 +6,9 @@ export const BEIJING_ARTICLE: CityArticle = {
   ko: {
     title: "베이징, 중축선 위에 쌓인 제국과 공화국의 수도",
     lede:
-      "베이징은 화북 평원의 북단에 앉아, 자금성의 지붕선부터 후통의 골목까지 수백 년의 수도 경험이 하나의 격자 위에 남아 있는 도시다.",
+      "새벽 천안문광장에서 국기가 올라갈 때, 베이징은 명소 목록이 아니라 의례의 도시로 먼저 나타난다. 그 의례의 뼈대가 남에서 북으로 난 중축선이다.",
     intro: [
-      "베이징은 타이항산맥과 옌산산맥이 에워싼 베이징 평원에 자리한다. 북쪽의 산줄기는 초원으로 가는 문을 열고, 남쪽으로는 화북의 넓은 들이 펼쳐진다. 이 지형은 방어와 보급을 동시에 가능하게 했고, 그래서 여러 왕조가 이곳에 도읍을 두었다. 도시는 산과 평야 사이의 문턱에서 자랐다.",
+      "오문 앞 줄을 서면 휴대전화보다 여권이 먼저 나온다. 자금성은 사진을 찍는 궁이 아니라, 입장 절차가 위계를 되풀이하는 문이다. 그 문을 넘고 나서야 황기와 홍벽이 격자처럼 펼쳐지고, 한 걸음 옆 후통은 같은 수도의 다른 척도를 보여 준다. 산이 북쪽을 막고 평원이 남쪽을 여는 자리는, 여러 왕조가 반복해서 고른 문턱이었다.",
       "수도로서의 베이징은 의례의 도시다. 남에서 북으로 뻗은 중축선은 영정문과 천안문, 자금성, 경산, 북쪽으로의 시선을 한 줄에 꿰고, 황제의 자리와 하늘의 질서를 건축으로 번역한다. 후통과 사합원의 격자는 그 장엄한 선의 그늘에서 일상을 지탱했다. 장엄과 골목이 한 지도에 공존하는 것이 이 도시의 기본 문법이다.",
       "문화적으로 베이징은 궁정의 관화와 시정의 골목말이 겹친 곳이다. 경극의 얼굴 분장, 사합원 중정의 대추나무, 대학가의 서점과 정치 구호가 같은 평원 위에서 자랐다. 사람들은 제국의 유산을 관광 자원으로만 보지 않는다. 그것은 여전히 도시의 방향과 계절 의례를 규정하는 좌표계다.",
       "오늘날 베이징은 중화인민공화국의 정치 중심인 동시에, 유네스코에 오른 궁성과 원림, 올림픽의 경기장, 공장에서 바뀐 예술구를 한 도시에 품는다. 여행자가 이곳을 찾는 까닭은 명소의 목록보다, 권력이 공간을 어떻게 배치해 왔는지를 눈으로 확인할 수 있기 때문이다. 자금성의 문턱을 넘는 일은 한 왕조의 사유지가 공공의 유산이 된 과정을 밟는 일이다.",
@@ -128,9 +128,9 @@ export const BEIJING_ARTICLE: CityArticle = {
   en: {
     title: "Beijing, a capital drawn along a single north-south line",
     lede:
-      "Beijing occupies the northern edge of the North China Plain, a city whose Forbidden City, hutongs, and Olympic steel still obey an imperial axis laid down for the Mandate of Heaven.",
+      "At dawn on Tiananmen Square, when the flag goes up, Beijing shows itself as a city of ritual before it is a list of sights. The bone of that ritual is the north-south axis.",
     intro: [
-      "The capital sits on a plain framed by the Taihang and Yan Mountains. The ranges open a gate toward the steppe; the south unrolls into farmland that fed courts for centuries. That threshold between mountain and field made the site defensible and supplyable, which is why dynasties kept returning to it.",
+      "In the queue at the Meridian Gate a passport appears before a phone. The Forbidden City is not a palace you merely photograph; entry itself repeats hierarchy. Only after that gate do yellow roofs and red walls open as a grid, and a hutong one step aside shows the same capital at another scale. Dynasties kept choosing this threshold, mountains to the north and a plain to the south.",
       "Beijing is a ceremonial city before it is a picturesque one. A north-south axis strings Yongdingmen, Tiananmen, the Forbidden City, and Jingshan into one argument about where a ruler should sit. Hutongs and courtyard houses filled the grid beside that argument with ordinary life. Grandeur and alleyway are not opposites here. They are the same map at different scales.",
       "The culture of the place mixes court speech with street speech. Peking opera, jujube trees in siheyuan courtyards, university bookshops, and political slogans all grew on the same dry plain. Residents do not treat the imperial inheritance as a backdrop for photographs alone. It remains a coordinate system for direction, season, and ritual.",
       "Today Beijing is the political center of the People's Republic and a compound of palaces, gardens, Olympic venues, and a factory turned art district. Visitors come less for a checklist than to watch power arrange space over time. Crossing a palace threshold is to walk the conversion of a dynasty's private city into a public inheritance.",

@@ -6,9 +6,9 @@ export const WUHAN_ARTICLE: CityArticle = {
   ko: {
     title: "우한, 장강과 한수가 만나는 삼진",
     lede:
-      "무창·한커우·한양이 한 도시가 된 자리이다. 황학루의 시와 1911년의 봉기가 같은 강가에서 태어났고, 다리는 그 세 마을을 하나의 우한으로 묶었다.",
+      "장강대교를 걸어서 건너면 우한은 한 도시가 아니라, 다리가 묶은 세 진으로 드러난다.",
     intro: [
-      "우한은 후베이성의 성도로, 장강과 한수가 합류하는 평원에 놓인다. 강 남쪽의 무창, 북쪽의 한커우, 한수 서쪽의 한양이 오래도록 따로 자라다가 하나의 이름이 되었다. 중국 내륙 교통의 십자로라는 말은 지리의 사실이다.",
+      "무창의 황학루, 한커우의 조계 벽돌, 한양의 절이 강 양쪽과 한수 서쪽에 따로 자랐다. 2호선 터널이 그 사이를 뚫기 전에는 배가 일정이었다. 1911년의 기의는 무창에서 일어났고, 시는 누각에서 강을 바라보며 쓰였다. 합류점의 습열은 관광 구호가 아니라 여름의 사실이다.",
       "도시의 스케일은 호수와 강이 정한다. 둥후가 동쪽으로 넓게 열리고, 장강은 시내를 둘로 가른다. 여름의 습열과 겨울의 낮은 하늘이 이 합류점을 성격 짓는다. 산동반도의 해풍이나 강남의 정원 도시와는 공기가 다르다.",
       "문화적으로 우한은 초나라의 기억과 근대 조약항, 신해혁명의 발원지가 겹친다. 굴원의 초사와 황학루의 당시가 문학의 층이라면, 한커우의 조계와 1911년 무창 기의는 정치의 층이다. 양자가 같은 강변에 붙어 있다.",
       "여행자가 우한을 찾는 이유는 탑 하나의 전망만이 아니다. 문학적 누각, 혁명의 도시, 호수와 대학, 조계의 벽돌 거리가 삼진의 서로 다른 얼굴을 보여 준다. 강을 건너는 일 자체가 이 도시의 역사이다.",
@@ -112,9 +112,9 @@ export const WUHAN_ARTICLE: CityArticle = {
   en: {
     title: "Wuhan, three towns at a confluence",
     lede:
-      "Wuchang, Hankou, and Hanyang grew apart before they became one name. A Tang poem, the 1911 uprising, and a bridge across the Yangtze all belong to the same meeting of rivers.",
+      "Walk the First Bridge and Wuhan is not one city but three towns a bridge had to bind.",
     intro: [
-      "Wuhan, capital of Hubei, sits on the plain where the Han River joins the Yangtze. Wuchang south of the great river, Hankou to the north, and Hanyang west of the Han lived as separate towns for centuries. Calling the place China's inland crossroads is geography, not a slogan.",
+      "Yellow Crane verse in Wuchang, concession brick in Hankou, and a Hanyang temple grew apart on two rivers. Before Line 2’s tunnel, a boat was the timetable. The 1911 uprising began in Wuchang; poems looked at the river from a tower. Confluence humidity is a summer fact, not a slogan.",
       "Scale is set by water. East Lake opens a wide basin on the east; the Yangtze splits the centre. Summer humidity and a low winter sky belong to this confluence. The air is not the sea wind of Shandong or the garden climate of Jiangnan.",
       "Culturally Wuhan stacks Chu memory, a treaty-port modern, and the origin of the 1911 Revolution. Qu Yuan and the Yellow Crane Tower poems are the literary layer; Hankou's concessions and the Wuchang uprising are the political one. Both sit on the same banks.",
       "Visitors come for more than a tower view. A literary pavilion, a revolutionary city, a lake campus, and brick streets from the concessions show three different faces. Crossing the river is itself a historical act here.",

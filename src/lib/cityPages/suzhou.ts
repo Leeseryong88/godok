@@ -6,9 +6,9 @@ export const SUZHOU_ARTICLE: CityArticle = {
   ko: {
     title: "쑤저우, 운하와 원림이 키운 강남의 문인 도시",
     lede:
-      "쑤저우는 장강 삼각주의 운하 그물 위에 앉아, 오나라의 도성과 명청 사가 정원을 아직도 같은 물길로 잇는 도시다.",
+      "졸정원 동쪽 창으로 먼저 보면, 쑤저우는 호수의 도시가 아니라 담장 안에 산수를 접어 넣은 도시다.",
     intro: [
-      "쑤저우는 장쑤성 남부, 타이호 동북쪽의 평원에 자리한다. 대운하가 도시를 남북으로 지나고, 성내를 가로지르는 작은 하천들이 집과 다리를 하나의 수망으로 묶는다. 산은 호구처럼 드문 구릉으로만 솟고, 대부분의 경치는 수평의 물과 담장 안의 가산이 만든다. 지형은 극적이지 않으나, 물이 도시를 설계했다.",
+      "운하 돌다리는 가까워 보여도 골목이 꺾여 한 정원에 90분이 금방 간다. 대운하가 남북을 지나고, 성안 물길이 집과 다리를 묶는다. 오나라의 검이 출발점이었으나, 후세가 기억한 것은 비단과 창틀의 비례다. 항저우의 넓은 호수와 달리, 여기의 단위는 창으로 잘린 조각이다.",
       "이 도시의 성격은 전장의 기세보다 완성된 취향에 있다. 오나라의 검과 합려의 도성에서 출발했으나, 후세가 기억한 쑤저우는 비단과 자수, 평탄과 원림의 도시다. 하늘에는 천당, 땅에는 소항이라는 짝에서 소주는 항주와 나란히 강남 풍요의 대명사가 되었다. 그 풍요는 과장된 휴양이 아니라, 운하가 실어 온 물자와 문인의 눈이 만든 밀도다.",
       "문화적으로 쑤저우는 정원을 철학처럼 다루는 곳이다. 한 줌의 호수석과 한 굽이의 회랑이 천리 산수를 대신하고, 창틀은 바깥 풍경을 그림으로 자른다. 오어의 부드러운 성조, 곤곡의 수양, 수향 고진의 돌다리는 모두 그 축소의 미학과 통한다. 사람들은 큰 궁전보다 작은 중정의 비례를 자랑한다.",
       "오늘날 쑤저우는 고전 원림의 세계유산 도시인 동시에, 싱가포르와 함께 만든 공업원구와 진지호의 유리 타워를 품에 안은 쌍면 도시다. 여행자가 찾는 이유는 사진의 구도보다, 중국 문인 문화가 주거와 물길 위에서 어떻게 일상이 되었는지를 골목에서 확인할 수 있기 때문이다. 정원 문을 여는 일은 사가의 세계로 잠시 들어가는 일이다.",
@@ -112,9 +112,9 @@ export const SUZHOU_ARTICLE: CityArticle = {
   en: {
     title: "Suzhou, a Jiangnan city built from canals and gardens",
     lede:
-      "Suzhou sits on the canal mesh of the Yangtze Delta, still joining the capital of ancient Wu to Ming-Qing private gardens by the same waterways.",
+      "Look first through an east window of the Humble Administrator’s Garden: Suzhou is not a lake city but a place that folded landscape inside walls.",
     intro: [
-      "The city occupies the plain northeast of Lake Tai in southern Jiangsu. The Grand Canal runs north-south; lesser streams inside the old walls bind houses and bridges into one water network. Hills appear only as rare rises such as Tiger Hill. Most scenery is made by horizontal water and artificial mountains inside walls. The land is not dramatic. Water designed the town.",
+      "Canal bridges look close; lanes zigzag until ninety minutes vanish in one garden. The Grand Canal runs north-south; inner streams bind houses to stone. Wu began with swords; later ages kept silk and the proportion of a window. Unlike Hangzhou’s wide water, the unit here is a fragment cut by a frame.",
       "Suzhou's character is finished taste rather than martial speed. It began as the sword capital of King Helü, yet later ages remembered silk, embroidery, pingtan storytelling, and gardens. In the pairing of paradise above and Suzhou-Hangzhou below, Suzhou stands beside Hangzhou as a name for Jiangnan plenty. That plenty is not idle resort. It is density made by canal freight and a scholar's eye.",
       "Culturally Suzhou treats the garden as a philosophy. A handful of Taihu rocks and a turn of corridor stand in for a thousand li of landscape; window frames cut the outside world into pictures. The soft tones of Wu speech, the water-sleeves of Kunqu opera, and the stone bridges of canal towns all share that aesthetic of reduction. People boast of courtyard proportion more than of palaces.",
       "Today Suzhou is a World Heritage city of classical gardens and, at the same time, a double-faced metropolis that holds the China-Singapore industrial park and the glass of Jinji Lake. Travelers come less for a postcard angle than to see, in alleys, how literati culture became daily life on water. Opening a garden door is a brief entry into a private cosmos.",

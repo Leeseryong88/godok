@@ -6,9 +6,9 @@ export const SHENZHEN_ARTICLE: CityArticle = {
   ko: {
     title: "선전, 국경의 어촌에서 열린 실험 도시",
     lede:
-      "선전은 홍콩과 맞닿은 해안 어촌이 40여 년 만에 초고층과 공원의 도시로 바뀐 곳이다. 개혁개방의 창구였던 기억이 만과 산, 국경 거리와 테마파크에 겹쳐 있다.",
+      "루오후 출입국 줄이 테마파크 줄보다 길 때, 선전은 휴양 도시가 아니라 국경의 실험으로 다시 읽힌다.",
     intro: [
-      "선전은 주장 삼각주 동쪽, 다펑 반도와 선전만 사이에 길게 누운 해안 도시다. 남쪽으로는 홍콩이 바다와 다리를 사이에 두고 이어지고, 서쪽으로는 주강 하구가 열린다. 평지보다 구릉과 만이 많아, 도시는 해안선과 산을 따라 여러 중심을 동시에 키웠다.",
+      "1979년 이전 바오안의 논과 염전은 홍콩을 강 너머로만 보았다. 특별경제구역이 선포된 뒤 공장과 이주민이 한꺼번에 밀려들었고, 만과 구릉 위에 여러 도심이 동시에 자랐다. 롄화산의 덩샤오핑 동상은 그 속도가 스스로를 기념하는 방식이다. 해수욕과 놀이기구만 보면, 국경석과 화창베이의 부품 상자가 빠진다.",
       "1979년 이전의 선전은 바오안현의 작은 진이었다. 논과 염전, 어촌과 국경 초소가 섞인 변방이었고, 사람들은 강을 건너 홍콩을 바라보았다. 특별경제구역이 선포된 뒤 공장과 이주 노동, 증권과 기술 기업이 한꺼번에 밀려들며, 중국에서 가장 빠르게 자란 대도시가 되었다.",
       "이 도시의 문화는 토착의 두꺼운 문인 전통보다, 각지에서 온 이주민이 만든 속도에 가깝다. 광동어와 보통화, 객가의 흔적과 홍콩의 대중문화가 한 지하철 칸에서 만난다. 화차오청의 테마파크와 롄화산의 덩샤오핑 동상은 그 속도가 스스로를 어떻게 기념하는지를 보여 준다.",
       "선전을 관광 도시로만 읽으면 핵심을 놓친다. 해변과 놀이공원 뒤에도 국경의 역사, 전자 상가의 세계 유통, 만 건너 홍콩을 바라보는 지정학이 있다. 여행자가 이 도시를 걷는 일은 개혁기 중국이 국경에서 어떤 풍경을 만들었는지를 확인하는 일이다.",
@@ -112,9 +112,9 @@ export const SHENZHEN_ARTICLE: CityArticle = {
   en: {
     title: "Shenzhen, the experiment that grew from a border village",
     lede:
-      "Shenzhen is a coastal county town that became a skyline in little more than forty years. The memory of the reform-era gateway still sits on its bays, hills, border street, and theme parks.",
+      "When the Luohu crossing queue outlasts any theme-park line, Shenzhen reads again as a border experiment, not a resort.",
     intro: [
-      "The city stretches along the eastern Pearl River Delta between Dapeng Peninsula and Shenzhen Bay. Hong Kong lies just south across water and bridges; the estuary opens to the west. Hills and coves matter more than a single flat core, so several centers grew at once.",
+      "Before 1979, Bao’an’s fields and salt pans looked at Hong Kong only across the water. After the Special Economic Zone, factories and migrants arrived together, and several downtowns grew at once on bay and hill. The Deng statue on Lianhua Hill is how that speed commemorates itself. Beaches and rides without Chung Ying stones and Huaqiangbei parts boxes miss the city.",
       "Before 1979 Shenzhen was a small town in Bao’an. Fields, salt pans, fishing hamlets, and border posts faced Hong Kong across the river. After the Special Economic Zone was declared, factories, migrant labor, markets, and later tech firms arrived together.",
       "Its culture is less a deep literati inheritance than a tempo made by newcomers. Cantonese, Mandarin, Hakka traces, and Hong Kong pop share a metro car. OCT’s parks and the Deng statue on Lianhua Hill show how that tempo commemorates itself.",
       "Reading Shenzhen only as beaches and rides misses the point. Behind leisure sit a border history, a global electronics bazaar, and the geopolitics of looking at Hong Kong. Walking here is to see what reform built at the frontier.",
