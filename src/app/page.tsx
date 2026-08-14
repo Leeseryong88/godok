@@ -16,8 +16,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SpotsMap } from "@/components/SpotsMap";
 import { COUPANG_CHINA_ESIM_URL } from "@/lib/affiliate";
 import {
-  DEFAULT_SPOTS_CITY,
   getCityGuide,
+  resolveSpotsCity,
   type Attraction,
 } from "@/lib/attractions";
 import { getSpotMeta } from "@/lib/attractions/meta";
@@ -30,7 +30,12 @@ import {
   openGaodeInstallPage,
   openInGaodeApp,
 } from "@/lib/gaode";
-import { loadSavedCity, saveCity } from "@/lib/history";
+import {
+  loadSavedCity,
+  loadSpotsCityCookie,
+  saveCity,
+  saveSpotsCityCookie,
+} from "@/lib/history";
 import {
   applyDocumentLocale,
   DEFAULT_LOCALE,
@@ -68,7 +73,7 @@ export default function HomePage() {
   const [platform, setPlatform] = useState<DevicePlatform>("desktop");
   const [locale, setLocale] = useState<Locale>(DEFAULT_LOCALE);
   const [tab, setTab] = useState<"search" | "spots">("search");
-  const [spotsCity, setSpotsCity] = useState(DEFAULT_SPOTS_CITY);
+  const [spotsCity, setSpotsCity] = useState("");
   const [spotModalOpen, setSpotModalOpen] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -96,6 +101,7 @@ export default function HomePage() {
     setLocale(next);
     applyDocumentLocale(next);
     setCity(normalizeSavedCity(loadSavedCity("")));
+    setSpotsCity(resolveSpotsCity(loadSpotsCityCookie()));
     setPlatform(detectPlatform(navigator.userAgent || ""));
     setReady(true);
   }, []);
@@ -104,6 +110,11 @@ export default function HomePage() {
     if (!ready) return;
     saveCity(city);
   }, [city, ready]);
+
+  useEffect(() => {
+    if (!ready || !spotsCity) return;
+    saveSpotsCityCookie(spotsCity);
+  }, [spotsCity, ready]);
 
   useEffect(() => {
     if (!ready) return;
@@ -491,8 +502,12 @@ export default function HomePage() {
             guide={activeGuide}
             loading={loading}
             disabled={isDesktop}
+            visible={tab === "spots"}
             onCityChange={(nextCity) => {
-              setSpotsCity(nextCity);
+              const next = resolveSpotsCity(nextCity);
+              if (!next) return;
+              setSpotsCity(next);
+              saveSpotsCityCookie(next);
               setFormError("");
             }}
             onOpenAmap={(guideCity, spot) => {

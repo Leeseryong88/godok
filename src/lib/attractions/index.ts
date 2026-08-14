@@ -46,10 +46,13 @@ export const CITY_GUIDES: CityGuide[] = [
 export const SPOTS_CITY_TABS: { city: string; enabled: boolean }[] =
   CITY_GUIDES.map((g) => ({ city: g.city, enabled: true }));
 
-export const DEFAULT_SPOTS_CITY = "上海";
-
 export function getCityGuide(cityZh: string): CityGuide | undefined {
   return CITY_GUIDES.find((g) => g.city === cityZh.trim());
+}
+
+export function resolveSpotsCity(cityZh: string): string {
+  const city = cityZh.trim();
+  return getCityGuide(city) ? city : "";
 }
 
 export function getAttractionLabel(

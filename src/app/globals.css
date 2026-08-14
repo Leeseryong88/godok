@@ -382,8 +382,53 @@ input {
   gap: 12px;
 }
 
-.spots .city-tabs {
-  margin-bottom: 0;
+.spots-head-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 10px;
+}
+
+.spots-change-city {
+  min-height: 32px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(247, 251, 250, 0.2);
+  background: rgba(243, 247, 246, 0.1);
+  color: #eef6f4;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.spots-change-city:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.city-picker-modal {
+  max-width: 22rem;
+}
+
+.city-picker-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.city-picker-list .city-tab {
+  background: #fff;
+  border: 1px solid rgba(18, 36, 43, 0.16);
+  color: #12242b;
+}
+
+.city-picker-list .city-tab.is-active {
+  background: #1f6f5c;
+  border-color: transparent;
+  color: #f4fbf8;
 }
 
 .spots-error {

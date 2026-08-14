@@ -49,3 +49,29 @@ export function saveCity(city: string): void {
   }
   localStorage.setItem(CITY_KEY, value);
 }
+
+const SPOTS_CITY_COOKIE = "godok.spotsCity";
+const SPOTS_CITY_MAX_AGE = 60 * 60 * 24 * 365;
+
+export function loadSpotsCityCookie(): string {
+  if (typeof document === "undefined") return "";
+  const match = document.cookie.match(
+    /(?:^|;\s*)godok\.spotsCity=([^;]*)/
+  );
+  if (!match?.[1]) return "";
+  try {
+    return decodeURIComponent(match[1]);
+  } catch {
+    return "";
+  }
+}
+
+export function saveSpotsCityCookie(city: string): void {
+  if (typeof document === "undefined") return;
+  const value = city.trim();
+  if (!value) {
+    document.cookie = `${SPOTS_CITY_COOKIE}=; Max-Age=0; Path=/; SameSite=Lax`;
+    return;
+  }
+  document.cookie = `${SPOTS_CITY_COOKIE}=${encodeURIComponent(value)}; Max-Age=${SPOTS_CITY_MAX_AGE}; Path=/; SameSite=Lax`;
+}

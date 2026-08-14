@@ -32,6 +32,9 @@ export type Messages = {
   tabSearch: string;
   tabSpots: string;
   cityTabsAria: string;
+  spotsPickCity: string;
+  spotsPickCityDesc: string;
+  spotsChangeCity: string;
   spotsTitle: string;
   spotsDesc: string;
   spotsComingSoon: string;
@@ -113,6 +116,9 @@ export const MESSAGES: Record<Locale, Messages> = {
     tabSearch: "Search",
     tabSpots: "Spot map",
     cityTabsAria: "Select city",
+    spotsPickCity: "Choose a city",
+    spotsPickCityDesc: "Pick a city to open its spot map",
+    spotsChangeCity: "Change city",
     spotsTitle: "{city} · spots",
     spotsDesc: "Tap a pin to read the place, then open it in Amap",
     spotsComingSoon: "Coming soon",
@@ -160,6 +166,9 @@ export const MESSAGES: Record<Locale, Messages> = {
     tabSearch: "Buscar",
     tabSpots: "Mapa",
     cityTabsAria: "Elegir ciudad",
+    spotsPickCity: "Elige una ciudad",
+    spotsPickCityDesc: "Elige una ciudad para ver su mapa",
+    spotsChangeCity: "Cambiar ciudad",
     spotsTitle: "{city} · lugares",
     spotsDesc: "Toca un pin para ver la descripción y abrirla en Amap",
     spotsComingSoon: "Próximamente",
@@ -235,6 +244,9 @@ export const MESSAGES: Record<Locale, Messages> = {
     tabSearch: "खोज",
     tabSpots: "मानचित्र",
     cityTabsAria: "शहर चुनें",
+    spotsPickCity: "शहर चुनें",
+    spotsPickCityDesc: "मानचित्र देखने के लिए शहर चुनें",
+    spotsChangeCity: "शहर बदलें",
     spotsTitle: "{city} · स्थल",
     spotsDesc: "पिन दबाकर विवरण देखें, फिर Amap में खोलें",
     spotsComingSoon: "जल्द आ रहा है",
@@ -310,6 +322,9 @@ export const MESSAGES: Record<Locale, Messages> = {
     tabSearch: "بحث",
     tabSpots: "الخريطة",
     cityTabsAria: "اختر المدينة",
+    spotsPickCity: "اختر مدينة",
+    spotsPickCityDesc: "اختر مدينة لفتح خريطة المعالم",
+    spotsChangeCity: "تغيير المدينة",
     spotsTitle: "{city} · معالم",
     spotsDesc: "اضغط الدبوس لقراءة الوصف ثم افتحه في Amap",
     spotsComingSoon: "قريبًا",
@@ -385,6 +400,9 @@ export const MESSAGES: Record<Locale, Messages> = {
     tabSearch: "검색",
     tabSpots: "명소 지도",
     cityTabsAria: "도시 선택",
+    spotsPickCity: "도시를 선택하세요",
+    spotsPickCityDesc: "명소 지도를 볼 도시를 고르세요",
+    spotsChangeCity: "도시 변경",
     spotsTitle: "{city} · 명소",
     spotsDesc: "지도의 핀을 눌러 설명을 보고, Amap으로 여세요",
     spotsComingSoon: "준비 중",
