@@ -1,14 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   getAttractionLabel,
   SPOTS_CITY_TABS,
   type Attraction,
   type CityGuide,
 } from "@/lib/attractions";
-import { getSpotBlurb, getSpotMeta } from "@/lib/attractions/meta";
-import { projectPins } from "@/lib/attractions/project";
+import { getSpotMeta, getSpotParagraphs } from "@/lib/attractions/meta";
+import {
+  cityMapSrc,
+  getMapViewForCity,
+  projectPins,
+} from "@/lib/attractions/mapView";
 import type { Locale } from "@/lib/i18n/locales";
 import type { Messages } from "@/lib/i18n/messages";
 
@@ -22,6 +27,7 @@ type Props = {
   disabled: boolean;
   onCityChange: (cityZh: string) => void;
   onOpenAmap: (cityZh: string, attraction: Attraction) => void;
+  onModalOpenChange?: (open: boolean) => void;
 };
 
 export function SpotsMap({
@@ -34,14 +40,20 @@ export function SpotsMap({
   disabled,
   onCityChange,
   onOpenAmap,
+  onModalOpenChange,
 }: Props) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const titleId = useId();
 
   const attractions = guide?.attractions ?? [];
   const selected =
     attractions.find((spot) => spot.id === selectedId) || null;
 
+  const mapSrc = cityMapSrc(cityZh);
   const pins = useMemo(() => {
+    const view = getMapViewForCity(cityZh);
+    if (!view) return [];
     const points = attractions
       .map((spot) => {
         const meta = getSpotMeta(cityZh, spot.id);
@@ -49,21 +61,98 @@ export function SpotsMap({
         return { id: spot.id, lat: meta.lat, lng: meta.lng };
       })
       .filter((p): p is { id: string; lat: number; lng: number } => Boolean(p));
-    return projectPins(points);
+    return projectPins(points, view);
   }, [attractions, cityZh]);
 
   const pinById = useMemo(() => {
     return new Map(pins.map((p) => [p.id, p]));
   }, [pins]);
 
-  function selectSpot(id: string) {
-    setSelectedId((prev) => (prev === id ? prev : id));
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    onModalOpenChange?.(Boolean(selectedId));
+  }, [selectedId, onModalOpenChange]);
+
+  useEffect(() => {
+    if (!selectedId) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedId(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selectedId]);
+
+  function openSpot(id: string) {
+    setSelectedId(id);
+  }
+
+  function closeSpot() {
+    setSelectedId(null);
   }
 
   const heading = t.spotsTitle.replace("{city}", cityLabel);
-  const blurb = selected
-    ? getSpotBlurb(cityZh, selected.id, locale)
-    : "";
+  const paragraphs = selected
+    ? getSpotParagraphs(cityZh, selected.id, locale)
+    : [];
+
+  const modal =
+    mounted && selected
+      ? createPortal(
+          <div
+            className="modal-root"
+            role="presentation"
+            onMouseDown={(e) => {
+              if (e.target === e.currentTarget && !loading) closeSpot();
+            }}
+          >
+            <div
+              className="modal spot-detail-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={titleId}
+            >
+              <div className="modal-head">
+                <div>
+                  <p className="modal-kicker">{cityLabel}</p>
+                  <p className="modal-query" id={titleId}>
+                    {getAttractionLabel(selected, locale)}
+                  </p>
+                  <p className="spot-detail-zh" lang="zh-CN">
+                    {selected.keyword}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  className="modal-close"
+                  onClick={closeSpot}
+                  aria-label={t.close}
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div className="spot-detail-body">
+                {paragraphs.map((para) => (
+                  <p key={para.slice(0, 28)}>{para}</p>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                className="spot-detail-open"
+                disabled={disabled || loading}
+                onClick={() => onOpenAmap(cityZh, selected)}
+              >
+                {loading ? t.openingApp : t.openInAmap}
+              </button>
+            </div>
+          </div>,
+          document.body
+        )
+      : null;
 
   return (
     <section className="spots" aria-label={heading}>
@@ -85,7 +174,7 @@ export function SpotsMap({
               disabled={loading}
               onClick={() => {
                 onCityChange(opt.city);
-                setSelectedId(null);
+                closeSpot();
               }}
             >
               {label}
@@ -104,39 +193,34 @@ export function SpotsMap({
           className="spot-map"
           role="application"
           aria-label={t.spotsMapAria}
-          onClick={() => setSelectedId(null)}
         >
-          <svg
-            className="spot-map-art"
-            viewBox="0 0 320 240"
-            preserveAspectRatio="xMidYMid slice"
-            aria-hidden="true"
-          >
-            <path d="M12 70 C70 40, 110 95, 168 78 S250 38, 308 88" />
-            <path d="M8 150 C78 118, 130 168, 188 150 S268 118, 314 168" />
-            <path d="M40 210 C120 178, 170 228, 260 200" />
-            <circle cx="168" cy="78" r="3.2" />
-            <circle cx="188" cy="150" r="2.4" />
-          </svg>
+          {mapSrc ? (
+            <img
+              className="spot-map-image"
+              src={mapSrc}
+              alt=""
+              draggable={false}
+            />
+          ) : null}
 
           {attractions.map((spot, index) => {
             const pos = pinById.get(spot.id);
-            if (!pos) return null;
+            if (!pos || !pos.inView) return null;
             const active = selectedId === spot.id;
             const name = getAttractionLabel(spot, locale);
+            const labelBelow = pos.y < 22;
             return (
               <button
                 key={spot.id}
                 type="button"
-                className={`map-pin${active ? " is-active" : ""}`}
+                className={`map-pin${active ? " is-active" : ""}${
+                  labelBelow ? " is-label-below" : ""
+                }`}
                 style={{ left: `${pos.x}%`, top: `${pos.y}%` }}
                 disabled={loading}
                 aria-pressed={active}
                 aria-label={name}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  selectSpot(spot.id);
-                }}
+                onClick={() => openSpot(spot.id)}
               >
                 <span className="map-pin-mark" aria-hidden="true">
                   <svg viewBox="0 0 32 40" className="map-pin-svg">
@@ -151,20 +235,24 @@ export function SpotsMap({
               </button>
             );
           })}
+          <p className="spot-map-credit">© OpenStreetMap © CARTO</p>
         </div>
       </div>
 
       <div className="spot-legend" role="list">
         {attractions.map((spot, index) => {
           const active = selectedId === spot.id;
+          const outbound = pinById.get(spot.id)?.inView === false;
           return (
             <button
               key={spot.id}
               type="button"
               role="listitem"
-              className={`spot-legend-item${active ? " is-active" : ""}`}
+              className={`spot-legend-item${active ? " is-active" : ""}${
+                outbound ? " is-outbound" : ""
+              }`}
               disabled={loading}
-              onClick={() => selectSpot(spot.id)}
+              onClick={() => openSpot(spot.id)}
             >
               <span className="spot-legend-num" aria-hidden="true">
                 {index + 1}
@@ -172,45 +260,16 @@ export function SpotsMap({
               <span className="spot-legend-name">
                 {getAttractionLabel(spot, locale)}
               </span>
+              {outbound ? (
+                <span className="spot-legend-far">{t.spotsFar}</span>
+              ) : null}
             </button>
           );
         })}
       </div>
 
-      {selected ? (
-        <div className="spot-sheet" role="region" aria-label={t.spotDetail}>
-          <div className="spot-sheet-head">
-            <div>
-              <p className="spot-sheet-kicker">{cityLabel}</p>
-              <h3 className="spot-sheet-title">
-                {getAttractionLabel(selected, locale)}
-              </h3>
-              <p className="spot-sheet-zh" lang="zh-CN">
-                {selected.keyword}
-              </p>
-            </div>
-            <button
-              type="button"
-              className="spot-sheet-close"
-              onClick={() => setSelectedId(null)}
-              aria-label={t.close}
-            >
-              ✕
-            </button>
-          </div>
-          {blurb ? <p className="spot-sheet-blurb">{blurb}</p> : null}
-          <button
-            type="button"
-            className="spot-sheet-open"
-            disabled={disabled || loading}
-            onClick={() => onOpenAmap(cityZh, selected)}
-          >
-            {loading ? t.openingApp : t.openInAmap}
-          </button>
-        </div>
-      ) : (
-        <p className="spot-sheet-placeholder">{t.spotsHint}</p>
-      )}
+      <p className="spot-sheet-placeholder">{t.spotsHint}</p>
+      {modal}
     </section>
   );
 }

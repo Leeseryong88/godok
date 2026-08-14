@@ -14,6 +14,11 @@ export type DevicePlatform = "ios" | "android" | "desktop";
 
 export type GaodeOpenResult = "opened" | "not_installed" | "desktop";
 
+export type GaodeLocation = {
+  lat: number;
+  lng: number;
+};
+
 function resolveCityName(city?: string): string | undefined {
   const raw = city?.trim();
   if (!raw) return undefined;
@@ -83,17 +88,86 @@ export function buildIosPoiUrl(keyword: string, cityName?: string): string {
   })}`;
 }
 
-function buildAndroidPoiIntent(keyword: string, cityName?: string): string {
-  const path = `poi?${buildQuery({
+function isValidLocation(loc?: GaodeLocation): loc is GaodeLocation {
+  return Boolean(
+    loc &&
+      Number.isFinite(loc.lat) &&
+      Number.isFinite(loc.lng) &&
+      loc.lat >= -85 &&
+      loc.lat <= 85 &&
+      loc.lng >= -180 &&
+      loc.lng <= 180
+  );
+}
+
+function formatCoord(n: number): string {
+  return n.toFixed(6);
+}
+
+function viewMapParams(name: string, lat: number, lng: number) {
+  return {
     sourceApplication: APP_NAME,
-    keywords: keywordWithCity(keyword, cityName),
-    dev: "0",
-  })}`;
+    poiname: name,
+    lat: formatCoord(lat),
+    lon: formatCoord(lng),
+    // 1 = WGS84 → 앱이 GCJ-02로 맞춤. 0이면 GPS 좌표가 수백 미터 어긋남
+    dev: "1",
+  };
+}
+
+/**
+ * 좌표로 지도 핀을 연다. 이름 검색은 내 주변 동명 장소를 잡을 수 있음.
+ * androidamap://viewMap?sourceApplication=...&poiname=...&lat=...&lon=...&dev=1
+ * @see https://developer.amap.com/api/amap-mobile/guide/android/marker
+ */
+export function buildAndroidViewMapUrl(
+  name: string,
+  lat: number,
+  lng: number
+): string {
+  return `androidamap://viewMap?${buildQuery(viewMapParams(name, lat, lng))}`;
+}
+
+/**
+ * iosamap://viewMap?sourceApplication=...&poiname=...&lat=...&lon=...&dev=1
+ * @see https://developer.amap.com/api/amap-mobile/guide/ios/marker
+ */
+export function buildIosViewMapUrl(
+  name: string,
+  lat: number,
+  lng: number
+): string {
+  return `iosamap://viewMap?${buildQuery(viewMapParams(name, lat, lng))}`;
+}
+
+function buildAndroidIntent(
+  path: string
+): string {
   const fallback = GAODE_INSTALL.androidWeb;
   return (
     `intent://${path}` +
     `#Intent;scheme=androidamap;package=com.autonavi.minimap;` +
     `S.browser_fallback_url=${encodeURIComponent(fallback)};end`
+  );
+}
+
+function buildAndroidPoiIntent(keyword: string, cityName?: string): string {
+  return buildAndroidIntent(
+    `poi?${buildQuery({
+      sourceApplication: APP_NAME,
+      keywords: keywordWithCity(keyword, cityName),
+      dev: "0",
+    })}`
+  );
+}
+
+function buildAndroidViewMapIntent(
+  name: string,
+  lat: number,
+  lng: number
+): string {
+  return buildAndroidIntent(
+    `viewMap?${buildQuery(viewMapParams(name, lat, lng))}`
   );
 }
 
@@ -113,8 +187,8 @@ export function openGaodeInstallPage(platform: DevicePlatform): void {
 }
 
 /**
- * 모바일에서만 공식 Amap POI 스킴으로 검색.
- * (amapuri://search 는 미지원/불안정 → 앱이 열리기만 하고 검색이 멈추는 원인)
+ * 모바일에서 Amap을 연다.
+ * 좌표가 있으면 viewMap(해당 위치), 없으면 도시명을 붙인 POI 검색.
  */
 function sanitizeKeyword(keyword: string): string {
   return keyword
@@ -127,7 +201,8 @@ function sanitizeKeyword(keyword: string): string {
 
 export function openInGaodeApp(
   keyword: string,
-  city?: string
+  city?: string,
+  location?: GaodeLocation
 ): Promise<GaodeOpenResult> {
   const trimmed = sanitizeKeyword(keyword);
   if (!trimmed) return Promise.resolve("not_installed");
@@ -142,8 +217,17 @@ export function openInGaodeApp(
   }
 
   const cityName = resolveCityName(city);
-  const androidUrl = buildAndroidPoiUrl(trimmed, cityName);
-  const iosUrl = buildIosPoiUrl(trimmed, cityName);
+  const pinName = keywordWithCity(trimmed, cityName);
+  const pin = isValidLocation(location) ? location : undefined;
+  const androidUrl = pin
+    ? buildAndroidViewMapUrl(pinName, pin.lat, pin.lng)
+    : buildAndroidPoiUrl(trimmed, cityName);
+  const iosUrl = pin
+    ? buildIosViewMapUrl(pinName, pin.lat, pin.lng)
+    : buildIosPoiUrl(trimmed, cityName);
+  const androidIntent = pin
+    ? buildAndroidViewMapIntent(pinName, pin.lat, pin.lng)
+    : buildAndroidPoiIntent(trimmed, cityName);
 
   return new Promise((resolve) => {
     let settled = false;
@@ -174,7 +258,7 @@ export function openInGaodeApp(
 
     if (platform === "android") {
       // Intent → 구형 스킴 한 번만 보조 (여러 스킴 연타는 로딩 고착 유발)
-      window.location.href = buildAndroidPoiIntent(trimmed, cityName);
+      window.location.href = androidIntent;
       window.setTimeout(() => {
         if (!settled && document.visibilityState === "visible") {
           openByAnchor(androidUrl);

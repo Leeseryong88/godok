@@ -415,49 +415,50 @@ input {
   overflow: hidden;
   border-radius: 22px;
   border: 1px solid rgba(247, 251, 250, 0.16);
-  background:
-    radial-gradient(120% 80% at 10% 0%, rgba(29, 75, 87, 0.7) 0%, transparent 55%),
-    radial-gradient(90% 70% at 100% 20%, rgba(42, 61, 40, 0.45) 0%, transparent 50%),
-    #102832;
+  background: #d7e2dc;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
 }
 
 .spot-map {
   position: relative;
-  height: min(58vw, 320px);
-  min-height: 248px;
+  aspect-ratio: 8 / 5;
+  width: 100%;
+  overflow: hidden;
   cursor: default;
 }
 
-.spot-map-art {
+.spot-map-image {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.38;
+  object-fit: fill;
   pointer-events: none;
+  user-select: none;
 }
 
-.spot-map-art path {
-  fill: none;
-  stroke: rgba(180, 220, 210, 0.55);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-}
-
-.spot-map-art circle {
-  fill: #d6452e;
+.spot-map-credit {
+  position: absolute;
+  right: 8px;
+  bottom: 6px;
+  z-index: 2;
+  margin: 0;
+  color: rgba(18, 36, 43, 0.55);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  pointer-events: none;
 }
 
 .map-pin {
   position: absolute;
-  z-index: 1;
-  width: 36px;
-  height: 44px;
+  z-index: 3;
+  width: 22px;
+  height: 26px;
   padding: 0;
   border: 0;
   background: transparent;
-  transform: translate(-50%, -92%);
+  transform: translate(-50%, -90%);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
@@ -465,68 +466,77 @@ input {
 .map-pin-mark {
   position: relative;
   display: block;
-  width: 32px;
-  height: 40px;
-  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.35));
+  width: 18px;
+  height: 22px;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
   transition: transform 0.16s ease;
 }
 
 .map-pin-svg {
-  width: 32px;
-  height: 40px;
+  width: 18px;
+  height: 22px;
   display: block;
 }
 
 .map-pin-svg path {
-  fill: #7dceba;
+  fill: #d6452e;
 }
 
 .map-pin-svg circle {
-  fill: #0b1c24;
+  fill: #fff8f6;
 }
 
 .map-pin-num {
   position: absolute;
   left: 50%;
-  top: 13px;
+  top: 7px;
   transform: translate(-50%, -50%);
-  color: #eef6f4;
-  font-size: 11px;
+  color: #7a1f14;
+  font-size: 8px;
   font-weight: 800;
   font-variant-numeric: tabular-nums;
   pointer-events: none;
 }
 
 .map-pin.is-active {
-  z-index: 3;
+  z-index: 4;
 }
 
 .map-pin.is-active .map-pin-mark {
-  transform: scale(1.18);
+  transform: scale(1.12);
 }
 
 .map-pin.is-active .map-pin-svg path {
-  fill: #d6452e;
+  fill: #0f5f50;
+}
+
+.map-pin.is-active .map-pin-num {
+  color: #06352c;
 }
 
 .map-pin-label {
   position: absolute;
   left: 50%;
-  bottom: calc(100% + 4px);
+  bottom: calc(100% + 3px);
   transform: translateX(-50%);
-  max-width: 140px;
-  padding: 5px 8px;
-  border-radius: 10px;
+  max-width: 120px;
+  padding: 4px 7px;
+  border-radius: 8px;
   background: rgba(11, 28, 36, 0.92);
   border: 1px solid rgba(125, 206, 186, 0.4);
   color: #f7fbfa;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   line-height: 1.3;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   pointer-events: none;
+}
+
+.map-pin.is-label-below .map-pin-label {
+  bottom: auto;
+  top: calc(100% + 3px);
 }
 
 .spot-legend {
@@ -581,6 +591,18 @@ input {
 
 .spot-legend-item.is-active .spot-legend-num {
   background: rgba(11, 28, 36, 0.16);
+}
+
+.spot-legend-item.is-outbound {
+  opacity: 0.78;
+  border-style: dashed;
+}
+
+.spot-legend-far {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  opacity: 0.72;
 }
 
 .spot-sheet {
@@ -652,6 +674,43 @@ input {
 }
 
 .spot-sheet-open:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.spot-detail-zh {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.spot-detail-body {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.spot-detail-body p {
+  margin: 0;
+  color: #1b2d33;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.spot-detail-open {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 16px;
+  border: 0;
+  border-radius: 14px;
+  background: #0f5f50;
+  color: #f7fbfa;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.spot-detail-open:disabled {
   opacity: 0.55;
   cursor: not-allowed;
 }

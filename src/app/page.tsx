@@ -20,6 +20,7 @@ import {
   getCityGuide,
   type Attraction,
 } from "@/lib/attractions";
+import { getSpotMeta } from "@/lib/attractions/meta";
 import { resolveCityForGaode } from "@/lib/cityAliases";
 import { CITIES } from "@/lib/cities";
 import {
@@ -68,6 +69,7 @@ export default function HomePage() {
   const [locale, setLocale] = useState<Locale>(DEFAULT_LOCALE);
   const [tab, setTab] = useState<"search" | "spots">("search");
   const [spotsCity, setSpotsCity] = useState(DEFAULT_SPOTS_CITY);
+  const [spotModalOpen, setSpotModalOpen] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const searchTabId = useId();
@@ -79,7 +81,7 @@ export default function HomePage() {
   const titleId = useId();
   const installTitleId = useId();
   const isDesktop = platform === "desktop";
-  const overlayOpen = modalOpen || installOpen;
+  const overlayOpen = modalOpen || installOpen || spotModalOpen;
   const t = useMemo(() => getMessages(locale), [locale]);
 
   function dismissKeyboard() {
@@ -290,7 +292,12 @@ export default function HomePage() {
         id: attraction.id,
         keyword: attraction.keyword,
       });
-      const result = await openInGaodeApp(attraction.keyword, guideCity);
+      const meta = getSpotMeta(guideCity, attraction.id);
+      const result = await openInGaodeApp(
+        attraction.keyword,
+        guideCity,
+        meta ? { lat: meta.lat, lng: meta.lng } : undefined
+      );
       if (result === "not_installed" || result === "desktop") {
         setInstallOpen(true);
       }
@@ -491,6 +498,7 @@ export default function HomePage() {
             onOpenAmap={(guideCity, spot) => {
               void openAttraction(guideCity, spot);
             }}
+            onModalOpenChange={setSpotModalOpen}
           />
         </div>
 
